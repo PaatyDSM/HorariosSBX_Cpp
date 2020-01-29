@@ -25,13 +25,13 @@ namespace SBX_HORARIOS
 		MainPage^ rootPage;
 
 		void start_FadeInAnimation(void);
-		void start_FadeOutAnimation(void);
-		void start_FadeOutAnimation2(void);
-		void Footer_Click(Platform::Object^ sender, RoutedEventArgs^ e);
-		void send_legajo_button(Platform::Object^ sender, RoutedEventArgs^ e);
-		void Release_Notes_Click(Platform::Object^ sender, RoutedEventArgs^ e);
-		void NavigateToHorariosPage(void);
 		void read_legajo(void);
+		void send_legajo_button(Object^ sender, RoutedEventArgs^ e);
+		void Footer_Click(Object^ sender, RoutedEventArgs^ e);
+		void start_FadeOutAnimation(void);
+		void NavigatetoHorariosPage(Object^ sender, RoutedEventArgs^ e);
+		void start_ReleaseNotesFadeOutAnimation(void);
+		void Release_Notes_Click(Platform::Object^ sender, RoutedEventArgs^ e);
 	};
 }
 

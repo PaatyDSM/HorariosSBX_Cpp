@@ -2,6 +2,5 @@
     x:Class="SBX_HORARIOS.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SBX_HORARIOS"
-    RequestedTheme="Light">
+    RequestedTheme="Dark">
 </Application>

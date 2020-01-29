@@ -2,23 +2,21 @@
 
 #include "MainPage.g.h"
 
-using namespace Platform;
-using namespace Windows::UI::Xaml::Navigation;
-using namespace Windows::Phone::UI::Input;
-
 namespace SBX_HORARIOS
 {
 	/// <summary>
-	/// Enums the Status NotifyTypes.
+	/// Enumera los tipos de notificación de estado.
 	/// </summary>
 	public enum class NotifyType
 	{
 		StatusMessage,
-		ErrorMessage
+		ErrorMessage,
+		DebugMessage
 	};
 
 	/// <summary>
-	/// MainPage contiene el Status Block y el Frame en el cual todas las páginas son cargadas.
+	/// MainPage contiene el "Frame" en el cual todas las páginas son cargadas y el
+	/// "StatusBlock" que notifica los distintos tipos de mensaje al usuario.
 	/// </summary>
 	public ref class MainPage sealed
 	{
@@ -29,10 +27,12 @@ namespace SBX_HORARIOS
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
 
 	private:
-		void HardwareButtons_BackPressed(Object^ sender, BackPressedEventArgs^ e);
+		void SetFullScreenModeON();
 
 	internal:
 		static MainPage^ Current;
 		void NotifyUser(String^ strMessage, NotifyType type);
+		void Await(int ms, bool stop);
+		void HideMessage(Object^ sender, Object^ args);
 	};
 }

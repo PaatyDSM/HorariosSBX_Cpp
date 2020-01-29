@@ -15,15 +15,15 @@ ReleaseNotesPage::ReleaseNotesPage()
 }
 
 // Function start_fadein_animation
-void ReleaseNotesPage::ReleaseNotesPage::start_FadeInAnimation(void)
+void ReleaseNotesPage::start_FadeInAnimation(void)
 {
-	ReleaseNotes_Storyboard->Begin();
+	ReleaseNotes_FadeInAnimation->Begin();
 }
 
 // Function start_fadeout_animation
-void ReleaseNotesPage::ReleaseNotesPage::start_FadeOutAnimation(void)
+void ReleaseNotesPage::start_FadeOutAnimation(void)
 {
-	ReleaseNotes_Storyboard2->Begin();
+	ReleaseNotes_FadeOutAnimation->Begin();
 }
 
 void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
@@ -34,26 +34,52 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 	// Clean error messages from previous page
 	rootPage->NotifyUser("", NotifyType::StatusMessage);
 
+	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &ReleaseNotesPage::App_BackRequested);
+}
+
+// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+void ReleaseNotesPage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+{
+	e->Handled = true;
+	Backbutton1(sender, nullptr);
+}
+
+void ReleaseNotesPage::LoadReleaseNotes(void)
+{
 	Notes->Text =
 
-		"Release notes :\n"
-        	"\n"
-        	"------------------------------------------\n"
-        	"V1.18\n"
+		"V1.2\n"
+		"*Fixed icons."
+		"\n"
+		"------------------\n"
+		"V1.19\n"
+		"*New and improved design.\n"
+		"*Fixed a lot of bugs.\n."
+		"*Speed improvements.\n"
+		"*Animations improvements.\n"
+		"*Removed expiration time.\n"
+		"*Network connection improvement.\n"
+		"*Fixed some translations.\n"
+		"*Added missing error messages.\n"
+		"*New BackButtonPressed handler.\n"
+		"\n"
+		"------------------\n"
+		"V1.18\n"
 		"*Minor GUI and code corrections.\n"
 		"*Added update text.\n"
 		"*Added x64 platform.\n"
 		"*Expiration for Windows 10 devices.\n"
-        	"\n"
-        	"------------------------------------------\n"
-        	"V1.17\n"
-        	"*Updated WebSite.\n"
-        	"*Now all Windows 10 versions from 10.0.10240 are supported.\n"
-        	"*Minor Fixes.\n"
-        	"\n"
-        	"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
+		"V1.17\n"
+		"*Updated WebSite.\n"
+		"*Now all Windows 10 versions from 10.0.10240 are supported.\n"
+		"*Minor Fixes.\n"
+		"\n"
+		"Know Bugs :\n"
+		"\n"
+		"------------------\n"
 		"V1.16\n"
 		"*Fixed Can't exit from app in Welcome Page pressing Hardware Back Button.(bug#6161070).\n"
 		"*Prevently blocked 'turned views' on mobile devices causing GUI glitches.\n"
@@ -63,7 +89,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"\n"
 		"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V1.15\n"
 		"*Fixed grid in Horarios Page on landscape mode.\n"
 		"*Fixed elements in Welcome Page on landscape mode.\n"
@@ -80,7 +106,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"Know Bugs :\n"
 		"*Can't exit from app in Welcome Page pressing Hardware Back Button.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V1.1\n"
 		"*Fixed a bug that causes a crash on dekstop devices.\n"
 		"*Changes and fixes in WelcomePage GUI.\n"
@@ -98,7 +124,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"\n"
 		"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V1.02\n"
 		"*New and redesigned MainPage.\n"
 		"*Now pages are centered correctly in landscape mode.\n"
@@ -112,7 +138,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"\n"
 		"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V1.01\n"
 		"*Fixes in App.xaml.\n"
 		"*Fixed some translations in source code.\n"
@@ -121,7 +147,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"\n"
 		"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V1.00 (Final release)\n"
 		"*Added cache offline read for no internet connection.\n"
 		"*Save my last used legajo.\n"
@@ -140,7 +166,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"\n"
 		"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.91rc\n"
 		"*Minor changes in source code\n"
 		"*Store App Certification for Windows 10\n"
@@ -148,7 +174,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"Know Bugs :\n"
 		"*After suspension, can't go back from Horarios Page pressing Hardware Back Button.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.9rp\n"
 		"*Revised code.\n"
 		"*Fixed minor bug in Main Page.\n"
@@ -168,7 +194,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"\n"
 		"Know Bugs :\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.87b\n"
 		"*Added better handler for no internet connection.\n"
 		"*A lot of changes in the source code.\n"
@@ -188,7 +214,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Horarios Page are not working after pressing Hardware Back button.\n"
 		"*Horarios don't clean up when navigate back.(#bug6161013).\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.86b\n"
 		"*Fixed Screen flickering in the Main Page.(bug#6161001).\n"
 		"*Fixed can't exit from the app pressing Hardware Back button.\n"
@@ -203,7 +229,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Random crash occurs when restoring from suspension.\n"
 		"*Horarios don't clean up when navigate back.(#bug6161013).\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.85b\n"
 		"*Fixed release notes aren't being displayed.\n"
 		"*Fixed minor bugs.\n"
@@ -218,7 +244,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Random crash occurs when restoring from suspension.\n"
 		"*Can't exit from the app pressing Hardware Back button.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.84b\n"
 		"*Centered some graphics in Horarios Page.\n"
 		"*Fixed Hyperlinks in Release Notes Page aren't working.\n"
@@ -238,7 +264,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Release notes aren't being displayed.\n"
 		"*When navigating to Release Notes Page with a previous error messages, the error messages still appears.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.83b\n"
 		"*Fixed some misaligned graphics.\n"
 		"*Fixed some graphic corruptions.\n"
@@ -255,7 +281,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Random crash occurs when restoring from suspension.\n"
 		"The store column is not sized correctly.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.82b\n"
 		"*Redesigned Main Page.\n"
 		"*Redesigned Horarios Page.\n"
@@ -275,7 +301,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Random crash occurs when restoring from suspension.\n"
 		"*Hyperlinks buttons doesn't work anymore.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.81b\n"
 		"*Added most icons and splash screens.\n"
 		"*Cleaning code.\n"
@@ -290,7 +316,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Screen flickering in the Main Page when pressing Hardware Back button.(bug#6161001)\n"
 		"*If a legajo is not encountered in database it won't show an error.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.8a\n"
 		"*Now app is fully working.\n"
 		"*Fixed some translations.\n"
@@ -304,7 +330,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Screen flickering in the Main Page when pressing Hardware Back button.(bug#6161001)\n"
 		"*If a legajo is not encountered in database it won't show an error.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.7a\n"
 		"*Fixed some error messages.\n"
 		"*Now, empty legajo is rejected.\n"
@@ -323,7 +349,7 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*Loading message is not being show.\n"
 		"*Landscape mode is not being showed correctly.\n"
 		"\n"
-		"------------------------------------------\n"
+		"------------------\n"
 		"V0.6a\n"
 		"*Changes in the UI.\n"
 		"*Changes in the source code for easy identification.\n"
@@ -345,11 +371,13 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 		"*The database can't be parsed if it readed from the internet\n"
 		"*Landscape mode is not being showed correctly.\n"
 		"\n"
-		"------------------------------------------------------\n"
+		"------------------\n"
 		"V0.1a (First release)\n"
 		"(Nov / 7 / 2016)\n"
 		"\n";
 
+		// Stop ProgressRing
+		loading_ring->IsActive = false;
 }
 
 // On Click 'Hyperlinks'

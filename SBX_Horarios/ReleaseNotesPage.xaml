@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="using:SBX_HORARIOS"
     mc:Ignorable="d"
     Background="Black">
 
@@ -14,20 +13,21 @@
             <Setter Property="Margin" Value="0" />
         </Style>
         <!--  Storyboard resource: ReleaseNotesPage FadeIn.  -->
-        <Storyboard x:Name="ReleaseNotes_Storyboard">
+        <Storyboard x:Name="ReleaseNotes_FadeInAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="Page"
                 Storyboard.TargetProperty="Opacity"
                 From="0.0"
                 To="1.0"
-                Duration="0:0:0.25">
+                Duration="0:0:0.25"
+                Completed="LoadReleaseNotes">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <!--  Storyboard resource: ReleaseNotesPage FadeOut.  -->
-        <Storyboard x:Name="ReleaseNotes_Storyboard2">
+        <Storyboard x:Name="ReleaseNotes_FadeOutAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="Page"
                 Storyboard.TargetProperty="Opacity"
@@ -42,31 +42,34 @@
         </Storyboard>
     </Page.Resources>
     
-    <!-- StartGrid:Page -->
+    <!-- Page -->
     <Grid x:Name="Page"
           Opacity="0"
           Loaded="start_FadeInAnimation">
+
+        <!-- BackgroundImage -->
         <Grid.Background>
             <ImageBrush ImageSource="Assets/pictures/Welcome_background.png"
                         Stretch="UniformToFill"/>
         </Grid.Background>
+
+        <!-- RowDefinitions -->
         <Grid.RowDefinitions>
             <!-- Grid:Title -->
             <RowDefinition Height="Auto"/>
             <!-- Grid:ContentPanel -->
             <RowDefinition Height="*"/>
-            <!-- Grid:ButtonPanel -->
-            <RowDefinition Height="Auto"/>
             <!-- Grid:FooterPanel -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--  Title  -->
         <Grid x:Name="TopPanel"
-              VerticalAlignment="Top" Margin="16,0">
+              VerticalAlignment="Top"
+              Margin="24,12"
+              MaxWidth="360">
 
-            <Viewbox x:Name="Title_effects1"
-                     Margin="12,12,12,4">
+            <Viewbox x:Name="Title_effects1">
                 <TextBlock
                     Text="Notas de publicación"
                     FontFamily="Gabriola"
@@ -78,8 +81,7 @@
                     Foreground="White"
                     Padding="1,1,0,1" />
             </Viewbox>
-            <Viewbox x:Name="Title_effects2"
-                     Margin="12,12,12,4">
+            <Viewbox x:Name="Title_effects2">
                 <TextBlock
                     Text="Notas de publicación"
                     FontFamily="Gabriola"
@@ -91,8 +93,7 @@
                     Foreground="White"
                     Padding="0,1,1,0" />
             </Viewbox>
-            <Viewbox x:Name="Title"
-                     Margin="12,12,12,4">
+            <Viewbox x:Name="Title">
                 <TextBlock
                     Text="Notas de publicación"
                     FontFamily="Gabriola"
@@ -109,143 +110,85 @@
         <!-- ContentPanel -->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
-              Margin="0,16,0,0"
-              Background="#99211200">
-
-                <ScrollViewer
+              Background="#B0211200">
+            <!-- ProgressRing_animation -->
+            <ProgressRing x:Name="loading_ring"
+                          IsActive="True"
+                          Height="100"
+                          Width="100"
+                          Foreground="#FF21804B"/>
+            <ScrollViewer
                     VerticalScrollMode="Auto"
                     VerticalScrollBarVisibility="Auto"
                     Height="Auto"
-                    Margin="32,16,32,0"
-                    Grid.Row="2">
+                    Margin="6,12">
                     <!-- Release notes Box-->
                     <TextBox x:Name="Notes"
                              FontFamily="Consolas"
-                             FontSize="15"
+                             FontSize="16"
                              IsReadOnly="True"
                              IsHitTestVisible="False"
                              IsSpellCheckEnabled="False"
                              BorderThickness="0"
                              TextWrapping="Wrap"
-                             PlaceholderText="Cargando notas de publicación..."
-                             TextAlignment="Left"
-                             Background="#7FFFFFFF" />
+                             Background="#56FFFFFF"
+                             Foreground="Black"
+                             TextAlignment="Center"
+                             Text="Cargando notas de publicación..."/>
                 </ScrollViewer>
 
         </Grid>
 
-        <!--  ButtonPanel  -->
-        <Grid x:Name="ButtonPanel"
+        <!--  FooterPanelV2  -->
+        <Grid x:Name="FooterPanelV2"
               Grid.Row="2"
-              Background="#99211200">
-            <Rectangle x:Name="Button_3D_Gradient"
-                           Margin="0,18"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           RadiusX="6"
-                           RadiusY="6"
-                           Opacity="1"
-                           Stroke="Transparent"
-                           MinHeight="34"
-                           MinWidth="256"
-                           RenderTransformOrigin="0.5,0.5" >
-                <Rectangle.RenderTransform>
-                    <CompositeTransform ScaleX="1.1" ScaleY="1.2"/>
-                </Rectangle.RenderTransform>
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FF21804B" Offset="0"/>
-                        <GradientStop Color="#FF1C4B4B" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="Border"
-                           Margin="0,18"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           RadiusX="6"
-                           RadiusY="6"
-                           Opacity="1"
-                           Stroke="Black"
-                           MinHeight="34"
-                           MinWidth="256"
-                           RenderTransformOrigin="0.5,0.5" StrokeThickness="2" >
-                <Rectangle.RenderTransform>
-                    <CompositeTransform ScaleX="1.1" ScaleY="1.2"/>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-            <Button x:Name="BackButton"
-                    Margin="0,20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Click="start_FadeOutAnimation"
-                    Content="Regresar"
-                    FontFamily="Segoe WP"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    MinWidth="256"
-                    Foreground="#FFA0A0A0"
-                    BorderThickness="1,1,2,2"
-                    RenderTransformOrigin="0.5,0.5" >
-                <Button.RenderTransform>
-                    <CompositeTransform ScaleX="1.1" ScaleY="1.2"/>
-                </Button.RenderTransform>
-            </Button>
-        </Grid>
+              Background="#FFBEBEBE"
+              Height="38">
 
-        <!--  FooterPanel  -->
-        <Grid x:Name="FooterPanel"
-              Grid.Row="5"
-              VerticalAlignment="Bottom"
-              Background="#FFC8C8C8" Margin="0" Padding="0,-6" Height="28">
-            <!--  E-mail Link  -->
-            <StackPanel
-                x:Name="ContactPnael"
-                Grid.Row="2"
-                Margin="0,0,8,0"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal">
-                <HyperlinkButton
-                    Click="Footer_Click"
-                    Content="Contacto"
-                    FontSize="12"
-                    Tag="mailto:paaty.dsm@gmail.com?Subject=PaatyDSM Apps - MAIL"
-                    ToolTipService.ToolTip="Envíame un mail" />
-            </StackPanel>
-            <!--  Release Notes Link  -->
-            <StackPanel
-                x:Name="VersionPanel"
-                Grid.Row="3"
-                Margin="8,0,0,0"
-                HorizontalAlignment="Left"
-                Orientation="Horizontal">
-                <Button
-                    x:Name="ReleaseNotesPage_Click"
+            <!-- ColumnDefinitions -->
+            <Grid.ColumnDefinitions>
+                <!--  Version  -->
+                <ColumnDefinition Width="*" />
+                <!--  Webpage  -->
+                <ColumnDefinition Width="Auto" />
+                <!--  Email  -->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Version  -->
+            <Button x:Name="FP_VersionButton"
+                    FontFamily="Consolas"
+                    FontSize="14"
+                    Content="v1.2"
+                    ToolTipService.ToolTip="Ver notas"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Background="{x:Null}"
-                    BorderBrush="White"
-                    BorderThickness="0"
-                    Content="V1.18"
-                    FontFamily="Consolas"
-                    FontSize="12"
-                    ToolTipService.ToolTip="Versión" />
-            </StackPanel>
-            <!--  Author Page's  -->
-            <Grid
-                x:Name="_credits"
-                HorizontalAlignment="Center">
-                <HyperlinkButton
-                    d:IsLocked="True"
-                    Click="Footer_Click"
-                    Content="PaatyDSM Apps"
-                    FontFamily="Segoe Script"
-                    FontSize="19"
-                    Tag="http://paatydsm.000webhostapp.com"
-                    ToolTipService.ToolTip="Ir a mi página web" />
-            </Grid>
+                    Foreground="Black"/>
+
+            <!--  Webpage  -->
+            <HyperlinkButton x:Name="FP_WebpageButton"
+                             Grid.Column="1"
+                             FontFamily="Segoe Script"
+                             FontSize="20"
+                             Content="PaatyDSM Apps"
+                             ToolTipService.ToolTip="Visitar sitio Web" 
+                             Tag="http://paatydsm.000webhostapp.com"
+                             Click="Footer_Click"/>
+
+            <!--  E-mail Link  -->
+            <HyperlinkButton x:Name="FP_EmailButton"
+                             Grid.Column="2"
+                             FontSize="12"
+                             Content="Contacto"
+                             ToolTipService.ToolTip="Enviar un mail"
+                             Tag="mailto:paaty.dsm@gmail.com?Subject=PaatyDSM Apps - MAIL"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Click="Footer_Click" />
+            
         </Grid>
 
-        <!--  EndGrid:Page  -->
     </Grid>
+    
 </Page>

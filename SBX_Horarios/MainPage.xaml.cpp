@@ -1,19 +1,22 @@
 ﻿#include "pch.h"
-
 #include "MainPage.xaml.h"
 #include "WelcomePage.xaml.h"
 
 using namespace SBX_HORARIOS;
-
+using namespace std;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Interop;
-
-using namespace std;
+using namespace Platform;
+using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::UI::ViewManagement;
+using namespace Windows::System::Profile;
 
 // Referencia al Frame en el cual todas las páginas son cargadas.
 MainPage^ MainPage::Current = nullptr;
+DispatcherTimer^ dispatcherTimer;
 
+// Main
 MainPage::MainPage()
 {
 	InitializeComponent();
@@ -21,28 +24,13 @@ MainPage::MainPage()
 	// This is a static public property that allows downstream pages to get a handle
 	// to the MainPage instance in order to call methods that are in this class.
 	MainPage::Current = this;
-
-	// Launch UWP apps in full-screen mode on mobile devices or tablets.
-	{
-		String^ platformFamily = Windows::System::Profile::AnalyticsInfo::VersionInfo->DeviceFamily;
-
-		if (platformFamily->Equals("Windows.Mobile"))
-		{
-			/// SpecificFix Crash on Desktop
-			// Called when Hardware Back Button is pressed
-			HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs ^>(this, &MainPage::HardwareButtons_BackPressed);
-
-			Windows::UI::ViewManagement::ApplicationView^ view = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView();
-
-			view->TryEnterFullScreenMode();
-		}
-	}
 }
 
 // OnNavigatedTo function
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	//Check trial
+	/* 
 	{
 		Windows::Globalization::Calendar^ c = ref new Windows::Globalization::Calendar;
 		String^ trial = c->YearAsString();
@@ -54,17 +42,18 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 		{
 			Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.TrialPage", TypeKind::Custom });
 		}
-		else
+	*/
+
+	// Launch UWP apps in full-screen mode on mobile devices or tablets.
+	SetFullScreenModeON();
+
+	// When the navigation stack isn't restored navigate to the WelcomePage
+	if (Page_Frame->Content == nullptr)
+	{
+		if (!Page_Frame->Navigate(TypeName{"SBX_HORARIOS.WelcomePage", TypeKind::Custom}))
 		{
-			/// Specific Fix (bug#6161012), (bug#6161013) & AfterSuspensionRandomCrash.
-			if (Page_Frame->Content == nullptr)
-			{
-				// When the navigation stack isn't restored navigate to the WelcomePage
-				if (!Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom }))
-				{
-					throw ref new FailureException("Error al cargar la página principal.\nDetalles del error: " + e);
-				}
-			}
+			// Clear the status block
+			NotifyUser("Hubo un problema al cargar la página principal.", NotifyType::ErrorMessage);
 		}
 	}
 }
@@ -79,6 +68,9 @@ void MainPage::NotifyUser(String^ strMessage, NotifyType type)
 		break;
 	case NotifyType::ErrorMessage:
 		StatusBorder->Background = ref new SolidColorBrush(Windows::UI::Colors::Red);
+		break;
+	case NotifyType::DebugMessage:
+		StatusBorder->Background = ref new SolidColorBrush(Windows::UI::Colors::Yellow);
 		break;
 	default:
 		break;
@@ -96,37 +88,54 @@ void MainPage::NotifyUser(String^ strMessage, NotifyType type)
 	}
 }
 
-// On Hardware Back Button press
-void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::Input::BackPressedEventArgs^ e)
+// Set fullscreen
+void MainPage::SetFullScreenModeON()
 {
-	if (this->Page_Frame->CanGoBack)
+	// Launch UWP apps in full-screen mode on mobile devices or tablets.
 	{
-		e->Handled = true;
+		String^ platformFamily = AnalyticsInfo::VersionInfo->DeviceFamily;
 
-		// Clear the status block when navigating
-		NotifyUser("", NotifyType::StatusMessage);
-
-		///Specific Fix (bug#6161022)
-		// Clear the navigation stacks using the Clear method of each stack.
-		Page_Frame->BackStack->Clear();
-
-		///Specific Fix (bug#6161070)
-		if (Page_Frame->Content->ToString() == "SBX_HORARIOS.WelcomePage")
+		if (platformFamily->Equals("Windows.Mobile"))
 		{
-			e->Handled = false;
+			ApplicationView^ view = ApplicationView::GetForCurrentView();
+			view->TryEnterFullScreenMode();
 		}
 	}
-	else
-	{
-		e->Handled = false;
-	}
-
-	///Specific Fix (bug#6161022)
-	// Clear the navigation stacks using the Clear method of each stack.
-	Page_Frame->BackStack->Clear();
-
-	// Back to WelcomePage
-	Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom });
-
 }
+
+/// DISABLED ///
+#pragma region AutoHide NotifyUser
+// Await 'ms' amount of time
+void MainPage::Await(int ms, bool stop)
+{
+	/*
+	if (!stop)
+	{
+	// Initializes DispatcherTimer
+	dispatcherTimer = ref new DispatcherTimer();
+
+	// Set Tick duration
+	TimeSpan time_amount;
+	time_amount.Duration = ms;
+	dispatcherTimer->Interval = time_amount;
+
+	// Register event handler for Tick event
+	auto registrationtoken = dispatcherTimer->Tick += ref new EventHandler<Object^>(this, &MainPage::HideMessage);
+
+	// Start the timer
+	dispatcherTimer->Start();
+	}
+	// Stop the timer
+	else dispatcherTimer->Stop();
+	*/
+}
+
+void MainPage::HideMessage(Object^ sender, Object^ args)
+{
+	// Clear and hide Messages.
+	/* NotifyUser("", NotifyType::StatusMessage); */
+
+	Await(0, true);
+}
+#pragma endregion
 

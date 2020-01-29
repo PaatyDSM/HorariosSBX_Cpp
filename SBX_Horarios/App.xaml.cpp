@@ -2,10 +2,11 @@
 #include "MainPage.xaml.h"
 
 using namespace SBX_HORARIOS;
-
 using namespace Platform;
 using namespace Windows::ApplicationModel;
 using namespace Windows::ApplicationModel::Activation;
+using namespace Windows::Foundation;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
@@ -41,19 +42,12 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 
 		rootFrame->NavigationFailed += ref new NavigationFailedEventHandler(this, &App::OnNavigationFailed);
 
-		/// Specific Fix (bug#6161022)
-		// Caché de navegación.
-		rootFrame->CacheSize = 0;
-
-		/*	.DISABLED FOR TESTING.	*/
-		// auto prerequisite = task<void>([]() {});
-
 		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
 		{
 			// Restaurar el estado de sesión guardado solo cuando sea necesario, programando
 			// los pasos de inicio finales una vez completada la restauración.
 
-			/*	.DISABLED FOR TESTING.	*/
+			/*	.DISABLED. ONLY FOR TESTING.	*/
 			// prerequisite = SuspensionManager::RestoreAsync();
 		}
 		if (e->PrelaunchActivated == false)
@@ -86,6 +80,12 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 			Window::Current->Activate();
 		}
 	}
+
+	///
+	/* Here goes the BackButtonPressed Handler */
+	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+	// SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &App::App_BackRequested);
+	///
 }
 
 /// <summary>
@@ -108,7 +108,7 @@ void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
 /// </summary>
 /// <param name="sender">Marco que produjo el error de navegación</param>
 /// <param name="e">Detalles sobre el error de navegación</param>
-void App::OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e)
+void App::OnNavigationFailed(Platform::Object ^sender, NavigationFailedEventArgs ^e)
 {
 	/// <param name="sender">Marco que produjo el error de navegación</param>
 	/// <param name="e">Detalles sobre el error de navegación</param>

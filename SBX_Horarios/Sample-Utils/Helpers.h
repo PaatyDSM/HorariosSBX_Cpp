@@ -17,6 +17,5 @@ namespace SBX_HORARIOS
 			TextBox^ output);
 
 		static HttpClient^ CreateHttpClient();
-		
 	};
 }

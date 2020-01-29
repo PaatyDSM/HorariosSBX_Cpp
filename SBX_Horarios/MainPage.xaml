@@ -1,17 +1,11 @@
-﻿<Page
-    x:Class="SBX_HORARIOS.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="using:SBX_HORARIOS"
-    mc:Ignorable="d"
-    MinWidth="320"
-    MinHeight="100"
-    MaxWidth="720"
-    Background="Black">
+﻿<Page x:Class="SBX_HORARIOS.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
     
-    <Grid Background="white">
+    <Grid>
         <Grid.RowDefinitions>
             <!-- Page_Frame -->
             <RowDefinition Height="*"/>
@@ -30,7 +24,7 @@
             <TextBlock x:Name="StatusBlock"
                        Foreground="White"
                        FontWeight="Bold"
-                       Margin="10"
+                       Margin="8"
                        TextWrapping="Wrap"
                        HorizontalAlignment="Center"/>
         </Border>

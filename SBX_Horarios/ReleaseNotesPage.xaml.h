@@ -21,6 +21,8 @@ namespace SBX_HORARIOS
 		MainPage^ rootPage;
 
 		void start_FadeInAnimation(void);
+		void App_BackRequested(Object ^ sender, BackRequestedEventArgs ^ e);
+		void LoadReleaseNotes(void);
 		void start_FadeOutAnimation(void);
 		void Footer_Click(Object^ sender, RoutedEventArgs^ e);
 		void Backbutton1(Object^ sender, RoutedEventArgs^ e);

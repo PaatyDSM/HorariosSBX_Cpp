@@ -1,16 +1,13 @@
 ﻿#include "pch.h"
-
 #include "HorariosPage.xaml.h"
 #include "MainPage.xaml.h"
 #include "WelcomePage.xaml.h"
-
 #include "Sample-Utils\Helpers.h"
-
 #include <fstream>
 #include <iostream>
 
 using namespace SBX_HORARIOS;
-
+using namespace std;
 using namespace concurrency;
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -20,102 +17,89 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Web::Http;
 using namespace Windows::Web::Http::Filters;
+using namespace Windows::Web::Http::Headers;
 
-using namespace std;
-
-/// Path for local saving
-String^ localfolder = ApplicationData::Current->LocalFolder->Path;
-
-HorariosPage::HorariosPage()
-{
-	InitializeComponent();
-}
+// Path for local saving
+wstring w_localfolder(ApplicationData::Current->LocalFolder->Path->Begin());
+string localfolder(w_localfolder.begin(), w_localfolder.end());
 
 // Function start_fadein_animation
 void HorariosPage::HorariosPage::start_FadeInAnimation(void)
 {
-	HorariosPage_Storyboard->Begin();
-}
+	// Show Message
+	rootPage->NotifyUser("Consultando horarios...", NotifyType::StatusMessage);
 
-// Function start_fadeout_animation
-void HorariosPage::HorariosPage::start_FadeOutAnimation(void)
-{
-	HorariosPage_Storyboard2->Begin();
-}
-
-// Function start_fadeout_animation2
-void HorariosPage::HorariosPage::start_FadeOutAnimation2(void)
-{
-	HorariosPage_Storyboard3->Begin();
+	HorariosPage_FadeInAnimation->Begin();
 }
 
 // OnNavigatedTo function
 void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	// Save received parameter like a reference called str
-		String^ str = (String^)e->Parameter;
-
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
-		rootPage = MainPage::Current;
+	rootPage = MainPage::Current;
 
-	///Specific fix
-		// Clean error messages 
-		rootPage->NotifyUser("", NotifyType::StatusMessage);
+	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &HorariosPage::App_BackRequested);
 
-	// Starting  filters and httpclient
-		filter = ref new HttpBaseProtocolFilter();
-		httpClient = ref new HttpClient(filter);
-	
-	///MyFunction3
-		// Convert String^ to int
-		wstring w_str(str->Data());
-		wstring wide(w_str);
-		string str3(wide.begin(), wide.end());
-		int legajo = stoi(str3);
-
-	// Error handler
-		if (e != nullptr) // Safe to use str
-		{ 
-			// Goto NEXT FUNCTION
-			send_pagewithlegajo(legajo);
-		}
-		else // Do not use data
-		{ 
-			// Show error
-			rootPage->NotifyUser("Error interno: #31326496.\nContacte al editor de la aplicación\ne incluya el #codigo de error.", NotifyType::ErrorMessage);
-			start_FadeOutAnimation();
-		}
-}
-
-// Send Legajo function
-void HorariosPage::send_pagewithlegajo(int legajo)
-{
-	///Specific Fix
-		rootPage->NotifyUser("Consultando horarios...", NotifyType::StatusMessage);
-
-	//Alsea Proveedores
-	///http:://proveedores.alsea.com.ar:25080/asignaciones-server/mobile/main/asignaciones/legajos/ + legajo
-
-	///Get input legajo and append it to the url
-		// Converts int to string
-			string s_legajo = to_string(legajo);
-		// Append legajo to the url
-			string var = "http://proveedores.alsea.com.ar:25080/asignaciones-server/mobile/main/asignaciones/legajos/" + s_legajo;
-		// Converts string to wstring
-			wstring url_ok(var.begin(), var.end());
-		// Reference to the new url page connection with legajo included
-			String^ uriString = ref new String(url_ok.c_str());
+	// Convert String^ to int
+	wstring w_legajo(((String^)e->Parameter)->Begin());
+	string legajo(w_legajo.begin(), w_legajo.end());
+	int legajo_number = stoi(legajo);
 
 	// CacheControl
-		filter->CacheControl->ReadBehavior = HttpCacheReadBehavior::MostRecent;
-		filter->CacheControl->WriteBehavior = HttpCacheWriteBehavior::NoCache;
+	filter = ref new HttpBaseProtocolFilter();
+	filter->CacheControl->ReadBehavior = HttpCacheReadBehavior::MostRecent;
+	filter->CacheControl->WriteBehavior = HttpCacheWriteBehavior::NoCache;
+
+	// Initialize httpclient
+	httpClient = ref new HttpClient(filter);
+
+	// Create url with legajo_number
+	string url = "http://proveedores.alsea.com.ar:25080/asignaciones-server/mobile/main/asignaciones/legajos/" + legajo;
 
 	// Save last used legajo
-		save_legajo(legajo);
+	save_legajo(legajo);
 
-	// Do an asynchronous GET. We need to use use_current() with the continuations since the tasks are completed on
-	// background threads and we need to run on the UI thread to update the UI.
-		BackgroundTask(uriString, legajo);
+	// Start Connection Async
+	StartConnectionAsync(url, legajo);
+
+}
+
+// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+void HorariosPage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+{
+	e->Handled = true;
+	Backbutton1(sender, nullptr);
+}
+
+// Save last used legajo
+void HorariosPage::save_legajo(string legajo)
+{
+	// Write file
+	ofstream out(localfolder + "\\lastlegajo.tmp");
+	if (out)
+	{
+		out << legajo;
+		out.close();
+	}
+}
+
+// Main
+HorariosPage::HorariosPage()
+{
+	InitializeComponent();
+}
+
+// Function start_fadeout_animation
+void HorariosPage::HorariosPage::start_FadeOutAnimation(void)
+{
+	HorariosPage_FadeOutAnimation->Begin();
+}
+
+// Function start_fadeout_animation2
+void HorariosPage::HorariosPage::start_FadeOutAnimation2(void)
+{
+	HorariosPage_FadeOutAnimation2->Begin();
 }
 
 // Hyperlink buttons
@@ -129,8 +113,8 @@ void HorariosPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 void HorariosPage::GoPageBack()
 {
 	///Specific Fix (#bug6161013)
-	OutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
-	MainPage::Current->DataContext = ref new User(OutputField->Text);
+	HiddenOutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
+	MainPage::Current->DataContext = ref new User(HiddenOutputField->Text);
 
 	// Go to page
 	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
@@ -139,35 +123,16 @@ void HorariosPage::GoPageBack()
 // Navigation: Back Button
 void HorariosPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 {
-	///Specific Fix (#bug6161013)
-	OutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
-	MainPage::Current->DataContext = ref new User(OutputField->Text);
+	// Clear List of Horarios
+	HiddenOutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
 
-	//Clears StatusBlock
+	MainPage::Current->DataContext = ref new User(HiddenOutputField->Text);
+
+	// Clear StatusBlock
 	rootPage->NotifyUser("", NotifyType::StatusMessage);
 
 	// Go to page
 	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
-}
-
-// Save last used legajo
-void HorariosPage::save_legajo(int legajo_var)
-{
-	// Convert String^ to string
-		wstring folderNameW(localfolder->Begin());
-		string folderName(folderNameW.begin(), folderNameW.end());
-
-	// Filename
-		string filename = folderName + "\\lastlegajo.tmp";
-
-	// Write file
-		string saved_legajo = to_string(legajo_var);
-		ofstream out(filename);
-		if (out)
-		{
-			out << saved_legajo;
-			out.close();
-		}
 }
 
 // Save cache to a file
@@ -177,15 +142,8 @@ void HorariosPage::save_cache(String^ cache)
 		wstring w_data(cache->Begin());
 		string s_data(w_data.begin(), w_data.end());
 
-	// Convert String^ to string
-		wstring folderNameW(localfolder->Begin());
-		string folderName(folderNameW.begin(), folderNameW.end());
-
-	// Filename
-		string filename2 = folderName + "\\lasthorarios.tmp";
-
 	// Write file
-		ofstream out(filename2);
+		ofstream out(localfolder + "\\lasthorarios.tmp");
 		if (out)
 		{
 			out << s_data;
@@ -193,59 +151,47 @@ void HorariosPage::save_cache(String^ cache)
 		}
 }
 
-// Run tasks
-void HorariosPage::BackgroundTask(String^ e, int legajo)
+// Start Connection Async
+void HorariosPage::StartConnectionAsync(string url, string legajo)
 {
-	// Save received parameter like a reference called str
-	String^ uriString = (String^)e;
+	// Convert string to String^
+	wstring w_url(url.begin(), url.end());
+	String^ baseUri = ref new String(w_url.c_str());
 
-	create_task(httpClient->GetAsync(ref new Uri(uriString))).then([=](HttpResponseMessage^ response)
+	// Do an asynchronous GET. We need to use use_current() with the continuations since the tasks
+	// are completed on background threads and we need to run on the UI thread to update the UI.
+	create_task(httpClient->GetAsync(ref new Uri(baseUri))).then([=](HttpResponseMessage^ response)
 	{
-		return Helpers::DisplayTextResultAsync(response, OutputField);
+		//if (response->EnsureSuccessStatusCode())
+		return Helpers::DisplayTextResultAsync(response, HiddenOutputField);
 	},
-		task_continuation_context::use_current()).then
-		(
-			[=](task<HttpResponseMessage^> previousTask)
+		task_continuation_context::use_current()).then([=](task<HttpResponseMessage^> previousTask)
 	{
-		unsigned short int internet_conn_status = 0;
 		try
 		{
 			// Check if any previous task threw an exception.
 			HttpResponseMessage^ response = previousTask.get();
-		}
-		///Specific Fix: bug#6161008
-		catch (Exception^ NoInternetConnection)
-		{
-			internet_conn_status = 1;
 
-			rootPage->NotifyUser("Error. No hay conexión a internet.", NotifyType::ErrorMessage);
-		}
+			// Convert String^ to string
+			wstring w_str(HiddenOutputField->Text->Data());
+			wstring wide(w_str);
+			string str3(wide.begin(), wide.end());
 
-		// If error connection don't occurs then initialize parse_Json
-		if (internet_conn_status == 0)
-		{
-			// Error Handlers
-			try
+			// Find ':[{' string to check if the data contains a valid legajo info
+			size_t found = str3.find(":[{");
+
+			// If true
+			if (found != std::string::npos)
 			{
-				// Parse_json
-				MainPage::Current->DataContext = ref new User(OutputField->Text);
-
-				// Convert String^ to string
-					wstring w_str(OutputField->Text->Data());
-					wstring wide(w_str);
-					string str3(wide.begin(), wide.end());
-
-				// Find ':[{' string to check if the data contains a valid legajo info
-				size_t found = str3.find(":[{");
-
-				// If true
-				if (found != std::string::npos)
+				try
 				{
+					// Parse JSON
+					MainPage::Current->DataContext = ref new User(HiddenOutputField->Text);
+
 					// Show successfull!
 					rootPage->NotifyUser("Horarios recibidos!", NotifyType::StatusMessage);
-
 					// Save cache
-					save_cache(OutputField->Text);
+					save_cache(HiddenOutputField->Text);
 
 					// Show ContentPanelInfo
 					ContentPanelInfo->Visibility = Windows::UI::Xaml::Visibility::Visible;
@@ -253,24 +199,30 @@ void HorariosPage::BackgroundTask(String^ e, int legajo)
 					// Stop ProgressRing
 					loading_ring->IsActive = false;
 
+					// Show list
+					List->Visibility = Windows::UI::Xaml::Visibility::Visible;
+
+					// Hide message after ms amount of time
+					rootPage->Await(3000, false);
 				}
-				else
+				catch (Exception^ ex)
 				{
-					rootPage->NotifyUser("El legajo no existe!", NotifyType::ErrorMessage);
-					GoPageBack();
+					// Database parsing error
+					rootPage->NotifyUser("Error en la base de datos. Intente nuevamente.\n Detalles: '" + ex + "'", NotifyType::StatusMessage);
 				}
 			}
-			catch (Exception^ JSONError)
+			else
 			{
-				rootPage->NotifyUser("Error: La base de datos del servidor está dañada.\nPor favor contacte al proveedor", NotifyType::ErrorMessage);
+				rootPage->NotifyUser("El legajo no existe!", NotifyType::ErrorMessage);
+				GoPageBack();
 			}
 		}
-		// Else try to read from cache
-		else
+		catch (Exception^)
 		{
-			/// Specific Fix (bug#6161010)
-			//If no internet connection is available get check if the last legajo obtained is equal to the actual legajo and read it from the cache.
-			//Show an error and adverts that the content is from cache.
+			// If no internet connection is available, check if the last legajo obtained is equal to
+			// the actual legajo and read it from the cache and show a message.
+
+			rootPage->NotifyUser("Error. No hay conexión a internet.", NotifyType::ErrorMessage);
 
 			// Try to read from cache
 			read_cache(legajo);
@@ -280,42 +232,32 @@ void HorariosPage::BackgroundTask(String^ e, int legajo)
 }
 
 // Read from cache
-void HorariosPage::read_cache(int legajo)
+void HorariosPage::read_cache(string legajo)
 {
-	// Convert String^ to string
-	wstring folderNameW(localfolder->Begin());
-	string folderName(folderNameW.begin(), folderNameW.end());
-
-	// Filename
-	string filename2 = folderName + "\\lasthorarios.tmp";
-
 	// Read file
-	string fileData2;
-	ifstream in(filename2);
+	string data;
+	ifstream in(localfolder + "\\lasthorarios.tmp");
 	if (in)
 	{
-		getline(in, fileData2);
+		getline(in, data);
 		in.close();
 	}
 
-	///MyFunction4
 	// Check legajo first and if valid, parse JSon
 
 	// Search for legajo item
-		string s_legajo = to_string(legajo);
-		string var = "\"legajo\":\"" + s_legajo + "\"}";
-		size_t found = fileData2.find(var);
+		string query = "\"legajo\":\"" + legajo + "\"}";
+		size_t found = data.find(query);
 
 	// If true
 	if (found != std::string::npos)
 	{
 		// Convert string to String^
-			wstring w_filedata2 = wstring(fileData2.begin(), fileData2.end());
-			String^ str_fileData2 = ref new String(w_filedata2.c_str());
+			wstring w_data = wstring(data.begin(), data.end());
+			String^ Str_data = ref new String(w_data.c_str());
 
 		// Parse JSon
-			MainPage::Current->DataContext = ref new User(str_fileData2);
-
+			MainPage::Current->DataContext = ref new User(Str_data);
 
 		// Show ContentPanelInfo
 			ContentPanelInfo->Visibility = Windows::UI::Xaml::Visibility::Visible;
@@ -325,6 +267,9 @@ void HorariosPage::read_cache(int legajo)
 
 		// Show ErrorMessage
 			rootPage->NotifyUser("Error. No hay conexión a internet.\nÚltimos horarios leídos en memoria", NotifyType::ErrorMessage);
+
+		// Show list
+		List->Visibility = Windows::UI::Xaml::Visibility::Visible;
 	}
 	// Else Go Back
 	else
@@ -332,3 +277,4 @@ void HorariosPage::read_cache(int legajo)
 		GoPageBack();
 	}
 }
+
