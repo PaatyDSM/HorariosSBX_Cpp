@@ -2,6 +2,7 @@
 #include "SBX_HORARIOS_MAINAPP.xaml.h"
 #include "HorariosPage.xaml.h"
 #include "MainPage.xaml.h"
+#include "ReleaseNotes.xaml.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -32,19 +33,14 @@ SBX_HORARIOS_MAINAPP::SBX_HORARIOS_MAINAPP()
 /// property is typically used to configure the page.</param>
 void SBX_HORARIOS_MAINAPP::OnNavigatedTo(NavigationEventArgs^ e)
 {
+	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
-}
-
-//On Click 'Hyperlinks'
-void SBX_HORARIOS_MAINAPP::Footer_Click(Object^ sender, RoutedEventArgs^ e)
-{
-	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
-	Windows::System::Launcher::LaunchUriAsync(uri);
 }
 
 //On click 'Consultar Horarios' validate Legajo and send it to the next page 'HorariosPage'
 void SBX_HORARIOS_MAINAPP::send_legajo_button(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	rootPage->NotifyUser("", NotifyType::StatusMessage);
 	///MyFunction
 	//Make reference for Text in the Textboxs
 	String^ str = main_legajo_input->Text;
@@ -75,9 +71,21 @@ void SBX_HORARIOS_MAINAPP::send_legajo_button(Platform::Object^ sender, Windows:
 
 }
 
-	//Go to HorariosPage and send it legajo
-	void PaatyDSM::SBX_HORARIOS_MAINAPP::NavigateToHorariosPage()
-	{
-		this->Frame->Navigate(TypeName(Horarios::typeid), main_legajo_input->Text);
-	}
+//On Click 'Hyperlinks'
+void SBX_HORARIOS_MAINAPP::Footer_Click(Object^ sender, RoutedEventArgs^ e)
+{
+	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
+	Windows::System::Launcher::LaunchUriAsync(uri);
+}
 
+//Go to HorariosPage and send it legajo
+void PaatyDSM::SBX_HORARIOS_MAINAPP::NavigateToHorariosPage()
+{
+	this->Frame->Navigate(TypeName(Horarios::typeid), main_legajo_input->Text);
+}
+
+//On click 'Version number' navigate to 'Release Notes Page'
+void SBX_HORARIOS_MAINAPP::release_notes_button(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	this->Frame->Navigate(TypeName(ReleaseNotes::typeid));
+}

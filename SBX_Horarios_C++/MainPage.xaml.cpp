@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "MainPage.xaml.h"
+#include "SBX_HORARIOS_MAINAPP.xaml.h"
 
 using namespace PaatyDSM;
 
@@ -33,11 +34,11 @@ MainPage::MainPage()
 
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	SuspensionManager::RegisterFrame(ScenarioFrame, "scenarioFrame");
-	if (ScenarioFrame->Content == nullptr)
+	SuspensionManager::RegisterFrame(Page_Frame, "PaatyDSM.SBX_HORARIOS_MAINAPP");
+	if (Page_Frame->Content == nullptr)
 	{
-		// When the navigation stack isn't restored navigate to the ScenarioList
-		if (!ScenarioFrame->Navigate(TypeName{ "PaatyDSM.SBX_HORARIOS_MAINAPP", TypeKind::Custom }))
+		// When the navigation stack isn't restored navigate to the SBX_HORARIOS_MAINAPP
+		if (!Page_Frame->Navigate(TypeName{ "PaatyDSM.SBX_HORARIOS_MAINAPP", TypeKind::Custom }))
 		{
 			throw ref new FailureException("Fallo al iniciar la App :(\n.\nCodigo de error: \n#31326497.\nContacte al editor de la aplicación\ne incluya el #codigo de error.");
 		}
@@ -49,16 +50,17 @@ void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::I
 	// Clear the status block when navigating
 	NotifyUser("", NotifyType::StatusMessage);
 
-	if (ScenarioFrame->CanGoBack)
+	if (Page_Frame->CanGoBack)
 	{
-		///Specified fix. bug#6161001
-		/* INCOMPLETED */
-		{
-			Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(PaatyDSM::MainPage::MainPage::typeid));
-
-			//Indicate the back button press is handled so the app does not exit
-			e->Handled = true;
-		}
+		///Specific fix. bug#6161001
+		//Indicate the back button press is handled so the app does not exit
+		e->Handled = true;
+		///Specific Fix: (bug#6161009)
+		Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(PaatyDSM::MainPage::typeid));
+	}
+	else
+	{
+		e->Handled = false;
 	}
 
 }

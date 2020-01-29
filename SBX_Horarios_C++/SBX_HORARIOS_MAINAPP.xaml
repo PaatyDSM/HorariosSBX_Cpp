@@ -6,42 +6,66 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     NavigationCacheMode="Enabled">
-
-    <Grid x:Name="RootGrid" Background="white">
+    
+    <!-- StartGrid:Page -->
+    <Grid x:Name="Page" Background="white" Margin="0,0">
         <Grid.RowDefinitions>
+            <!-- Grid:Title -->
             <RowDefinition Height="Auto"/>
+            <!-- Grid:InputPanel -->
             <RowDefinition Height="*"/>
+            <!-- Grid:ButtonPanel -->
+            <RowDefinition Height="*"/>
+            <!-- Grid:FooterPanel -->
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,0,0,0" BorderThickness="0">
-            <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0">
-                <TextBlock x:Name="main_title" Text="Mis horarios Starbucks" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Height="51" d:IsLocked="True"/>
-                <Image x:Name="main_imagebox" Margin="45,0" Source="LOGO_MAIN.png" HorizontalAlignment="Center" Stretch="None"/>
-            </StackPanel>
-        </StackPanel>
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="Title" Grid.Row="0" Margin="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <!-- Title -->
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <!-- Image -->
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="2" Margin="0,0,0,0">
-                <TextBlock x:Name="_credits" Margin="0,0,0,0" TextWrapping="Wrap" Text="Created by PaatyDSM" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="11" FontFamily="Segoe Script" d:IsLocked="True"/>
-            </Grid>
-            <StackPanel x:Name="FooterPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,0,0">
-                <HyperlinkButton Content="Contacto" Tag="mailto:paaty.dsm@gmail.com?Subject=PaatyDSM Apps - MAIL" FontSize="12"/>
-                <TextBlock Text=" |" VerticalAlignment="Center"/>
-                <HyperlinkButton Content="Página Web" Tag="http://paty.netii.net/PaatyDSMApps" FontSize="12"/>
+            <!-- Title -->
+            <TextBlock x:Name="SBX_HORAIOS_MAINAPP_title" Grid.Row="0" Text="Mis horarios Starbucks" HorizontalAlignment="Center" FontFamily="Gabriola" FontSize="48" FontWeight="Bold" Height="51" d:IsLocked="True"/>
+            <!--  Main Page image -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,2,0,0" HorizontalAlignment="Center">
+                <Image x:Name="main_imagebox" Source="Assets/pictures/logo_main.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
             </StackPanel>
-            <StackPanel x:Name="VersionPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <TextBlock Text="v0.81a" FontSize="12" ToolTipService.ToolTip="Versión"/>
-            </StackPanel>
-            <TextBlock x:Name="textBlock" Margin="0,30,180,0" TextWrapping="Wrap" Text="Legajo: " VerticalAlignment="Top" HorizontalAlignment="Center" Width="55" FontSize="16" Height="26"/>
-            <TextBox x:Name="main_legajo_input" Margin="90,27,30,0" TextWrapping="Wrap" Text="" Height="20" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="190" Background="#FFECECEC" FontSize="16" BorderBrush="Black" PlaceholderText="Escribe tu legajo" InputScope="Number"/>
         </Grid>
-        <StackPanel x:Name="ButtonAlignment" Margin="0" BorderThickness="0" Height="120" Grid.Row="1" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Top">
-            <Button x:Name="send_legajo" Content="Consultar horarios" HorizontalAlignment="Stretch" Margin="5,80,5,0" VerticalAlignment="Center" Height="40" BorderThickness="2" FontSize="17" FontFamily="Segoe WP" Click="send_legajo_button" Background="#33000000" BorderBrush="#FF0044AE"/>
-        </StackPanel>
+
+        <Grid x:Name="InputPanel" Grid.Row="1" VerticalAlignment="Center" Margin="0,8,0,0" HorizontalAlignment="Center">
+            <StackPanel x:Name="InputBlocks" Orientation="Horizontal" Margin="0">
+                <TextBlock x:Name="textBlock" Margin="0,0,2,0" TextWrapping="Wrap" Text="Legajo:" FontSize="16" VerticalAlignment="Center"/>
+                <!--  Input Field -->
+                <TextBox x:Name="main_legajo_input" Margin="0" TextWrapping="Wrap" Text="" Height="20" BorderThickness="1" Width="190" Background="#FFECECEC" FontSize="16" BorderBrush="Black" PlaceholderText=" Ingrese su legajo aquí" InputScope="Number"/>
+            </StackPanel>
+        </Grid>
+        
+        <!--  Button -->
+        <Grid x:Name="ButtonPanel" Grid.Row="2" VerticalAlignment="Top" Margin="16,0" MaxWidth="480">
+            <StackPanel x:Name="ButtonAlignment" Margin="0" BorderThickness="0" Grid.Row="1" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Center">
+                <Button x:Name="send_legajo" Content="Consultar horarios" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,8,0,0" Click="send_legajo_button" FontFamily="Segoe WP" FontSize="17" BorderThickness="2.5" FontWeight="Bold" BorderBrush="Black"/>
+            </StackPanel>
+        </Grid>
+        
+        <Grid x:Name="FooterPanel" Grid.Row="3" Margin="8,0" VerticalAlignment="Bottom">
+            <!--  E-mail Link -->
+            <StackPanel x:Name="ContactPnael" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,0,0">
+                <HyperlinkButton Content="Contacto" Tag="mailto:paaty.dsm@gmail.com?Subject=PaatyDSM Apps - MAIL" FontSize="12" ToolTipService.ToolTip="Envíame un mail" Click="Footer_Click"/>
+            </StackPanel>
+            <!--  Release Notes Link -->
+            <StackPanel x:Name="VersionPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Margin="0,0,0,0">
+                <Button x:Name="ReleaseNotes_button" Content="V0.87b" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" FontFamily="Consolas" FontSize="12" BorderThickness="0" BorderBrush="White" ToolTipService.ToolTip="Versión" Background="{x:Null}" Click="release_notes_button"/>
+            </StackPanel>
+            <!--  Author Page's -->
+            <Grid x:Name="_credits" Margin="0,0,0,0" HorizontalAlignment="Center">
+                <HyperlinkButton Content="PaatyDSM Apps" Tag="http://paaty.netii.net/PaatyDSMApps" ToolTipService.ToolTip="Ir a mi página web" FontSize="18" FontFamily="Segoe Script" d:IsLocked="True" Click="Footer_Click"/>
+            </Grid>
+        </Grid>
+        
+     <!-- EndGrid:Page -->
     </Grid>
 </Page>
+ 

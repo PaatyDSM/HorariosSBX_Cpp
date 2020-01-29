@@ -1,12 +1,7 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-//
-//*********************************************************
-
-#pragma once
+﻿#pragma once
 
 #include "School.h"
+#include "MainPage.xaml.h"
 
 namespace SDKSample
 {

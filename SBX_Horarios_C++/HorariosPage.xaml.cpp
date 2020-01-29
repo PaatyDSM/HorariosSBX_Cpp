@@ -45,13 +45,17 @@ void Horarios::OnNavigatedTo(NavigationEventArgs^ e)
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
 
+	///Specific fix
+	// Clean error messages 
+	rootPage->NotifyUser("", NotifyType::StatusMessage);
+
 	//Save received parameter like a reference called str
 	String^ str = (String^)e->Parameter;
 
 	//Starting  filters and httpclient
 	filter = ref new HttpBaseProtocolFilter();
 	httpClient = ref new HttpClient(filter);
-
+	
 	//Convert String^ to wstring
 	wstring w_str(str->Data());
 
@@ -63,25 +67,19 @@ void Horarios::OnNavigatedTo(NavigationEventArgs^ e)
 	int legajo = stoi(str3);
 
 	//error handler
-	if (e != nullptr)
-	{
-	// Safe to use str.
+	if (e != nullptr) // Safe to use str.
+	{ 
+		// Go to
 		send_pagewithlegajo(legajo);
 	}
-	else
-	{
-	// Do not use data.
+	else // Do not use data.
+	{ 
+		// Show error.
 		rootPage->NotifyUser("Error interno: #31326496.\nContacte al editor de la aplicación\ne incluya el #codigo de error.", NotifyType::ErrorMessage);
 		GoBack();
 	}
-
 }
 
-//Go back to MainPage on specified error: #31326498
-void Horarios::GoBack()
-{
-	this->Frame->Navigate(TypeName(MainPage::typeid));
-}
 
 void Horarios::send_pagewithlegajo(int legajo)
 {
@@ -94,7 +92,7 @@ void Horarios::send_pagewithlegajo(int legajo)
 	//Get input legajo and append it to the url
 	string s_legajo = to_string(legajo);
 	string var = "http://proveedores.alsea.com.ar:25080/asignaciones-server/mobile/main/asignaciones/legajos/" + s_legajo;
-	
+
 	//Converts string to wstring
 	wstring url_ok(var.begin(), var.end());
 
@@ -113,50 +111,82 @@ void Horarios::send_pagewithlegajo(int legajo)
 
 	// Do an asynchronous GET. We need to use use_current() with the continuations since the tasks are completed on
 	// background threads and we need to run on the UI thread to update the UI.
+
 	create_task(httpClient->GetAsync(ref new Uri(uriString))).then([=](HttpResponseMessage^ response)
 	{
 		return Helpers::DisplayTextResultAsync(response, OutputField);
-	}, task_continuation_context::use_current()).then([=](task<HttpResponseMessage^> previousTask)
+	},
+		task_continuation_context::use_current()).then
+		(
+			[=](task<HttpResponseMessage^> previousTask)
 	{
+		unsigned short int internet_conn_status = 0;
 		try
 		{
 			// Check if any previous task threw an exception.
 			HttpResponseMessage^ response = previousTask.get();
-
 		}
+		///Specific Fix: bug#6161008
 		catch (Exception^ ex)
 		{
+			internet_conn_status = 1;
+
 			rootPage->NotifyUser("Error. No hay conexión a internet.", NotifyType::ErrorMessage);
 		}
 
-		//parse_json
-		MainPage::Current->DataContext = ref new User();
-
-		try
+		// If no error connection occurs then initialize parse_Json
+		if (internet_conn_status == 0)
 		{
-			MainPage::Current->DataContext = ref new User(OutputField->Text);
-			rootPage->NotifyUser("Completado. Obtenido desde la red.", NotifyType::StatusMessage);
+			//parse_json
+			MainPage::Current->DataContext = ref new User();
+
+			// Error Handlers
+			try
+			{
+				MainPage::Current->DataContext = ref new User(OutputField->Text);
+				// Show successfull!
+				rootPage->NotifyUser("Horarios recibidos!", NotifyType::StatusMessage);
+			}
+			catch (Exception^ ex)
+			{
+				rootPage->NotifyUser("El legajo no existe" + ex, NotifyType::ErrorMessage);
+			}
 		}
-		catch (Exception^ ex)
+		else
 		{
-			MainPage::Current->NotifyUser("Error en la red de Alsea\nDetalles: La base de datos JSON\nestá dañada o contiende caracteres no validos.\nNotifique al Proveedor", NotifyType::ErrorMessage);
+			/// Specific Fix (bug#6161010)
+			//INCOMPLETE
+			/*
+			If no internet connection is available get check if the last legajo obtained is equal to the actual legajo and read it from the cache.
+			Show an error and adverts that the content is from cache.
+			*/
+
+			// Go Back
+			GoBack();
 		}
 
-	});
+	}
+	);
 
 }
 
-//Navigation: Back Button
+// Navigation: Back Button
 void Horarios::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 {
-	Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
+	OutputField->Text = " ";
+	Frame->Navigate(TypeName(SBX_HORARIOS_MAINAPP::typeid));
 	rootPage->NotifyUser("", NotifyType::ErrorMessage);
 }
 
-//Hyperlink buttons
+//Go back to MainPage with uncleared errors
+void Horarios::GoBack()
+{
+	this->Frame->Navigate(TypeName(SBX_HORARIOS_MAINAPP::typeid));
+}
+
+// Hyperlink buttons
 void Horarios::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
 	Windows::System::Launcher::LaunchUriAsync(uri);
 }
-

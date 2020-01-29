@@ -22,6 +22,7 @@ namespace PaatyDSM
 		MainPage^ rootPage;
 		void Footer_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void send_legajo_button(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void release_notes_button(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void NavigateToHorariosPage(void);
 	};
 }

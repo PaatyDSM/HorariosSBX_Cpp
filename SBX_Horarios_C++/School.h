@@ -1,10 +1,4 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-//
-//*********************************************************
-
-#pragma once
+﻿#pragma once
 
 namespace SDKSample
 {

@@ -48,7 +48,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 		//rootFrame->Language = Windows::Globalization::ApplicationLanguages::Languages->GetAt(0);
 
 		// Change this value to a cache size that is appropriate for your application.
-		rootFrame->CacheSize = 0;
+		rootFrame->CacheSize = 1;
 
 		auto prerequisite = task<void>([]() {});
 		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
