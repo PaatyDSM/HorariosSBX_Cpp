@@ -15,7 +15,5 @@ namespace SBX_HORARIOS
 		static task<HttpResponseMessage^> DisplayTextResultAsync(
 			HttpResponseMessage^ response,
 			TextBox^ output);
-
-		static HttpClient^ CreateHttpClient();
 	};
 }

@@ -14,7 +14,6 @@ using namespace Windows::System::Profile;
 
 // Referencia al Frame en el cual todas las páginas son cargadas.
 MainPage^ MainPage::Current = nullptr;
-//DispatcherTimer^ dispatcherTimer;
 
 // Main
 MainPage::MainPage()
@@ -29,41 +28,19 @@ MainPage::MainPage()
 // OnNavigatedTo function
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	//Check trial
-	/// DISABLED ///
-#pragma region TRIAL
-	/*
-	{
-		Windows::Globalization::Calendar^ c = ref new Windows::Globalization::Calendar;
-		String^ trial = c->YearAsString();
-		wstring w_trial(trial->Data());
-		wstring wide_year(w_trial);
-		string year(wide_year.begin(), wide_year.end());
-		int year_number = stoi(year);
-		if (year_number > 2017)
-		{
-			Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.TrialPage", TypeKind::Custom });
-		}
-	}
-	*/
-#pragma endregion
-	/// DISABLED ///
-
-	// Launch UWP apps in full-screen mode on mobile devices or tablets.
-	SetFullScreenModeON();
+	// Set fullscreen on mobile devices and tablets.
+	SetFullScreenModeON(0);
 
 	// When the navigation stack isn't restored navigate to the WelcomePage
 	if (Page_Frame->Content == nullptr)
 	{
 		if (!Page_Frame->Navigate(TypeName{"SBX_HORARIOS.WelcomePage", TypeKind::Custom}))
 		{
-			// Clear the status block
+			// Show navigation error
+			Frame->Background = ref new SolidColorBrush(Windows::UI::Colors::Gray);
 			NotifyUser("Hubo un problema al cargar la página principal.", NotifyType::ErrorMessage);
 		}
 	}
-
-	// Initialize DispatcherTimer
-	//dispatcherTimer = ref new DispatcherTimer;
 }
 
 // StatusBlock function
@@ -97,50 +74,37 @@ void MainPage::NotifyUser(String^ strMessage, NotifyType type)
 }
 
 // Set fullscreen
-void MainPage::SetFullScreenModeON()
+/// <summary>
+/// Launch UWP apps in full-screen mode on mobile devices and tablets, desktop or both.
+/// </summary>
+/// <param name="device">0 for Mobile and Tablets, 1 for PC and 2 for both platforms</param>
+void MainPage::SetFullScreenModeON(int device)
 {
-	// Launch UWP apps in full-screen mode on mobile devices or tablets.
-	{
-		String^ platformFamily = AnalyticsInfo::VersionInfo->DeviceFamily;
+	String^ platformFamily = AnalyticsInfo::VersionInfo->DeviceFamily;
 
+	if (device == 0)
+	{
 		if (platformFamily->Equals("Windows.Mobile"))
 		{
 			ApplicationView^ view = ApplicationView::GetForCurrentView();
 			view->TryEnterFullScreenMode();
 		}
 	}
+	else if (device == 1)
+	{
+		if (platformFamily->Equals("Windows.Desktop"))
+		{
+			ApplicationView^ view = ApplicationView::GetForCurrentView();
+			view->TryEnterFullScreenMode();
+		}
+	}
+	else if (device == 2)
+	{
+		ApplicationView^ view = ApplicationView::GetForCurrentView();
+		view->TryEnterFullScreenMode();
+	}
+
+		
 }
 
-/// DISABLED ///
-#pragma region AutoHide NotifyUser
-// Await 'ms' amount of time
-void MainPage::Await(int ms, bool stop)
-{
-	//if (!stop)
-	//{
-		// Set Tick duration
-		//time_amount.Duration = ms;
-		//dispatcherTimer->Interval = time_amount;
-		// Register event handler for Tick event
-		//auto registrationtoken = dispatcherTimer->Tick += ref new EventHandler<Object^>(this, &MainPage::HideMessage);
-	//}
-}
-
-// Clear and hide Messages
-void MainPage::HideMessage(Object^ sender, Object^ args)
-{
-	//auto dTIString = dispatcherTimer->Interval.ToString();
-	//if (dTIString = "0")
-	//{
-	//	Await(0, true);
-	//	return;
-	//}
-	//else 
-	//{
-	//	NotifyUser("", NotifyType::StatusMessage);
-	//	// Stop the timer
-	//	dispatcherTimer->Stop();
-	//}
-}
-#pragma endregion
 

@@ -3,8 +3,12 @@
 #include "WelcomePage.g.h"
 #include "MainPage.xaml.h"
 
+using namespace std;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::UI::Xaml::Input;
+using namespace Windows::Web::Http;
+using namespace Windows::Web::Http::Filters;
 
 namespace SBX_HORARIOS
 {
@@ -25,6 +29,9 @@ namespace SBX_HORARIOS
 	private:
 		MainPage^ rootPage;
 
+		HttpClient^ client;
+		HttpBaseProtocolFilter^ filter;
+
 		void start_FadeInAnimation(void);
 		void read_legajo(void);
 		void send_legajo_button(Object^ sender, RoutedEventArgs^ e);
@@ -32,9 +39,10 @@ namespace SBX_HORARIOS
 		void start_FadeOutAnimation(void);
 		void NavigatetoHorariosPage(Object^ sender, RoutedEventArgs^ e);
 		void start_ReleaseNotesFadeOutAnimation(void);
-		void Release_Notes_Click(Platform::Object^ sender, RoutedEventArgs^ e);
-		void main_legajo_input_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
+		void Release_Notes_Click(Object^ sender, RoutedEventArgs^ e);
+		void OnKeyDownHandler(Object ^ sender, KeyEventArgs^ e);
+		void CheckUpdates(void);
+
 	};
 }
-
 

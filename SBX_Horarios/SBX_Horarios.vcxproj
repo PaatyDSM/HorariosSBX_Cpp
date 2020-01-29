@@ -7,7 +7,7 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <ProjectName>SBX_HORARIOS</ProjectName>
@@ -285,10 +285,6 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Sample-Utils\Helpers.h" />
-    <ClInclude Include="Sample-Utils\PlugInFilter.h" />
-    <ClInclude Include="TrialPage.xaml.h">
-      <DependentUpon>TrialPage.xaml</DependentUpon>
-    </ClInclude>
     <ClInclude Include="WelcomePage.xaml.h">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </ClInclude>
@@ -308,9 +304,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="ReleaseNotesPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TrialPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="WelcomePage.xaml">
@@ -336,6 +329,15 @@
     <Image Include="Assets\BadgeLogo.scale-150.png" />
     <Image Include="Assets\BadgeLogo.scale-200.png" />
     <Image Include="Assets\BadgeLogo.scale-400.png" />
+    <Image Include="Assets\LargeTile.scale-100.png" />
+    <Image Include="Assets\LargeTile.scale-125.png" />
+    <Image Include="Assets\LargeTile.scale-150.png" />
+    <Image Include="Assets\LargeTile.scale-200.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-400.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
     <Image Include="Assets\pictures\Horarios_background.png" />
     <Image Include="Assets\pictures\Welcome_background.png" />
@@ -387,6 +389,21 @@
     </Image>
     <Image Include="Assets\Square44x44Logo.targetsize-32.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-16.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-24.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-256.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-32.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-48.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-100.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-125.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-150.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-400.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-16.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-24.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-256.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-32.png" />
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-48.png" />
     <Image Include="Assets\StoreLogo.scale-100.png" />
     <Image Include="Assets\StoreLogo.scale-125.png" />
     <Image Include="Assets\StoreLogo.scale-150.png" />
@@ -408,10 +425,6 @@
       <DependentUpon>ReleaseNotesPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Sample-Utils\Helpers.cpp" />
-    <ClCompile Include="Sample-Utils\PlugInFilter.cpp" />
-    <ClCompile Include="TrialPage.xaml.cpp">
-      <DependentUpon>TrialPage.xaml</DependentUpon>
-    </ClCompile>
     <ClCompile Include="WelcomePage.xaml.cpp">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </ClCompile>

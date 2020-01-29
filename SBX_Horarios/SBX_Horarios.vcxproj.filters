@@ -24,9 +24,6 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="HorariosPage.xaml.cpp" />
     <ClCompile Include="ReleaseNotesPage.xaml.cpp" />
-    <ClCompile Include="Sample-Utils\PlugInFilter.cpp">
-      <Filter>Sample-Utils</Filter>
-    </ClCompile>
     <ClCompile Include="WelcomePage.xaml.cpp" />
     <ClCompile Include="JSon_manageData\User.cpp">
       <Filter>JSon_manageData</Filter>
@@ -34,7 +31,6 @@
     <ClCompile Include="JSon_manageData\WorkDays.cpp">
       <Filter>JSon_manageData</Filter>
     </ClCompile>
-    <ClCompile Include="TrialPage.xaml.cpp" />
     <ClCompile Include="Sample-Utils\Helpers.cpp">
       <Filter>Sample-Utils</Filter>
     </ClCompile>
@@ -46,9 +42,6 @@
     <ClInclude Include="HorariosPage.xaml.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ReleaseNotesPage.xaml.h" />
-    <ClInclude Include="Sample-Utils\PlugInFilter.h">
-      <Filter>Sample-Utils</Filter>
-    </ClInclude>
     <ClInclude Include="WelcomePage.xaml.h" />
     <ClInclude Include="JSon_manageData\User.h">
       <Filter>JSon_manageData</Filter>
@@ -56,7 +49,6 @@
     <ClInclude Include="JSon_manageData\WorkDays.h">
       <Filter>JSon_manageData</Filter>
     </ClInclude>
-    <ClInclude Include="TrialPage.xaml.h" />
     <ClInclude Include="Sample-Utils\Helpers.h">
       <Filter>Sample-Utils</Filter>
     </ClInclude>
@@ -206,6 +198,66 @@
     <Image Include="Assets\Square150x150Logo.scale-400.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-16.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-24.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-32.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-48.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.targetsize-256.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-16.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-24.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-32.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-48.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo_altform-unplated.altform-unplated_targetsize-256.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LargeTile.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -220,7 +272,6 @@
     <Page Include="HorariosPage.xaml" />
     <Page Include="ReleaseNotesPage.xaml" />
     <Page Include="WelcomePage.xaml" />
-    <Page Include="TrialPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SBX_Horarios.rc" />

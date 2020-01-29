@@ -32,12 +32,12 @@ namespace SBX_HORARIOS
 		void start_FadeOutAnimation(void);
 		void start_FadeOutAnimation2(void);
 		void SetBackButton(void);
-		void StartConnectionAsync(string, string);
+		void StartConnectionAsync(string url, string legajo, int retry);
 		void Backbutton1(Object^ sender, RoutedEventArgs^ e);
 		void GoPageBack(void);
 		void Footer_Click(Object^ sender, RoutedEventArgs^ e);
 		void save_legajo(string);
 		void save_cache(String^ e);
-		void read_cache(string);
+		void read_cache(string, int database_error);
 	};
 }

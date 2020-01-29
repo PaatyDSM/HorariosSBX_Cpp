@@ -10,9 +10,14 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::System::Profile;
 
+static String^ CurrentVersionNumber = "1.26";
+
 ReleaseNotesPage::ReleaseNotesPage()
 {
 	InitializeComponent();
+
+	// Set version number
+	FP_VersionButton->Content = CurrentVersionNumber;
 }
 
 // Function start_fadein_animation
@@ -59,7 +64,22 @@ void ReleaseNotesPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 void ReleaseNotesPage::LoadReleaseNotes(void)
 {
 	Notes->Text =
-
+		"V1.26\n"
+		"*Now can be installed on the sd card.\n"
+		"*Better performance.\n"
+		"*Fixed images.\n"
+		"*Added kayboard navigation.\n"
+		"*Changes and improvments on the readability of Horarios Page.\n"
+		"*Minor changes and fixes.\n"
+		"*Reduced app size.\n"
+		"*Fixed navigation on Desktop version.\n"
+		"*Updated texts.\n"
+		"*Fixed bugs.\n"
+		"*Added update notification.\n"
+		"*Retry on internet error connection.\n"
+		"*UI changes and improvments.\n"
+		"\n"
+		"------------------\n"
 		"V1.25\n"
 		"*Fixed navigation.\n"
 		"*Updated texts.\n"
@@ -395,4 +415,6 @@ void ReleaseNotesPage::LoadReleaseNotes(void)
 
 		// Stop ProgressRing
 		loading_ring->IsActive = false;
+
+		//Notes->VerticalAlignment = ...;
 }

@@ -41,7 +41,6 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 		rootFrame = ref new Frame();
 
 		rootFrame->NavigationFailed += ref new NavigationFailedEventHandler(this, &App::OnNavigationFailed);
-		//rootFrame->Navigated += RootFrame_Navigated;
 
 		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
 		{
@@ -81,12 +80,6 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 			Window::Current->Activate();
 		}
 	}
-
-	///
-	/* Here goes the BackButtonPressed Handler */
-	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-	// SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &App::App_BackRequested);
-	///
 }
 
 /// <summary>

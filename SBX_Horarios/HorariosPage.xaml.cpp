@@ -21,7 +21,6 @@ using namespace Windows::Web::Http::Headers;
 using namespace Windows::System::Profile;
 
 // Path for local saving
-/// orig: non static
 static wstring w_localfolder(ApplicationData::Current->LocalFolder->Path->Begin());
 static string localfolder(w_localfolder.begin(), w_localfolder.end());
 
@@ -63,7 +62,7 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 	save_legajo(legajo);
 
 	// Start Connection Async
-	StartConnectionAsync(url, legajo);
+	StartConnectionAsync(url, legajo, 0);
 
 }
 
@@ -158,7 +157,7 @@ void HorariosPage::save_cache(String^ cache)
 }
 
 // Start Connection Async
-void HorariosPage::StartConnectionAsync(string url, string legajo)
+void HorariosPage::StartConnectionAsync(string url, string legajo, int retry)
 {
 	// Convert string to String^
 	wstring w_url(url.begin(), url.end());
@@ -180,8 +179,7 @@ void HorariosPage::StartConnectionAsync(string url, string legajo)
 
 			// Convert String^ to string
 			wstring w_str(HiddenOutputField->Text->Data());
-			wstring wide(w_str);
-			string str3(wide.begin(), wide.end());
+			string str3(w_str.begin(), w_str.end());
 
 			// Find ':[{' string to check if the data contains a valid legajo info
 			size_t found = str3.find(":[{");
@@ -203,25 +201,33 @@ void HorariosPage::StartConnectionAsync(string url, string legajo)
 					// Show ContentPanelInfo
 					ContentPanelInfo->Visibility = Windows::UI::Xaml::Visibility::Visible;
 
-					// Stop ProgressRing
-					loading_ring->IsActive = false;
-
 					// Show list
 					List->Visibility = Windows::UI::Xaml::Visibility::Visible;
-
-					// Hide message after ms amount of time
-					//rootPage->Await(3000, false);
+					
+					// Stop ProgressRing
+					loading_ring->IsActive = false;
 				}
 				catch (Exception^ ex)
 				{
 					// Database parsing error
-					rootPage->NotifyUser("Hubo un problema con la conexión a internet.\nIntente nuevamente.", NotifyType::StatusMessage);
+					rootPage->NotifyUser("Hay problemas con la conexión a internet.\nReintentando...", NotifyType::ErrorMessage);
+					if (retry == 0)
+					{
+						StartConnectionAsync(url, legajo, 1);
+					}
+					else
+					{
+						rootPage->NotifyUser("Hay problemas con la conexión a internet.", NotifyType::ErrorMessage);
+
+						// Try to read from cache
+						read_cache(legajo, 1);
+					}
 				}
 			}
 			else
 			{
 				// Legajo NOT FOUND error
-				rootPage->NotifyUser("El legajo no existe o no contiene los horarios!", NotifyType::ErrorMessage);
+				rootPage->NotifyUser("El legajo no existe o no tiene asignado los horarios.", NotifyType::ErrorMessage);
 				GoPageBack();
 			}
 		}
@@ -233,14 +239,14 @@ void HorariosPage::StartConnectionAsync(string url, string legajo)
 			rootPage->NotifyUser("Error. No hay conexión a internet.", NotifyType::ErrorMessage);
 
 			// Try to read from cache
-			read_cache(legajo);
+			read_cache(legajo, 0);
 		}
 	}
 	);
 }
 
 // Read from cache
-void HorariosPage::read_cache(string legajo)
+void HorariosPage::read_cache(string legajo, int database_error)
 {
 	// Read file
 	string data;
@@ -274,8 +280,15 @@ void HorariosPage::read_cache(string legajo)
 			loading_ring->IsActive = false;
 
 		// Show ErrorMessage
-			rootPage->NotifyUser("Error. No hay conexión a internet.\nÚltimos horarios leídos de la memoria", NotifyType::ErrorMessage);
-
+			if (database_error == 1)
+			{
+				rootPage->NotifyUser("Hay problemas con la conexión a internet.\nÚltimos horarios leídos de la memoria", NotifyType::ErrorMessage);
+			}
+			else
+			{
+				rootPage->NotifyUser("Error. No hay conexión a internet.\nÚltimos horarios leídos de la memoria", NotifyType::ErrorMessage);
+			}
+			
 		// Show list
 		List->Visibility = Windows::UI::Xaml::Visibility::Visible;
 	}
