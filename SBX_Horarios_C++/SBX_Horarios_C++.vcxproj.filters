@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>be0e901b-ae5e-4505-8dde-39bd68504f5d</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>c6578651-9257-48d0-9b27-6750704d33f8</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="images">
+      <UniqueIdentifier>{90b34fe1-d4b3-492c-adb5-01841f2e4bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample-Utils">
+      <UniqueIdentifier>{6bdb4f9f-5756-4174-85a0-b8478618947c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="HorariosPage.xaml.cpp" />
+    <ClCompile Include="Common\SuspensionManager.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="PlugInFilter.cpp" />
+    <ClCompile Include="SBX_HORARIOS_MAINAPP.xaml.cpp" />
+    <ClCompile Include="School.cpp" />
+    <ClCompile Include="User.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="HorariosPage.xaml.h" />
+    <ClInclude Include="Sample-Utils\CppSamplesUtils.h">
+      <Filter>Sample-Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SuspensionManager.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="PlugInFilter.h" />
+    <ClInclude Include="SBX_HORARIOS_MAINAPP.xaml.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="School.h" />
+    <ClInclude Include="User.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\SBX_Horarios\FILES\LOGO_MAIN.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Pictures\Saved Pictures\loading icons\Loading_icon.gif">
+      <Filter>images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SBX_Horarios_C++_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="HorariosPage.xaml" />
+    <Page Include="SBX_HORARIOS_MAINAPP.xaml" />
+    <Page Include="Styles.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SBX_Horarios_C++.rc" />
+  </ItemGroup>
+</Project>

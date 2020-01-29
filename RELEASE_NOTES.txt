@@ -1,0 +1,63 @@
+Mis Horarios SBX (SBX_HORARIOS_C__)
+
+Release notes:
+
+V0.8b
+*Now app is fully working.
+*Fixed some translations.
+*Fixed Back Button, now pressing Hardware Back button should always go back to the Main Page.
+*Added app version in the Main Page.
+*Cleaning workfolder
+
+Know Bugs:
+*Loading message is not being show.
+*Landscape mode is not being showed correctly.
+*Screen flickering when pressing Hardware Back button on MainPage (bug#6161001)
+*App crash if Hardware Back Button is pressed a lot of times
+*If a legajo is not encountered in database it won't show no error.
+
+-----------------------------------------------------------------------------------------
+V0.7a
+*Fixed all error messages in all pages:
+*Now, empty legajo is rejected.
+*Fixed all error handlers.
+	-Green message status now close when navigate back.
+	-Database errors are reported correctly now.
+*Improvements in the UI
+*Minor changes in the UI.
+*Fixed minor bugs.
+*Changes in the Source Code and cleaning.
+*Removed more unused code.
+*Changed User Agent (Mozilla/5.0; PaatyDSM Apps)
+*Now the database can be parsed if it's loaded from the internet.
+
+Know Bugs:
+*Loading message is not being show.
+*Landscape mode is not being showed correctly.
+
+-----------------------------------------------------------------------------------------
+V0.6a
+*Changes in the UI.
+*Changes in the source code for easy identification.
+*Removed unused code.
+*Fix for small screens.
+*Fixed hyperlink buttons.
+*Fix for Autoadaptive Content in the Horarios Page.
+*Fixed spanish translations.
+*Fixed error messages in Main Page:
+*Optimized code.
+*Aligned some texts.
+*Fixed error handlers
+
+Know Bugs:
+*Empty legajo is acepted.
+*Loading message is not being show.
+*Green message status doesn't close when going back to the Main Page
+*Database errors are now reported.
+*The database can't be parsed if it readed from the internet
+*Landscape mode is not being showed correctly.
+
+-----------------------------------------------------------------------------------------
+V0.1a
+(Nov / 7 / 2016)
+*First Release.

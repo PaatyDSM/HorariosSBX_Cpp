@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="PaatyDSM.SBX_HORARIOS_MAINAPP"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Enabled">
+
+    <Grid x:Name="RootGrid" Background="white">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,0,0,0" BorderThickness="0">
+            <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock x:Name="main_title" Text="Mis horarios Starbucks" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Gabriola" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Height="51" d:IsLocked="True"/>
+                <Image x:Name="main_imagebox" Margin="45,0" Source="LOGO_MAIN.png" HorizontalAlignment="Center" Stretch="None"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="2" Margin="0,0,0,0">
+                <TextBlock x:Name="_credits" Margin="0,0,0,0" TextWrapping="Wrap" Text="Created by PaatyDSM" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="11" FontFamily="Segoe Script" d:IsLocked="True"/>
+            </Grid>
+            <StackPanel x:Name="FooterPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,0,0">
+                <HyperlinkButton Content="Contacto" Tag="mailto:paaty.dsm@gmail.com?Subject=PaatyDSM Apps - MAIL" FontSize="12"/>
+                <TextBlock Text=" |" VerticalAlignment="Center"/>
+                <HyperlinkButton Content="Página Web" Tag="http://paty.netii.net/PaatyDSMApps" FontSize="12"/>
+            </StackPanel>
+            <StackPanel x:Name="VersionPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Margin="0,0,0,0">
+                <TextBlock Text="v0.81a" FontSize="12" ToolTipService.ToolTip="Versión"/>
+            </StackPanel>
+            <TextBlock x:Name="textBlock" Margin="0,30,180,0" TextWrapping="Wrap" Text="Legajo: " VerticalAlignment="Top" HorizontalAlignment="Center" Width="55" FontSize="16" Height="26"/>
+            <TextBox x:Name="main_legajo_input" Margin="90,27,30,0" TextWrapping="Wrap" Text="" Height="20" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="190" Background="#FFECECEC" FontSize="16" BorderBrush="Black" PlaceholderText="Escribe tu legajo" InputScope="Number"/>
+        </Grid>
+        <StackPanel x:Name="ButtonAlignment" Margin="0" BorderThickness="0" Height="120" Grid.Row="1" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Top">
+            <Button x:Name="send_legajo" Content="Consultar horarios" HorizontalAlignment="Stretch" Margin="5,80,5,0" VerticalAlignment="Center" Height="40" BorderThickness="2" FontSize="17" FontFamily="Segoe WP" Click="send_legajo_button" Background="#33000000" BorderBrush="#FF0044AE"/>
+        </StackPanel>
+    </Grid>
+</Page>
