@@ -26,31 +26,36 @@
     <ClCompile Include="Common\SuspensionManager.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Helpers.cpp" />
-    <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="PlugInFilter.cpp" />
     <ClCompile Include="SBX_HORARIOS_MAINAPP.xaml.cpp" />
     <ClCompile Include="School.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="ReleaseNotes.xaml.cpp" />
+    <ClCompile Include="Sample-Utils\Helpers.cpp">
+      <Filter>Sample-Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample-Utils\PlugInFilter.cpp">
+      <Filter>Sample-Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h" />
     <ClInclude Include="MainPage.xaml.h" />
     <ClInclude Include="HorariosPage.xaml.h" />
-    <ClInclude Include="Sample-Utils\CppSamplesUtils.h">
-      <Filter>Sample-Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Common\SuspensionManager.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Helpers.h" />
-    <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="PlugInFilter.h" />
     <ClInclude Include="SBX_HORARIOS_MAINAPP.xaml.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="School.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="ReleaseNotes.xaml.h" />
+    <ClInclude Include="Sample-Utils\Helpers.h">
+      <Filter>Sample-Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample-Utils\PlugInFilter.h">
+      <Filter>Sample-Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">

@@ -1,9 +1,10 @@
 ﻿#include "pch.h"
 #include "User.h"
 
+using namespace PaatyDSM;
+
 using namespace Platform;
 using namespace Platform::Collections;
-using namespace SDKSample::Json;
 using namespace Windows::Data::Json;
 using namespace Windows::Foundation::Collections;
 

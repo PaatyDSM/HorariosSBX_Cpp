@@ -2,6 +2,10 @@
 
 #include "App.g.h"
 
+using namespace Platform;
+using namespace Windows::ApplicationModel;
+using namespace Windows::ApplicationModel::Activation;
+
 namespace PaatyDSM
 {
 	/// <summary>
@@ -10,10 +14,10 @@ namespace PaatyDSM
 	ref class App sealed
 	{
 	public:
-		virtual void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e) override;
+		virtual void OnLaunched(LaunchActivatedEventArgs^ e) override;
 		App();
 
 	private:
-		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
+		void OnSuspending(Object^ sender, SuspendingEventArgs^ e);
 	};
 }

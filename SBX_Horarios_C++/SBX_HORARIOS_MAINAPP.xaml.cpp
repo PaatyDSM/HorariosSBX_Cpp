@@ -1,24 +1,13 @@
 ﻿#include "pch.h"
+
 #include "SBX_HORARIOS_MAINAPP.xaml.h"
 #include "HorariosPage.xaml.h"
-#include "MainPage.xaml.h"
 #include "ReleaseNotes.xaml.h"
 
-#include <stdlib.h>
-#include <string.h>
-
 using namespace PaatyDSM;
-using namespace PaatyDSM::HttpClientSample;
-using namespace Platform;
+
 using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
-using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
-using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Phone::UI::Input;
 
@@ -29,8 +18,7 @@ SBX_HORARIOS_MAINAPP::SBX_HORARIOS_MAINAPP()
 	InitializeComponent();
 }
 
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
+// OnNavigatedTo function
 void SBX_HORARIOS_MAINAPP::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
@@ -38,8 +26,9 @@ void SBX_HORARIOS_MAINAPP::OnNavigatedTo(NavigationEventArgs^ e)
 }
 
 //On click 'Consultar Horarios' validate Legajo and send it to the next page 'HorariosPage'
-void SBX_HORARIOS_MAINAPP::send_legajo_button(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SBX_HORARIOS_MAINAPP::send_legajo_button(Object^ sender, RoutedEventArgs^ e)
 {
+	//Clear errors
 	rootPage->NotifyUser("", NotifyType::StatusMessage);
 	///MyFunction
 	//Make reference for Text in the Textboxs
@@ -71,7 +60,7 @@ void SBX_HORARIOS_MAINAPP::send_legajo_button(Platform::Object^ sender, Windows:
 
 }
 
-//On Click 'Hyperlinks'
+//On click 'Hyperlinks'
 void SBX_HORARIOS_MAINAPP::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
@@ -85,7 +74,7 @@ void PaatyDSM::SBX_HORARIOS_MAINAPP::NavigateToHorariosPage()
 }
 
 //On click 'Version number' navigate to 'Release Notes Page'
-void SBX_HORARIOS_MAINAPP::release_notes_button(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SBX_HORARIOS_MAINAPP::release_notes_button(Object^ sender, RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(TypeName(ReleaseNotes::typeid));
 }

@@ -1,30 +1,3 @@
-﻿#include "pch.h"
-
-#include "ReleaseNotes.xaml.h"
-#include "MainPage.xaml.h"
-
-using namespace PaatyDSM;
-
-using namespace Windows::Foundation;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Interop;
-
-ReleaseNotes::ReleaseNotes()
-{
-	InitializeComponent();
-}
-
-
-	/// <param name="e">Event data that describes how this page was reached.  The Parameter
-	/// property is typically used to configure the page.</param>
-void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
-{
-	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
-	rootPage = MainPage::Current;
-
-	// Clean error messages from previous page
-	rootPage->NotifyUser("", NotifyType::StatusMessage);
-
 	Notes->Text =
 
 		"Release notes :\n"
@@ -237,19 +210,3 @@ void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
 		"V0.1a (First release)\n"
 		"(Nov / 7 / 2016)\n"
 		"\n";
-
-}
-
-//On Click 'Hyperlinks'
-void ReleaseNotes::Footer_Click(Object^ sender, RoutedEventArgs^ e)
-{
-	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
-	Windows::System::Launcher::LaunchUriAsync(uri);
-}
-
-//Navigation: Back Button
-void ReleaseNotes::Backbutton1(Object^ sender, RoutedEventArgs^ e)
-{
-	rootPage->NotifyUser("", NotifyType::StatusMessage);
-	Frame->Navigate(TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
-}

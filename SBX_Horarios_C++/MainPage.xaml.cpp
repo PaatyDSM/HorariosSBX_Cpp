@@ -1,23 +1,13 @@
 ﻿#include "pch.h"
+
 #include "MainPage.xaml.h"
 #include "SBX_HORARIOS_MAINAPP.xaml.h"
 
 using namespace PaatyDSM;
 
-using namespace Platform;
-using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
-using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Xaml::Interop;
-using namespace Windows::Phone::UI::Input;
-
-using namespace std;
+using namespace Windows::Foundation;
 
 MainPage^ MainPage::Current = nullptr;
 
@@ -29,12 +19,16 @@ MainPage::MainPage()
 	// in order to call methods that are in this class.
 	MainPage::Current = this;
 
-	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs ^>(this, &MainPage::HardwareButtons_BackPressed);
+	// Called when Hardware Back Button is pressed
+	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs^>(this, &MainPage::HardwareBackButtonPressed);
 }
 
+// OnNavigatedTo function
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	SuspensionManager::RegisterFrame(Page_Frame, "PaatyDSM.SBX_HORARIOS_MAINAPP");
+
+	///Specific Fix (bug#6161012), (bug#6161013) & AfterSuspensionRandomCrash.
 	if (Page_Frame->Content == nullptr)
 	{
 		// When the navigation stack isn't restored navigate to the SBX_HORARIOS_MAINAPP
@@ -43,27 +37,13 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 			throw ref new FailureException("Fallo al iniciar la App :(\n.\nCodigo de error: \n#31326497.\nContacte al editor de la aplicación\ne incluya el #codigo de error.");
 		}
 	}
-}
-
-void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::Input::BackPressedEventArgs^ e)
-{
-	// Clear the status block when navigating
-	NotifyUser("", NotifyType::StatusMessage);
-
-	if (Page_Frame->CanGoBack)
-	{
-		///Specific fix. bug#6161001
-		//Indicate the back button press is handled so the app does not exit
-		e->Handled = true;
-		///Specific Fix: (bug#6161009)
-		Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(PaatyDSM::MainPage::typeid));
-	}
 	else
 	{
-		e->Handled = false;
+		// null
 	}
-
 }
+
+// StatusBlock function
 void MainPage::NotifyUser(String^ strMessage, NotifyType type)
 {
 	switch (type)

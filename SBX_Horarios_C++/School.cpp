@@ -1,14 +1,9 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-//
-//*********************************************************
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "School.h"
 
+using namespace PaatyDSM;
+
 using namespace Platform;
-using namespace SDKSample::Json;
 using namespace Windows::Data::Json;
 
 String^ School::fechaKey = "fecha";

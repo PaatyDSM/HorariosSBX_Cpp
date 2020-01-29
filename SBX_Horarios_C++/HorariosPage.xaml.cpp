@@ -1,43 +1,31 @@
 ﻿#include "pch.h"
-#include <assert.h>
+
 #include "HorariosPage.xaml.h"
 #include "MainPage.xaml.h"
-#include <SBX_HORARIOS_MAINAPP.xaml.h>
+#include "SBX_HORARIOS_MAINAPP.xaml.h"
 
-#include <string.h>
 
-#include <school.h>
+#include "Sample-Utils\Helpers.h"
 
-using namespace std;
 using namespace PaatyDSM;
-using namespace PaatyDSM::HttpClientSample;
-using namespace SDKSample::Json;
-using namespace concurrency;
+
 using namespace Platform;
+using namespace concurrency;
 using namespace Windows::Foundation;
-using namespace Windows::Data::Json;
-using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
-using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Web::Http;
 using namespace Windows::Web::Http::Filters;
 
-using namespace SDKSample::Json;
-using namespace Windows::Data::Json;
+using namespace std;
 
-
-PaatyDSM::HttpClientSample::Horarios::Horarios()
+PaatyDSM::Horarios::Horarios()
 {
 	InitializeComponent();
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
+// OnNavigatedTo function
 void Horarios::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	(void)e;   // Unused parameter
@@ -76,14 +64,14 @@ void Horarios::OnNavigatedTo(NavigationEventArgs^ e)
 	{ 
 		// Show error.
 		rootPage->NotifyUser("Error interno: #31326496.\nContacte al editor de la aplicación\ne incluya el #codigo de error.", NotifyType::ErrorMessage);
-		GoBack();
+		GoPageBack();
 	}
 }
 
-
+// Send Legajo function
 void Horarios::send_pagewithlegajo(int legajo)
 {
-	///Specific Fix:
+	///Specific Fix
 	rootPage->NotifyUser("Obteniendo horarios...", NotifyType::StatusMessage);
 
 	//Alsea Proveedores
@@ -105,9 +93,6 @@ void Horarios::send_pagewithlegajo(int legajo)
 	//CacheControl
 	filter->CacheControl->ReadBehavior = HttpCacheReadBehavior::MostRecent;
 	filter->CacheControl->WriteBehavior = HttpCacheWriteBehavior::NoCache;
-
-	//Status Message
-	Helpers::ScenarioStarted(OutputField);
 
 	// Do an asynchronous GET. We need to use use_current() with the continuations since the tasks are completed on
 	// background threads and we need to run on the UI thread to update the UI.
@@ -144,25 +129,47 @@ void Horarios::send_pagewithlegajo(int legajo)
 			try
 			{
 				MainPage::Current->DataContext = ref new User(OutputField->Text);
-				// Show successfull!
-				rootPage->NotifyUser("Horarios recibidos!", NotifyType::StatusMessage);
+
+				///MyFunction2
+				//Make reference for Text in the Textboxs
+				String^ str = OutputField->Text;
+
+				//Convert String^ to wstring
+				wstring w_str(str->Data());
+
+				//Convert wstring to string
+				wstring wide(w_str);
+				string str3(wide.begin(), wide.end());
+
+				//Find ':[{' string to check if the data contains a valid legajo info
+				size_t found = str3.find(":[{");
+
+				//If true
+				if (found != std::string::npos)
+				{
+					// Show successfull!
+					rootPage->NotifyUser("Horarios recibidos!", NotifyType::StatusMessage);
+				}
+				else
+				{
+					rootPage->NotifyUser("El legajo no existe!", NotifyType::ErrorMessage);
+					GoPageBack();
+				}
 			}
 			catch (Exception^ ex)
 			{
-				rootPage->NotifyUser("El legajo no existe" + ex, NotifyType::ErrorMessage);
+				rootPage->NotifyUser("Error: La base de datos del servidor está dañada.\nPor favor contacte al proveedor", NotifyType::ErrorMessage);
 			}
 		}
 		else
 		{
 			/// Specific Fix (bug#6161010)
 			//INCOMPLETE
-			/*
-			If no internet connection is available get check if the last legajo obtained is equal to the actual legajo and read it from the cache.
-			Show an error and adverts that the content is from cache.
-			*/
-
+			//If no internet connection is available get check if the last legajo obtained is equal to the actual legajo and read it from the cache.
+			//Show an error and adverts that the content is from cache.
+			
 			// Go Back
-			GoBack();
+			GoPageBack();
 		}
 
 	}
@@ -170,23 +177,34 @@ void Horarios::send_pagewithlegajo(int legajo)
 
 }
 
-// Navigation: Back Button
-void Horarios::Backbutton1(Object^ sender, RoutedEventArgs^ e)
-{
-	OutputField->Text = " ";
-	Frame->Navigate(TypeName(SBX_HORARIOS_MAINAPP::typeid));
-	rootPage->NotifyUser("", NotifyType::ErrorMessage);
-}
-
-//Go back to MainPage with uncleared errors
-void Horarios::GoBack()
-{
-	this->Frame->Navigate(TypeName(SBX_HORARIOS_MAINAPP::typeid));
-}
-
 // Hyperlink buttons
 void Horarios::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
 	Windows::System::Launcher::LaunchUriAsync(uri);
+}
+
+//Go back to MainPage with uncleared errors
+void Horarios::GoPageBack()
+{
+	///Specific Fix (#bug6161013)
+	OutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
+	MainPage::Current->DataContext = ref new User(OutputField->Text);
+
+	// Go to page
+	Frame->Navigate(TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
+}
+
+//Navigation: Back Button
+void Horarios::Backbutton1(Object^ sender, RoutedEventArgs^ e)
+{
+	///Specific Fix (#bug6161013)
+	OutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
+	MainPage::Current->DataContext = ref new User(OutputField->Text);
+
+	//Clears StatusBlock
+	rootPage->NotifyUser("", NotifyType::StatusMessage);
+
+	// Go to page
+	Frame->Navigate(TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
 }

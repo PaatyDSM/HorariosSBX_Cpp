@@ -15,11 +15,12 @@ namespace PaatyDSM
 		ReleaseNotes();
 
 	protected:
-		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
 
 	private:
 		MainPage^ rootPage;
-		void Footer_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		void Backbutton1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		void Footer_Click(Object^ sender, RoutedEventArgs^ e);
+		void Backbutton1(Object^ sender, RoutedEventArgs^ e);
 	};
 }

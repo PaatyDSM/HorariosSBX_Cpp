@@ -1,53 +1,53 @@
 ﻿#pragma once
 
-namespace SDKSample
+using namespace Windows::Data::Json;
+
+namespace PaatyDSM
 {
-    namespace Json
-    {
-        // Mark as WebHostHidden since Windows.Data.Json API is not available in JavaScript.
-        [Windows::Foundation::Metadata::WebHostHidden]
-        [Windows::UI::Xaml::Data::Bindable]
-        public ref class School sealed
-        {
-        public:
-            School(void);
-            School(Windows::Data::Json::JsonObject^ jsonObject);
+	// Mark as WebHostHidden since Windows.Data.Json API is not available in JavaScript.
+	[Windows::Foundation::Metadata::WebHostHidden]
+	[Windows::UI::Xaml::Data::Bindable]
+	public ref class School sealed
+	{
+	public:
+		School(void);
+		School(JsonObject^ jsonObject);
 
-            property Platform::String^ Fecha
-            {
-                Platform::String^ get();
-                void set(Platform::String^ value);
-            }
+	property String^ Fecha
+	{
+		String^ get();
+		void set(String^ value);
+	}
 
-            property Platform::String^ HoraEntrada
-            {
-                Platform::String^ get();
-                void set(Platform::String^ value);
-            }
+	property String^ HoraEntrada
+	{
+		String^ get();
+		void set(String^ value);
+	}
 
-            property Platform::String^ HoraSalida
-            {
-                Platform::String^ get();
-                void set(Platform::String^ value);
-            }
+	property String^ HoraSalida
+	{
+		String^ get();
+		void set(String^ value);
+	}
 
-			property Platform::String^ Tienda
-			{
-				Platform::String^ get();
-				void set(Platform::String^ value);
-			}
+	property String^ Tienda
+	{
+		String^ get();
+		void set(String^ value);
+	}
 
-        private:
-            static Platform::String^ fechaKey;
-            static Platform::String^ horaEntradaKey;
-            static Platform::String^ horaSalidaKey;
-			static Platform::String^ tiendaKey;
-			static Platform::String^ asignacionesKey;
+	private:
+		static String^ fechaKey;
+		static String^ horaEntradaKey;
+		static String^ horaSalidaKey;
+		static String^ tiendaKey;
+		static String^ asignacionesKey;
 
-            Platform::String^ fecha;
-            Platform::String^ horaEntrada;
-            Platform::String^ horaSalida;
-			Platform::String^ tienda;
-        };
-    }
+		String^ fecha;
+		String^ horaEntrada;
+		String^ horaSalida;
+		String^ tienda;
+	};
 }
+

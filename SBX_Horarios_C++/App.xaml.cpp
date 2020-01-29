@@ -1,26 +1,19 @@
-﻿#include "pch.h"
+﻿#pragma once
+
+#include "pch.h"
+#include "App.xaml.h"
 #include "MainPage.xaml.h"
 
 using namespace PaatyDSM;
 
 using namespace concurrency;
-using namespace Platform;
-using namespace Windows::ApplicationModel;
-using namespace Windows::ApplicationModel::Activation;
-using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
-using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
-using namespace Windows::UI::Xaml::Interop;
-using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::UI::Xaml;
 
 /// <summary>
-/// Initializes the singleton application object.  This is the first line of authored code
-/// executed, and as such is the logical equivalent of main() or WinMain().
+/// Initializes the singleton application object.
+/// Esta es la primer línea de codigo ejecutado,
+/// y como tal es el equivalente lógico de main() o WinMain().
 /// </summary>
 App::App()
 {
@@ -29,35 +22,33 @@ App::App()
 }
 
 /// <summary>
-/// Invoked when the application is launched normally by the end user.	Other entry points
-/// will be used such as when the application is launched to open a specific file.
+/// Función que se utiliza cuando la aplicación es lanzada normalmente por el usuario.
 /// </summary>
-/// <param name="e">Details about the launch request and process.</param>
-void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e)
+void App::OnLaunched(LaunchActivatedEventArgs^ e)
 {
-	auto rootFrame = dynamic_cast<Frame^>(Window::Current->Content);
+	// El siguiente comando admite la navegación a páginas nuevas y mantiene un historial de navegación para navegar hacia adelante y hacia atrás.
+	auto rootFrame = dynamic_cast<Frame^> (Window::Current->Content);
 
-	// Do not repeat app initialization when the Window already has content,
-	// just ensure that the window is active
+	// No repetir la inicialización cuando la ventana ya tiene contenido, solo asegurar que la ventana está activa.
 	if (rootFrame == nullptr)
 	{
-		// Create a Frame to act as the navigation context 
+		// Crear un Frame que actua como contexto de navegación.
 		rootFrame = ref new Frame();
 
-		// Set the default language
-		//rootFrame->Language = Windows::Globalization::ApplicationLanguages::Languages->GetAt(0);
-
-		// Change this value to a cache size that is appropriate for your application.
+		// Caché de navegación.
 		rootFrame->CacheSize = 1;
 
-		auto prerequisite = task<void>([]() {});
+		auto prerequisite = task<void> ( [] () {} );
+
 		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
 		{
 			// Restore the saved session state only when appropriate, scheduling the
 			// final launch steps after the restore is complete
 			prerequisite = SuspensionManager::RestoreAsync();
 		}
-		prerequisite.then([=](task<void> prerequisite)
+
+		prerequisite.then
+		( [=] (task<void> prerequisite)
 		{
 			try
 			{
@@ -65,7 +56,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 			}
 			catch (Platform::Exception^)
 			{
-				//Something went wrong restoring state.
+				throw ref new FailureException("Algo salió mal resumiendo la aplicación.");
 				//Assume there is no state and continue
 			}
 
@@ -83,7 +74,9 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 			// Ensure the current window is active
 			Window::Current->Activate();
 
-		}, task_continuation_context::use_current());
+		},
+			task_continuation_context::use_current()
+		);
 	}
 	else
 	{
@@ -94,7 +87,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 			// parameter
 			if (!rootFrame->Navigate(MainPage::typeid, e->Arguments))
 			{
-				throw ref new FailureException("Error al iniciar la aplicación.\nCodigo de error: \n#31326498.\nContacte al editor de la aplicación\ne incluya el #codigo de error.");
+				throw ref new FailureException("Algo salió mal.\nError desconocido :(");
 			}
 		}
 
@@ -104,9 +97,8 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 }
 
 /// <summary>
-/// Invoked when application execution is being suspended. Application state is saved
-/// without knowing whether the application will be terminated or resumed with the contents
-/// of memory still intact.
+/// Función que se utiliza cuando la ejecución de la aplicación  es suspendida.
+/// El estado de la aplicación es guardado con el contenido en memoria intacto.
 /// </summary>
 void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
 {

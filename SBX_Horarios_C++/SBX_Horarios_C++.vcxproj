@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{be0e901b-ae5e-4505-8dde-39bd68504f5d}</ProjectGuid>
-    <RootNamespace>SBX_Horarios_C__</RootNamespace>
+    <RootNamespace>PaatyDSM</RootNamespace>
     <DefaultLanguage>es-ES</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -51,15 +51,24 @@
   <PropertyGroup>
     <PackageCertificateKeyFile>SBX_Horarios_C++_TemporaryKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>EB822157BA01BE18B425BD0F098E926C4B0ADC20</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <EmbedManifest>true</EmbedManifest>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Manifest>
-      <AssemblyIdentity>
-      </AssemblyIdentity>
+      <VerboseOutput>true</VerboseOutput>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,11 +82,12 @@
       <DependentUpon>ReleaseNotes.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Sample-Utils\Helpers.h" />
+    <ClInclude Include="Sample-Utils\PlugInFilter.h" />
     <ClInclude Include="SBX_HORARIOS_MAINAPP.xaml.h">
       <DependentUpon>SBX_HORARIOS_MAINAPP.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Common\SuspensionManager.h" />
-    <ClInclude Include="Helpers.h" />
     <ClInclude Include="HorariosPage.xaml.h">
       <DependentUpon>HorariosPage.xaml</DependentUpon>
     </ClInclude>
@@ -88,9 +98,6 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="PlugInFilter.h" />
-    <ClInclude Include="Sample-Utils\CppSamplesUtils.h" />
-    <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="School.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
@@ -164,11 +171,12 @@
     <ClCompile Include="ReleaseNotes.xaml.cpp">
       <DependentUpon>ReleaseNotes.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="Sample-Utils\Helpers.cpp" />
+    <ClCompile Include="Sample-Utils\PlugInFilter.cpp" />
     <ClCompile Include="SBX_HORARIOS_MAINAPP.xaml.cpp">
       <DependentUpon>SBX_HORARIOS_MAINAPP.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Common\SuspensionManager.cpp" />
-    <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="HorariosPage.xaml.cpp">
       <DependentUpon>HorariosPage.xaml</DependentUpon>
     </ClCompile>
@@ -179,8 +187,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="PlugInFilter.cpp" />
-    <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="School.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
