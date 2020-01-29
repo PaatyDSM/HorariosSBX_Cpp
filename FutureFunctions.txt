@@ -1,0 +1,20 @@
+﻿v1.7 (latest no more maintenance)
+*maintenance update. bug fixes.
+
+v1.60 (latest)
+*Alarms.
+*Download Weekend Report.
+*Update notify.
+*Compare legajos.
+*hs count and pay.
+*coffee info.
+*fixes
+
+v1.53
+*Christmas Season Mode.
+*Change text: "No se pudo establecer la conexión.
+Los horarios pueden no estar actualizados."
+*Translation of release notes.
+*Fix GUI in HorariosPage.
+*Update FooterPanel to V3.
+*New SplashScreen

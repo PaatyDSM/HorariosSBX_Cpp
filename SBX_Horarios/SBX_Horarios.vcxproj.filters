@@ -272,7 +272,7 @@
     <ResourceCompile Include="SBX_Horarios.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SBX_HORARIOS_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
+    <None Include="..\..\..\_COMPLETED\PaatyDSMApps_TemporaryKey.pfx" />
   </ItemGroup>
 </Project>
