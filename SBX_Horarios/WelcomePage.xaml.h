@@ -34,3 +34,5 @@ namespace SBX_HORARIOS
 		void read_legajo(void);
 	};
 }
+
+

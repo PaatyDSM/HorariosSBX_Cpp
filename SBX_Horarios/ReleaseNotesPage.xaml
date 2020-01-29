@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:SBX_HORARIOS"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Background="Black">
 
     <Page.Resources>
         <Style x:Name="HorariosListViewStyle" TargetType="ListViewItem">
@@ -19,7 +20,7 @@
                 Storyboard.TargetProperty="Opacity"
                 From="0.0"
                 To="1.0"
-                Duration="0:0:0.33">
+                Duration="0:0:0.25">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
@@ -32,7 +33,7 @@
                 Storyboard.TargetProperty="Opacity"
                 From="1.0"
                 To="0.0"
-                Duration="0:0:0.33"
+                Duration="0:0:0.25"
                 Completed="Backbutton1">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase />
@@ -62,7 +63,7 @@
 
         <!--  Title  -->
         <Grid x:Name="TopPanel"
-              VerticalAlignment="Top">
+              VerticalAlignment="Top" Margin="16,0">
 
             <Viewbox x:Name="Title_effects1"
                      Margin="12,12,12,4">
@@ -116,8 +117,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Height="Auto"
                     Margin="32,16,32,0"
-                    Grid.Row="2"
-                    HorizontalAlignment="Center">
+                    Grid.Row="2">
                     <!-- Release notes Box-->
                     <TextBox x:Name="Notes"
                              FontFamily="Consolas"
@@ -128,9 +128,7 @@
                              BorderThickness="0"
                              TextWrapping="Wrap"
                              PlaceholderText="Cargando notas de publicación..."
-                             HorizontalAlignment="Center"
                              TextAlignment="Justify"
-                             VerticalAlignment="Center"
                              Background="#7FFFFFFF" />
                 </ScrollViewer>
 
@@ -228,7 +226,7 @@
                     Background="{x:Null}"
                     BorderBrush="White"
                     BorderThickness="0"
-                    Content="V1.1"
+                    Content="V1.15"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />

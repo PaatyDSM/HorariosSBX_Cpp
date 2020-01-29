@@ -35,7 +35,6 @@ MainPage::MainPage()
 			view->TryEnterFullScreenMode();
 		}
 	}
-
 }
 
 // OnNavigatedTo function
@@ -49,10 +48,6 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 		{
 			throw ref new FailureException("Error al cargar la página principal.\nDetalles del error: " + e);
 		}
-	}
-	else
-	{
-		// null
 	}
 }
 

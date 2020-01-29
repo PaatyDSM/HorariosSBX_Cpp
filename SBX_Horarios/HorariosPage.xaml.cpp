@@ -91,7 +91,7 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 void HorariosPage::send_pagewithlegajo(int legajo)
 {
 	///Specific Fix
-		rootPage->NotifyUser("Obteniendo horarios...", NotifyType::StatusMessage);
+		rootPage->NotifyUser("Consultando horarios...", NotifyType::StatusMessage);
 
 	//Alsea Proveedores
 	///http:://proveedores.alsea.com.ar:25080/asignaciones-server/mobile/main/asignaciones/legajos/ + legajo
@@ -246,6 +246,13 @@ void HorariosPage::BackgroundTask(String^ e, int legajo)
 
 					// Save cache
 					save_cache(OutputField->Text);
+
+					// Show ContentPanelInfo
+					ContentPanelInfo->Visibility = Windows::UI::Xaml::Visibility::Visible;
+
+					// Stop ProgressRing
+					loading_ring->IsActive = false;
+
 				}
 				else
 				{
@@ -308,6 +315,16 @@ void HorariosPage::read_cache(int legajo)
 
 		// Parse JSon
 			MainPage::Current->DataContext = ref new User(str_fileData2);
+
+
+		// Show ContentPanelInfo
+			ContentPanelInfo->Visibility = Windows::UI::Xaml::Visibility::Visible;
+
+		// Stop ProgressRing
+			loading_ring->IsActive = false;
+
+		// Show ErrorMessage
+			rootPage->NotifyUser("Error. No hay conexión a internet.\nÚltimos horarios leídos en memoria", NotifyType::ErrorMessage);
 	}
 	// Else Go Back
 	else

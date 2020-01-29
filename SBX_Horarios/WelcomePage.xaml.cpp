@@ -13,6 +13,7 @@ using namespace Windows::Foundation;
 using namespace Windows::Storage;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
+using namespace Windows::UI::Xaml::Media;
 using namespace Windows::Phone::UI::Input;
 
 using namespace std;
@@ -37,6 +38,7 @@ void WelcomePage::WelcomePage::start_FadeOutAnimation(void)
 // Function start_fadeout_animation
 void WelcomePage::WelcomePage::start_FadeOutAnimation2(void)
 {
+	TransitionColorFix1->Background = ref new SolidColorBrush(Windows::UI::Colors::Black);
 	WelcomepPage_Storyboard3->Begin();
 }
 

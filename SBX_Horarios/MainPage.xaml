@@ -9,7 +9,7 @@
     MinWidth="320"
     MinHeight="100"
     MaxWidth="720"
-    Background="White">
+    Background="Black">
     
     <Grid Background="white">
         <Grid.RowDefinitions>
