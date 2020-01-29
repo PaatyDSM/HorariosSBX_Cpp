@@ -28,5 +28,6 @@ namespace PaatyDSM
 		void send_legajo_button(Platform::Object^ sender, RoutedEventArgs^ e);
 		void release_notes_button(Platform::Object^ sender, RoutedEventArgs^ e);
 		void NavigateToHorariosPage(void);
+		void read_legajo(void);
 	};
 }

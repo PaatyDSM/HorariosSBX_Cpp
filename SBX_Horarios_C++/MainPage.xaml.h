@@ -27,32 +27,7 @@ namespace PaatyDSM
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
 
 	private:
-		//On press Hardware Back Button
-		void MainPage::HardwareBackButtonPressed(Object^ sender, BackPressedEventArgs^ e)
-		{
-			// Clear the status block when navigating
-			Current->NotifyUser("", NotifyType::StatusMessage);
-
-			/// Specific Fix (bug#6161021)
-			// If it's possible to Navigate back and if the event has not already been handled
-			if (Page_Frame->CanGoBack && e->Handled == true)
-			{
-				Frame->Navigate(MainPage::typeid, safe_cast<Object^>(0));
-			}
-			else
-			{
-				if (Page_Frame->CanGoBack)
-				{
-					Frame->Navigate(MainPage::typeid, safe_cast<Object^>(0));
-					e->Handled = true;
-				}
-				else
-				{
-					// Exit app.
-					e->Handled = false;
-				}
-			}
-		}
+		void HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::Input::BackPressedEventArgs^ e);
 
 	internal:
 		static MainPage^ Current;

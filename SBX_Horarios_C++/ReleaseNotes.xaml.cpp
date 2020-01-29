@@ -14,9 +14,6 @@ ReleaseNotes::ReleaseNotes()
 	InitializeComponent();
 }
 
-
-	/// <param name="e">Event data that describes how this page was reached.  The Parameter
-	/// property is typically used to configure the page.</param>
 void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
@@ -29,6 +26,25 @@ void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
 
 		"Release notes :\n"
 		"\n"
+		"V1.00 (Final release)\n"
+		"*Added cache offline read for no internet connection.\n"
+		"*Save my last used legajo.\n"
+		"*Deleted unused files.\n"
+		"*Changes in source code.\n"
+		"\t - Deleted unused code.\n"
+		"\t - Optimized functions.\n"
+		"\t - Better comments.\n"
+		"*Fixed error handler for no internet connection.\n"
+		"*Minor fixes on some texts.\n"
+		"*Updated manifest.\n"
+		"*Speed and memory improvement.\n"
+		"*Changed problematic functions.\n"
+		"*Fixed after suspension, can't go back from Horarios Page pressing Hardware Back Button.(bug#6161022\n"
+		"*Better suspension Manager.\n"
+		"\n"
+		"Know Bugs :\n"
+		"\n"
+		"------------------------------------------------------\n"
 		"V0.91rc\n"
 		"*Minor changes in source code\n"
 		"*Store App Certification for Windows 10\n"
@@ -240,14 +256,14 @@ void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
 
 }
 
-//On Click 'Hyperlinks'
+// On Click 'Hyperlinks'
 void ReleaseNotes::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
 	Windows::System::Launcher::LaunchUriAsync(uri);
 }
 
-//Navigation: Back Button
+// Navigation: Back Button
 void ReleaseNotes::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 {
 	rootPage->NotifyUser("", NotifyType::StatusMessage);

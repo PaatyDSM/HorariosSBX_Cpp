@@ -18,7 +18,7 @@ using namespace Windows::UI::Xaml;
 App::App()
 {
 	InitializeComponent();
-	Suspending += ref new SuspendingEventHandler(this, &App::OnSuspending);
+	Application::Current->Suspending += ref new SuspendingEventHandler(this, &App::App_Suspending);
 }
 
 /// <summary>
@@ -35,10 +35,11 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 		// Crear un Frame que actua como contexto de navegación.
 		rootFrame = ref new Frame();
 
+		///Specific Fix (bug#6161022)
 		// Caché de navegación.
-		rootFrame->CacheSize = 1;
+		rootFrame->CacheSize = 0;
 
-		auto prerequisite = task<void> ( [] () {} );
+		auto prerequisite = task<void>([]() {});
 
 		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
 		{
@@ -47,61 +48,40 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 			prerequisite = SuspensionManager::RestoreAsync();
 		}
 
-		prerequisite.then
-		( [=] (task<void> prerequisite)
+		if (!e->PrelaunchActivated)
 		{
-			try
-			{
-				prerequisite.get();
-			}
-			catch (Platform::Exception^)
-			{
-				throw ref new FailureException("Algo salió mal resumiendo la aplicación.");
-				//Assume there is no state and continue
-			}
-
-			if (rootFrame->Content == nullptr)
-			{
-				// When the navigation stack isn't restored navigate to the first page,
-				// configuring the new page by passing required information as a navigation
-				// parameter
-				rootFrame->Navigate(MainPage::typeid, e->Arguments);
-			}
-
-			// Place the frame in the current Window
-			Window::Current->Content = rootFrame;
-
-			// Ensure the current window is active
-			Window::Current->Activate();
-
-		},
-			task_continuation_context::use_current()
-		);
-	}
-	else
-	{
-		if (rootFrame->Content == nullptr)
-		{
-			// When the navigation stack isn't restored navigate to the first page,
-			// configuring the new page by passing required information as a navigation
-			// parameter
-			if (!rootFrame->Navigate(MainPage::typeid, e->Arguments))
-			{
-				throw ref new FailureException("Algo salió mal.\nError desconocido :(");
-			}
+			// TODO: This is not a prelaunch activation. Perform operations which
+			// assume that the user explicitly launched the app such as updating
+			// the online presence of the user on a social network, updating a
+			// what's new feed, etc.
 		}
 
-		// Ensure the current window is active
-		Window::Current->Activate();
+		// Place the frame in the current Window
+		Window::Current->Content = rootFrame;
 	}
+
+	if (rootFrame->Content == nullptr)
+	{
+		// When the navigation stack isn't restored navigate to the first page,
+		// configuring the new page by passing required information as a navigation
+		// parameter
+		if (!rootFrame->Navigate(MainPage::typeid, e->Arguments))
+		{
+			throw ref new FailureException("Algo salió mal.\nError desconocido :(");
+		}
+	}
+
+	// Ensure the current window is active
+	Window::Current->Activate();
 }
 
 /// <summary>
 /// Función que se utiliza cuando la ejecución de la aplicación  es suspendida.
 /// El estado de la aplicación es guardado con el contenido en memoria intacto.
 /// </summary>
-void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
+void App::App_Suspending(Object^ sender, SuspendingEventArgs^ e)
 {
+	// This is the time to save app data in case the process is terminated
 	(void)sender;	// Unused parameter
 	(void)e;		// Unused parameter
 

@@ -18,6 +18,8 @@ namespace PaatyDSM
 		App();
 
 	private:
-		void OnSuspending(Object^ sender, SuspendingEventArgs^ e);
+		void App_Suspending(Object^ sender, SuspendingEventArgs^ e);
 	};
 }
+
+

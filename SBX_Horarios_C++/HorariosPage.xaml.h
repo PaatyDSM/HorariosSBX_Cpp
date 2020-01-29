@@ -24,8 +24,12 @@ namespace PaatyDSM
 		Windows::Web::Http::HttpClient^ httpClient;
 
 		void send_pagewithlegajo(int);
+		void BackgroundTask(String^ e, int);
 		void Backbutton1(Object^ sender, RoutedEventArgs^ e);
 		void GoPageBack(void);
 		void Footer_Click(Object^ sender, RoutedEventArgs^ e);
+		void save_legajo(int);
+		void save_cache(String^ e);
+		void read_cache(int);
 	};
 }

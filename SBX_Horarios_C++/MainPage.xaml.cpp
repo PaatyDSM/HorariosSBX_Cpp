@@ -9,6 +9,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Foundation;
 
+// Holds the Status Block and the Frame in which all the pages are loaded.
 MainPage^ MainPage::Current = nullptr;
 
 MainPage::MainPage()
@@ -20,7 +21,7 @@ MainPage::MainPage()
 	MainPage::Current = this;
 
 	// Called when Hardware Back Button is pressed
-	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs^>(this, &MainPage::HardwareBackButtonPressed);
+	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs ^>(this, &MainPage::HardwareButtons_BackPressed);
 }
 
 // OnNavigatedTo function
@@ -68,4 +69,31 @@ void MainPage::NotifyUser(String^ strMessage, NotifyType type)
 	{
 		StatusBorder->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 	}
+}
+
+// On Hardware Back Button press
+void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::Input::BackPressedEventArgs^ e)
+{
+	if (this->Page_Frame->CanGoBack)
+	{
+		e->Handled = true;
+
+		// Clear the status block when navigating
+			NotifyUser("", NotifyType::StatusMessage);
+
+		///Specific Fix (bug#6161022)
+		// Clear the navigation stacks using the Clear method of each stack.
+			Page_Frame->BackStack->Clear();
+	}
+	else
+	{
+		e->Handled = false;
+	}
+
+	///Specific Fix (bug#6161022)
+	// Back to MainPage
+		Page_Frame->Navigate(TypeName{ "PaatyDSM.SBX_HORARIOS_MAINAPP", TypeKind::Custom });
+
+	// Clear the navigation stacks using the Clear method of each stack.
+		Page_Frame->BackStack->Clear();
 }
