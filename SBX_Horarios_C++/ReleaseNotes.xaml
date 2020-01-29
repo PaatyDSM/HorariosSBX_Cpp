@@ -46,7 +46,7 @@
             </StackPanel>
             <!--  Release Notes Link -->
             <StackPanel x:Name="VersionPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <Button x:Name="ReleaseNotes_button" Content="V1.00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" FontFamily="Consolas" FontSize="14" BorderThickness="0" BorderBrush="White" ToolTipService.ToolTip="Versión" Background="{x:Null}"/>
+                <Button x:Name="ReleaseNotes_button" Content="V1.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" FontFamily="Consolas" FontSize="14" BorderThickness="0" BorderBrush="White" ToolTipService.ToolTip="Versión" Background="{x:Null}"/>
             </StackPanel>
             <!--  Author Page's -->
             <Grid x:Name="_credits" Margin="0,0,0,0" HorizontalAlignment="Center">

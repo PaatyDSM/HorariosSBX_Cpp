@@ -158,7 +158,7 @@
                     BorderBrush="White"
                     BorderThickness="0"
                     Click="release_notes_button"
-                    Content="V1.00"
+                    Content="V1.01"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />

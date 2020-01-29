@@ -18,7 +18,8 @@ namespace PaatyDSM
 		App();
 
 	private:
-		void App_Suspending(Object^ sender, SuspendingEventArgs^ e);
+		void OnSuspending(Object^ sender, SuspendingEventArgs^ e);
+		void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);
 	};
 }
 

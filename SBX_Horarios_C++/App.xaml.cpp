@@ -7,8 +7,9 @@
 using namespace PaatyDSM;
 
 using namespace concurrency;
-using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls;
+using namespace Windows::UI::Xaml::Interop;
 
 /// <summary>
 /// Initializes the singleton application object.
@@ -18,7 +19,7 @@ using namespace Windows::UI::Xaml;
 App::App()
 {
 	InitializeComponent();
-	Application::Current->Suspending += ref new SuspendingEventHandler(this, &App::App_Suspending);
+	Application::Current->Suspending += ref new SuspendingEventHandler(this, &App::OnSuspending);
 }
 
 /// <summary>
@@ -35,6 +36,8 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 		// Crear un Frame que actua como contexto de navegación.
 		rootFrame = ref new Frame();
 
+		rootFrame->NavigationFailed += ref new Windows::UI::Xaml::Navigation::NavigationFailedEventHandler(this, &App::OnNavigationFailed);
+
 		///Specific Fix (bug#6161022)
 		// Caché de navegación.
 		rootFrame->CacheSize = 0;
@@ -48,38 +51,46 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 			prerequisite = SuspensionManager::RestoreAsync();
 		}
 
-		if (!e->PrelaunchActivated)
+		if (e->PrelaunchActivated == false)
 		{
-			// TODO: This is not a prelaunch activation. Perform operations which
-			// assume that the user explicitly launched the app such as updating
-			// the online presence of the user on a social network, updating a
-			// what's new feed, etc.
+			if (rootFrame->Content == nullptr)
+			{
+				// Cuando no se restaura la pila de navegación, navegar a la primera página,
+				// configurando la nueva página pasándole la información requerida como
+				// parámetro de navegación
+				rootFrame->Navigate(TypeName(MainPage::typeid), e->Arguments);
+			}
+			// Poner el marco en la ventana actual
+			Window::Current->Content = rootFrame;
+			// Asegurarse de que la ventana actual está activa.
+			Window::Current->Activate();
 		}
-
-		// Place the frame in the current Window
-		Window::Current->Content = rootFrame;
 	}
-
-	if (rootFrame->Content == nullptr)
+	else
 	{
-		// When the navigation stack isn't restored navigate to the first page,
-		// configuring the new page by passing required information as a navigation
-		// parameter
-		if (!rootFrame->Navigate(MainPage::typeid, e->Arguments))
+		if (e->PrelaunchActivated == false)
 		{
-			throw ref new FailureException("Algo salió mal.\nError desconocido :(");
+			if (rootFrame->Content == nullptr)
+			{
+				// Cuando no se restaura la pila de navegación, navegar a la primera página,
+				// configurando la nueva página pasándole la información requerida como
+				// parámetro de navegación
+				rootFrame->Navigate(TypeName(MainPage::typeid), e->Arguments);
+			}
+			// Asegurarse de que la ventana actual está activa.
+			Window::Current->Activate();
 		}
 	}
-
-	// Ensure the current window is active
-	Window::Current->Activate();
 }
 
 /// <summary>
-/// Función que se utiliza cuando la ejecución de la aplicación  es suspendida.
-/// El estado de la aplicación es guardado con el contenido en memoria intacto.
+/// Se invoca al suspender la ejecución de la aplicación. El estado de la aplicación se guarda
+/// sin saber si la aplicación finalizará o se reanudará con el contenido
+/// de la memoria aún intacto.
 /// </summary>
-void App::App_Suspending(Object^ sender, SuspendingEventArgs^ e)
+/// <param name="sender">Origen de la solicitud de suspensión.</param>
+/// <param name="e">Detalles de la solicitud de suspensión.</param>
+void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
 {
 	// This is the time to save app data in case the process is terminated
 	(void)sender;	// Unused parameter
@@ -90,4 +101,14 @@ void App::App_Suspending(Object^ sender, SuspendingEventArgs^ e)
 	{
 		deferral->Complete();
 	});
+}
+
+/// <summary>
+/// Se invoca cuando la aplicación la inicia normalmente el usuario final. Se usarán otros puntos
+/// </summary>
+/// <param name="sender">Marco que produjo el error de navegación</param>
+/// <param name="e">Detalles sobre el error de navegación</param>
+void App::OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e)
+{
+	throw ref new FailureException("Problema al cargar la página " + e->SourcePageType.Name);
 }

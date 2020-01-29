@@ -9,7 +9,7 @@ using namespace Windows::UI::Xaml::Navigation;
 namespace PaatyDSM
 {
 	/// <summary>
-	/// Page that displays horarios in a table.
+	/// Página que muestra los horarios en formato de lista.
 	/// </summary>
 	[Windows::Foundation::Metadata::WebHostHidden]
 

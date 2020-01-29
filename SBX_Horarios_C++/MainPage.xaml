@@ -14,9 +14,9 @@
             <!-- StatusBlock -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <!-- Here is loaded all the pages of the program -->
+        <!-- Aquí son cargadas todas las páginas del programa -->
         <Frame x:Name="Page_Frame" Grid.Row="0" Margin="0"/>
-        <!-- Status and error messages block -->
+        <!-- Bloque para mensajes de estado y de error -->
         <Border x:Name="StatusBorder" Grid.Row="1" Visibility="Collapsed">
             <TextBlock x:Name="StatusBlock" Foreground="White" FontWeight="Bold" Margin="12, 10, 12, 10" TextWrapping="Wrap" HorizontalAlignment="Center"/>
         </Border>

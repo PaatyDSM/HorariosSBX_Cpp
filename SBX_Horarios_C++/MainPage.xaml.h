@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "MainPage.g.h"
-#include "MainPage.xaml.h"
 
 using namespace Platform;
 using namespace Windows::UI::Xaml::Navigation;

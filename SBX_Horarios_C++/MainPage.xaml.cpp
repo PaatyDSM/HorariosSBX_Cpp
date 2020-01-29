@@ -9,7 +9,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Foundation;
 
-// Holds the Status Block and the Frame in which all the pages are loaded.
+// Sostiene el Frame en el cual son cargadas todas las páginas.
 MainPage^ MainPage::Current = nullptr;
 
 MainPage::MainPage()
