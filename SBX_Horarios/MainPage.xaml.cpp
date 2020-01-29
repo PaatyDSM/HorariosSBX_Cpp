@@ -31,10 +31,15 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 	// Set fullscreen on mobile devices and tablets.
 	SetFullScreenModeON(0);
 
+	// Set windows size.
+	ApplicationView^ view = ApplicationView::GetForCurrentView();
+    	view->TryResizeView(Size(500, 680));
+	view->SetPreferredMinSize(Size(500, 840));
+
 	// When the navigation stack isn't restored navigate to the WelcomePage
 	if (Page_Frame->Content == nullptr)
 	{
-		if (!Page_Frame->Navigate(TypeName{"SBX_HORARIOS.WelcomePage", TypeKind::Custom}))
+		if (!Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom }))
 		{
 			// Show navigation error
 			Frame->Background = ref new SolidColorBrush(Windows::UI::Colors::Gray);

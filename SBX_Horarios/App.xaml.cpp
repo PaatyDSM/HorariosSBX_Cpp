@@ -61,6 +61,7 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 			}
 			// Poner el marco en la ventana actual.
 			Window::Current->Content = rootFrame;
+
 			// Asegurarse de que la ventana actual está activa.
 			Window::Current->Activate();
 		}

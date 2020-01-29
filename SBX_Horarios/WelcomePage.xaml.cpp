@@ -18,8 +18,8 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::UI::Xaml::Media;
 
-static String^ CurrentVersionNumber = "1.26";
-static int CurrentVersionNumberInt = 126;
+static String^ CurrentVersionNumber = "1.33";
+static int CurrentVersionNumberInt = 133;
 
 // Function start_fadein_animation
 void WelcomePage::WelcomePage::start_FadeInAnimation(void)
@@ -30,9 +30,6 @@ void WelcomePage::WelcomePage::start_FadeInAnimation(void)
 // OnNavigatedTo function
 void WelcomePage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &WelcomePage::App_BackRequested);
-
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
 
@@ -51,13 +48,6 @@ void WelcomePage::OnNavigatedTo(NavigationEventArgs^ e)
 	// Check for updates
 	CheckUpdates();
 
-}
-
-// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-void WelcomePage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
-{
-	e->Handled = true;
-	//Backbutton1(sender, nullptr);
 }
 
 // Read last used legajo

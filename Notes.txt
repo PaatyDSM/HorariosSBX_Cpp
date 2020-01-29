@@ -1,5 +1,11 @@
 	Notes->Text =
 
+		"V1.33\n"
+		"*Fixed navigation back.\n"
+		"*Fixed toolbar.\n"
+		"*A lot of improvments.\n"
+		"\n"
+		"------------------\n"
 		"V1.26\n"
 		"*Now can be installed on the sd card.\n"
 		"*Better performance.\n"

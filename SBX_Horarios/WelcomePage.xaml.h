@@ -24,7 +24,6 @@ namespace SBX_HORARIOS
 
 	protected:
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
-		void App_BackRequested(Object ^ sender, BackRequestedEventArgs ^ e);
 
 	private:
 		MainPage^ rootPage;

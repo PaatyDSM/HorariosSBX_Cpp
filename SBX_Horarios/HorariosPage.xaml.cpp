@@ -42,6 +42,9 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 	// Set Back Button on Desktop devices
 	SetBackButton();
 
+	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &HorariosPage::App_BackRequested);
+
 	// Convert String^ to int
 	wstring w_legajo(((String^)e->Parameter)->Begin());
 	string legajo(w_legajo.begin(), w_legajo.end());
@@ -64,6 +67,13 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 	// Start Connection Async
 	StartConnectionAsync(url, legajo, 0);
 
+}
+
+// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+void HorariosPage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+{
+	e->Handled = true;
+	Backbutton1(sender, nullptr);
 }
 
 // Set Back Button on Desktop devices

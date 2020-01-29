@@ -10,7 +10,7 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::System::Profile;
 
-static String^ CurrentVersionNumber = "1.26";
+static String^ CurrentVersionNumber = "1.33";
 
 ReleaseNotesPage::ReleaseNotesPage()
 {
@@ -35,6 +35,21 @@ void ReleaseNotesPage::start_FadeOutAnimation(void)
 void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	SetBackButton();
+	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &ReleaseNotesPage::App_BackRequested);
+}
+
+// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+void ReleaseNotesPage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+{
+	e->Handled = true;
+	Backbutton1(sender, nullptr);
+}
+
+// Navigation: Back Button
+void ReleaseNotesPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
+{
+	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
 }
 
 // Set Back Button on Desktop devices
@@ -55,15 +70,15 @@ void ReleaseNotesPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 	Windows::System::Launcher::LaunchUriAsync(uri);
 }
 
-// Navigation: Back Button
-void ReleaseNotesPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
-{
-	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
-}
-
 void ReleaseNotesPage::LoadReleaseNotes(void)
 {
 	Notes->Text =
+		"V1.33\n"
+		"*Fixed navigation back.\n"
+		"*Fixed toolbar.\n"
+		"*A lot of improvments.\n"
+		"\n"
+		"------------------\n"
 		"V1.26\n"
 		"*Now can be installed on the sd card.\n"
 		"*Better performance.\n"
