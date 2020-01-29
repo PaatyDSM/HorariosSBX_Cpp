@@ -263,11 +263,6 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SBX_Horarios_TemporaryKey.pfx" />
-    <None Include="SBX_HORARIOS_StoreKey.pfx" />
-    <None Include="Package.StoreAssociation.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="MainPage.xaml" />
     <Page Include="HorariosPage.xaml" />
     <Page Include="ReleaseNotesPage.xaml" />
@@ -275,5 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SBX_Horarios.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SBX_HORARIOS_TemporaryKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
 </Project>
