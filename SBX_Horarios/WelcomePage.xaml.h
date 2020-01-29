@@ -20,6 +20,7 @@ namespace SBX_HORARIOS
 
 	protected:
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
+		void App_BackRequested(Object ^ sender, BackRequestedEventArgs ^ e);
 
 	private:
 		MainPage^ rootPage;
@@ -32,6 +33,7 @@ namespace SBX_HORARIOS
 		void NavigatetoHorariosPage(Object^ sender, RoutedEventArgs^ e);
 		void start_ReleaseNotesFadeOutAnimation(void);
 		void Release_Notes_Click(Platform::Object^ sender, RoutedEventArgs^ e);
+		void main_legajo_input_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
 	};
 }
 

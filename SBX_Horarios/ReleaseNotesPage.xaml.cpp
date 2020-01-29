@@ -8,6 +8,7 @@ using namespace SBX_HORARIOS;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
+using namespace Windows::System::Profile;
 
 ReleaseNotesPage::ReleaseNotesPage()
 {
@@ -28,29 +29,45 @@ void ReleaseNotesPage::start_FadeOutAnimation(void)
 
 void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
-	rootPage = MainPage::Current;
-
-	// Clean error messages from previous page
-	rootPage->NotifyUser("", NotifyType::StatusMessage);
-
-	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &ReleaseNotesPage::App_BackRequested);
+	SetBackButton();
 }
 
-// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-void ReleaseNotesPage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+// Set Back Button on Desktop devices
+void ReleaseNotesPage::SetBackButton()
 {
-	e->Handled = true;
-	Backbutton1(sender, nullptr);
+	String^ platformFamily = AnalyticsInfo::VersionInfo->DeviceFamily;
+
+	if (platformFamily->Equals("Windows.Mobile"))
+	{
+		BackButtonPC->Opacity = 0;
+	}
+}
+
+// On Click 'Hyperlinks'
+void ReleaseNotesPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
+{
+	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
+	Windows::System::Launcher::LaunchUriAsync(uri);
+}
+
+// Navigation: Back Button
+void ReleaseNotesPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
+{
+	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
 }
 
 void ReleaseNotesPage::LoadReleaseNotes(void)
 {
 	Notes->Text =
 
+		"V1.25\n"
+		"*Fixed navigation.\n"
+		"*Updated texts.\n"
+		"*Fixed bugs.\n"
+		"\n"
+		"------------------\n"
 		"V1.2\n"
-		"*Fixed icons."
+		"*Fixed icons.\n"
 		"\n"
 		"------------------\n"
 		"V1.19\n"
@@ -378,18 +395,4 @@ void ReleaseNotesPage::LoadReleaseNotes(void)
 
 		// Stop ProgressRing
 		loading_ring->IsActive = false;
-}
-
-// On Click 'Hyperlinks'
-void ReleaseNotesPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
-{
-	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
-	Windows::System::Launcher::LaunchUriAsync(uri);
-}
-
-// Navigation: Back Button
-void ReleaseNotesPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
-{
-	rootPage->NotifyUser("", NotifyType::StatusMessage);
-	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
 }

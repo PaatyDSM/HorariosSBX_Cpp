@@ -53,7 +53,7 @@
 
     <!-- Page -->
     <Grid x:Name="Page"
-          Opacity="1"
+          Opacity="0"
           Loaded="start_FadeInAnimation">
         
         <!-- BackgroundImage -->
@@ -94,11 +94,9 @@
                        TextWrapping="Wrap"
                        TextAlignment="Center"
                        Foreground="#FFF5FAFF">
-                Prueba la versión para Android e iOS
                 <LineBreak />
-                "Mis Asignaciones SBX"
+                Ingresá con tu número de legajo
                 <LineBreak />
-                Y otras geniales aplicaciones del sitio web.
             </TextBlock>
 
             <!--  InputPanel  -->
@@ -138,7 +136,8 @@
                                  MaxLength="12"
                                  TextAlignment="Center"
                                  MinWidth="200"
-                                 Foreground="Black" />
+                                 Foreground="Black"
+                                 KeyDown="main_legajo_input_KeyDown"/>
                 </Grid>
             </Grid>
 
@@ -219,7 +218,7 @@
             <Button x:Name="FP_VersionButton"
                     FontFamily="Consolas"
                     FontSize="14"
-                    Content="v1.2"
+                    Content="v1.25"
                     ToolTipService.ToolTip="Ver notas"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"

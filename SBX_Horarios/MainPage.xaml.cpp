@@ -14,7 +14,7 @@ using namespace Windows::System::Profile;
 
 // Referencia al Frame en el cual todas las páginas son cargadas.
 MainPage^ MainPage::Current = nullptr;
-DispatcherTimer^ dispatcherTimer;
+//DispatcherTimer^ dispatcherTimer;
 
 // Main
 MainPage::MainPage()
@@ -30,7 +30,9 @@ MainPage::MainPage()
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	//Check trial
-	/* 
+	/// DISABLED ///
+#pragma region TRIAL
+	/*
 	{
 		Windows::Globalization::Calendar^ c = ref new Windows::Globalization::Calendar;
 		String^ trial = c->YearAsString();
@@ -42,7 +44,10 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 		{
 			Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.TrialPage", TypeKind::Custom });
 		}
+	}
 	*/
+#pragma endregion
+	/// DISABLED ///
 
 	// Launch UWP apps in full-screen mode on mobile devices or tablets.
 	SetFullScreenModeON();
@@ -56,6 +61,9 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 			NotifyUser("Hubo un problema al cargar la página principal.", NotifyType::ErrorMessage);
 		}
 	}
+
+	// Initialize DispatcherTimer
+	//dispatcherTimer = ref new DispatcherTimer;
 }
 
 // StatusBlock function
@@ -108,34 +116,31 @@ void MainPage::SetFullScreenModeON()
 // Await 'ms' amount of time
 void MainPage::Await(int ms, bool stop)
 {
-	/*
-	if (!stop)
-	{
-	// Initializes DispatcherTimer
-	dispatcherTimer = ref new DispatcherTimer();
-
-	// Set Tick duration
-	TimeSpan time_amount;
-	time_amount.Duration = ms;
-	dispatcherTimer->Interval = time_amount;
-
-	// Register event handler for Tick event
-	auto registrationtoken = dispatcherTimer->Tick += ref new EventHandler<Object^>(this, &MainPage::HideMessage);
-
-	// Start the timer
-	dispatcherTimer->Start();
-	}
-	// Stop the timer
-	else dispatcherTimer->Stop();
-	*/
+	//if (!stop)
+	//{
+		// Set Tick duration
+		//time_amount.Duration = ms;
+		//dispatcherTimer->Interval = time_amount;
+		// Register event handler for Tick event
+		//auto registrationtoken = dispatcherTimer->Tick += ref new EventHandler<Object^>(this, &MainPage::HideMessage);
+	//}
 }
 
+// Clear and hide Messages
 void MainPage::HideMessage(Object^ sender, Object^ args)
 {
-	// Clear and hide Messages.
-	/* NotifyUser("", NotifyType::StatusMessage); */
-
-	Await(0, true);
+	//auto dTIString = dispatcherTimer->Interval.ToString();
+	//if (dTIString = "0")
+	//{
+	//	Await(0, true);
+	//	return;
+	//}
+	//else 
+	//{
+	//	NotifyUser("", NotifyType::StatusMessage);
+	//	// Stop the timer
+	//	dispatcherTimer->Stop();
+	//}
 }
 #pragma endregion
 

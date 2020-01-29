@@ -63,6 +63,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <Button x:Name="BackButtonPC"
+                        Click="Backbutton1"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Opacity="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"/>
+        
         <!--  Title  -->
         <Grid x:Name="TopPanel"
               VerticalAlignment="Top"
@@ -134,7 +141,8 @@
                              Background="#56FFFFFF"
                              Foreground="Black"
                              TextAlignment="Center"
-                             Text="Cargando notas de publicación..."/>
+                             Text="Cargando notas de publicación..."
+                             SelectionHighlightColor="{x:Null}"/>
                 </ScrollViewer>
 
         </Grid>
@@ -159,7 +167,7 @@
             <Button x:Name="FP_VersionButton"
                     FontFamily="Consolas"
                     FontSize="14"
-                    Content="v1.2"
+                    Content="v1.25"
                     ToolTipService.ToolTip="Ver notas"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"

@@ -22,6 +22,9 @@ void WelcomePage::WelcomePage::start_FadeInAnimation(void)
 // OnNavigatedTo function
 void WelcomePage::OnNavigatedTo(NavigationEventArgs^ e)
 {
+	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &WelcomePage::App_BackRequested);
+
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
 
@@ -35,7 +38,14 @@ void WelcomePage::OnNavigatedTo(NavigationEventArgs^ e)
 	read_legajo();
 
 	// Hide message after ms amount of time
-	rootPage->Await(5000, false);
+	//rootPage->Await(5000, false);
+}
+
+// Se invoca cuando se presionan los botones de retroceso de hardware o software.
+void WelcomePage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+{
+	e->Handled = true;
+	//Backbutton1(sender, nullptr);
 }
 
 // Read last used legajo
@@ -104,7 +114,7 @@ void WelcomePage::send_legajo_button(Object^ sender, RoutedEventArgs^ e)
 	}
 
 	// Hide message after ms amount of time
-	rootPage->Await(3000, false);
+	//rootPage->Await(3000, false);
 }
 
 // Function start FadeOutAnimation
@@ -137,5 +147,13 @@ void WelcomePage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 // On click 'Version number' navigate to 'Release Notes Page'
 void WelcomePage::Release_Notes_Click(Object^ sender, RoutedEventArgs^ e)
 {
+	// Clean error messages from previous page
+	rootPage->NotifyUser("", NotifyType::StatusMessage);
+
 	this->Frame->Navigate(TypeName(ReleaseNotesPage::typeid));
+}
+
+void SBX_HORARIOS::WelcomePage::main_legajo_input_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
+{
+
 }

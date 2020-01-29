@@ -41,6 +41,7 @@ void App::OnLaunched(LaunchActivatedEventArgs^ e)
 		rootFrame = ref new Frame();
 
 		rootFrame->NavigationFailed += ref new NavigationFailedEventHandler(this, &App::OnNavigationFailed);
+		//rootFrame->Navigated += RootFrame_Navigated;
 
 		if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
 		{

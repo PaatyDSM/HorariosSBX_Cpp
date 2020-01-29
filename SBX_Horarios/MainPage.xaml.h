@@ -34,5 +34,8 @@ namespace SBX_HORARIOS
 		void NotifyUser(String^ strMessage, NotifyType type);
 		void Await(int ms, bool stop);
 		void HideMessage(Object^ sender, Object^ args);
+
+		// Declare and Initializes DispatcherTimer
+		//DispatcherTimer^ dispatcherTimer;
 	};
 }

@@ -80,7 +80,13 @@
         <!-- HiddenOutputField -->
         <TextBox x:Name="HiddenOutputField"
                  Visibility="Collapsed"/>
-        
+
+        <Button x:Name="BackButtonPC"
+                        Click="Backbutton1"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Opacity="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"/>
         <!--  Title  -->
         <Viewbox x:Name="Title"
                  MaxWidth="360">

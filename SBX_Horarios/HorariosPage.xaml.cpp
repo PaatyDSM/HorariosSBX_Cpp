@@ -18,10 +18,12 @@ using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Web::Http;
 using namespace Windows::Web::Http::Filters;
 using namespace Windows::Web::Http::Headers;
+using namespace Windows::System::Profile;
 
 // Path for local saving
-wstring w_localfolder(ApplicationData::Current->LocalFolder->Path->Begin());
-string localfolder(w_localfolder.begin(), w_localfolder.end());
+/// orig: non static
+static wstring w_localfolder(ApplicationData::Current->LocalFolder->Path->Begin());
+static string localfolder(w_localfolder.begin(), w_localfolder.end());
 
 // Function start_fadein_animation
 void HorariosPage::HorariosPage::start_FadeInAnimation(void)
@@ -38,8 +40,8 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
 
-	// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-	SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs^>(this, &HorariosPage::App_BackRequested);
+	// Set Back Button on Desktop devices
+	SetBackButton();
 
 	// Convert String^ to int
 	wstring w_legajo(((String^)e->Parameter)->Begin());
@@ -52,7 +54,7 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 	filter->CacheControl->WriteBehavior = HttpCacheWriteBehavior::NoCache;
 
 	// Initialize httpclient
-	httpClient = ref new HttpClient(filter);
+	client = ref new HttpClient(filter);
 
 	// Create url with legajo_number
 	string url = "http://proveedores.alsea.com.ar:25080/asignaciones-server/mobile/main/asignaciones/legajos/" + legajo;
@@ -65,11 +67,15 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 
 }
 
-// Se invoca cuando se presionan los botones de retroceso de hardware o software.
-void HorariosPage::App_BackRequested(Object^ sender, BackRequestedEventArgs^ e)
+// Set Back Button on Desktop devices
+void HorariosPage::SetBackButton()
 {
-	e->Handled = true;
-	Backbutton1(sender, nullptr);
+	String^ platformFamily = AnalyticsInfo::VersionInfo->DeviceFamily;
+
+	if (platformFamily->Equals("Windows.Mobile"))
+	{
+		BackButtonPC->Opacity = 0;
+	}
 }
 
 // Save last used legajo
@@ -114,7 +120,7 @@ void HorariosPage::GoPageBack()
 {
 	///Specific Fix (#bug6161013)
 	HiddenOutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
-	MainPage::Current->DataContext = ref new User(HiddenOutputField->Text);
+	DataContext = ref new User(HiddenOutputField->Text);
 
 	// Go to page
 	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
@@ -126,7 +132,7 @@ void HorariosPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 	// Clear List of Horarios
 	HiddenOutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
 
-	MainPage::Current->DataContext = ref new User(HiddenOutputField->Text);
+	DataContext = ref new User(HiddenOutputField->Text);
 
 	// Clear StatusBlock
 	rootPage->NotifyUser("", NotifyType::StatusMessage);
@@ -160,7 +166,7 @@ void HorariosPage::StartConnectionAsync(string url, string legajo)
 
 	// Do an asynchronous GET. We need to use use_current() with the continuations since the tasks
 	// are completed on background threads and we need to run on the UI thread to update the UI.
-	create_task(httpClient->GetAsync(ref new Uri(baseUri))).then([=](HttpResponseMessage^ response)
+	create_task(client->GetAsync(ref new Uri(baseUri))).then([=](HttpResponseMessage^ response)
 	{
 		//if (response->EnsureSuccessStatusCode())
 		return Helpers::DisplayTextResultAsync(response, HiddenOutputField);
@@ -186,10 +192,11 @@ void HorariosPage::StartConnectionAsync(string url, string legajo)
 				try
 				{
 					// Parse JSON
-					MainPage::Current->DataContext = ref new User(HiddenOutputField->Text);
+					DataContext = ref new User(HiddenOutputField->Text);
 
 					// Show successfull!
-					rootPage->NotifyUser("Horarios recibidos!", NotifyType::StatusMessage);
+					rootPage->NotifyUser("Horarios leídos!", NotifyType::StatusMessage);
+
 					// Save cache
 					save_cache(HiddenOutputField->Text);
 
@@ -203,17 +210,18 @@ void HorariosPage::StartConnectionAsync(string url, string legajo)
 					List->Visibility = Windows::UI::Xaml::Visibility::Visible;
 
 					// Hide message after ms amount of time
-					rootPage->Await(3000, false);
+					//rootPage->Await(3000, false);
 				}
 				catch (Exception^ ex)
 				{
 					// Database parsing error
-					rootPage->NotifyUser("Error en la base de datos. Intente nuevamente.\n Detalles: '" + ex + "'", NotifyType::StatusMessage);
+					rootPage->NotifyUser("Hubo un problema con la conexión a internet.\nIntente nuevamente.", NotifyType::StatusMessage);
 				}
 			}
 			else
 			{
-				rootPage->NotifyUser("El legajo no existe!", NotifyType::ErrorMessage);
+				// Legajo NOT FOUND error
+				rootPage->NotifyUser("El legajo no existe o no contiene los horarios!", NotifyType::ErrorMessage);
 				GoPageBack();
 			}
 		}
@@ -257,7 +265,7 @@ void HorariosPage::read_cache(string legajo)
 			String^ Str_data = ref new String(w_data.c_str());
 
 		// Parse JSon
-			MainPage::Current->DataContext = ref new User(Str_data);
+			DataContext = ref new User(Str_data);
 
 		// Show ContentPanelInfo
 			ContentPanelInfo->Visibility = Windows::UI::Xaml::Visibility::Visible;
@@ -266,7 +274,7 @@ void HorariosPage::read_cache(string legajo)
 			loading_ring->IsActive = false;
 
 		// Show ErrorMessage
-			rootPage->NotifyUser("Error. No hay conexión a internet.\nÚltimos horarios leídos en memoria", NotifyType::ErrorMessage);
+			rootPage->NotifyUser("Error. No hay conexión a internet.\nÚltimos horarios leídos de la memoria", NotifyType::ErrorMessage);
 
 		// Show list
 		List->Visibility = Windows::UI::Xaml::Visibility::Visible;

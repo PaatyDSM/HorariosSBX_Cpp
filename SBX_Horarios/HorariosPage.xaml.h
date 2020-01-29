@@ -21,17 +21,17 @@ namespace SBX_HORARIOS
 
 	protected:
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
-		void App_BackRequested(Object ^ sender, BackRequestedEventArgs ^ e);
 
 	private:
 		MainPage^ rootPage;
 
-		HttpClient^ httpClient;
+		HttpClient^ client;
 		HttpBaseProtocolFilter^ filter;
 
 		void start_FadeInAnimation(void);
 		void start_FadeOutAnimation(void);
 		void start_FadeOutAnimation2(void);
+		void SetBackButton(void);
 		void StartConnectionAsync(string, string);
 		void Backbutton1(Object^ sender, RoutedEventArgs^ e);
 		void GoPageBack(void);
