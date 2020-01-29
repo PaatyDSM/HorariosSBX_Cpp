@@ -14,6 +14,18 @@ ReleaseNotesPage::ReleaseNotesPage()
 	InitializeComponent();
 }
 
+// Function start_fadein_animation
+void ReleaseNotesPage::ReleaseNotesPage::start_FadeInAnimation(void)
+{
+	ReleaseNotes_Storyboard->Begin();
+}
+
+// Function start_fadeout_animation
+void ReleaseNotesPage::ReleaseNotesPage::start_FadeOutAnimation(void)
+{
+	ReleaseNotes_Storyboard2->Begin();
+}
+
 void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
@@ -25,6 +37,24 @@ void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 	Notes->Text =
 
 		"Release notes :\n"
+		"\n"
+		"------------------------------------------------------\n"
+		"V1.1\n"
+		"*Fixed a bug that causes a crash on dekstop devices.\n"
+		"*Changes and fixes in WelcomePage GUI.\n"
+		"*Fixed some translations.\n"
+		"*Fixed size elements on dekstop devices.\n"
+		"*Fixed FooterPanel in all pages.\n"
+		"*Changed all titles to new 3d look.\n"
+		"*Changed all old buttons to new look 3D buttons in all pages.\n"
+		"*New and redesigned ReleaseNotesPage.\n"
+		"*Added animations and transitions.\n"
+		"*New look at HorariosPage.\n"
+		"*Fix autoscale in all pages.\n"
+		"*Fixed items in HorariosPAge are note selectables.\n"
+		"*Changed filenames and project name.\n"
+		"\n"
+		"Know Bugs :\n"
 		"\n"
 		"------------------------------------------------------\n"
 		"V1.02\n"

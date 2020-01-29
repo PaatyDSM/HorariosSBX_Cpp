@@ -31,6 +31,24 @@ HorariosPage::HorariosPage()
 	InitializeComponent();
 }
 
+// Function start_fadein_animation
+void HorariosPage::HorariosPage::start_FadeInAnimation(void)
+{
+	HorariosPage_Storyboard->Begin();
+}
+
+// Function start_fadeout_animation
+void HorariosPage::HorariosPage::start_FadeOutAnimation(void)
+{
+	HorariosPage_Storyboard2->Begin();
+}
+
+// Function start_fadeout_animation2
+void HorariosPage::HorariosPage::start_FadeOutAnimation2(void)
+{
+	HorariosPage_Storyboard3->Begin();
+}
+
 // OnNavigatedTo function
 void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
@@ -65,7 +83,7 @@ void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 		{ 
 			// Show error
 			rootPage->NotifyUser("Error interno: #31326496.\nContacte al editor de la aplicación\ne incluya el #codigo de error.", NotifyType::ErrorMessage);
-			GoPageBack();
+			start_FadeOutAnimation();
 		}
 }
 

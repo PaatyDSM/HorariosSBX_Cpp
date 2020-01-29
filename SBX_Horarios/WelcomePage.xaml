@@ -6,19 +6,63 @@
     xmlns:local="using:SBX_HORARIOS"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    MinWidth="320"
-    MinHeight="480"
     ScrollViewer.VerticalScrollBarVisibility="Auto">
 
-    <!--  StartGrid:Page  -->
-    <Grid x:Name="Page">
+    <Page.Resources>
+        <!--  Storyboard resource: WelcomepPage FadeIn.  -->
+        <Storyboard x:Name="WelcomepPage_Storyboard">
+            <DoubleAnimation
+                Storyboard.TargetName="Page"
+                Storyboard.TargetProperty="Opacity"
+                From="0.0"
+                To="1.0"
+                Duration="0:0:0.33">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <!--  Storyboard resource: WelcomepPage FadeOut.  -->
+        <Storyboard x:Name="WelcomepPage_Storyboard2">
+            <DoubleAnimation
+                Storyboard.TargetName="Page"
+                Storyboard.TargetProperty="Opacity"
+                From="1.0"
+                To="0.0"
+                Duration="0:0:0.33"
+                Completed="NavigateToHorariosPage">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <!--  Storyboard resource: WelcomepPage FadeOut2.  -->
+        <Storyboard x:Name="WelcomepPage_Storyboard3">
+            <DoubleAnimation
+                Storyboard.TargetName="Page"
+                Storyboard.TargetProperty="Opacity"
+                From="1.0"
+                To="0.0"
+                Duration="0:0:0.66"
+                Completed="Release_Notes_Click">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Page.Resources>
+    
+        <!--  StartGrid:Page  -->
+    <Grid x:Name="Page"
+          Opacity="0"
+          Loaded="start_FadeInAnimation">
         <Grid.Background>
             <ImageBrush ImageSource="Assets/pictures/Welcome_background.png"
                         Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <!--  Title  -->
-            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="Auto" />
             <!--  SpaceSeparator  -->
             <RowDefinition Height="0.25*" />
             <!--  InputPanel  -->
@@ -26,7 +70,7 @@
             <!--  ButtonPanel  -->
             <RowDefinition Height="Auto" />
             <!--  SpaceSeparator2  -->
-            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="0.33*" />
             <!--  FooterPanel  -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -37,7 +81,7 @@
 
             <!--  Title  -->
             <Viewbox x:Name="Title_effects1"
-                     Margin="16">
+                     Margin="12,12,12,4">
                 <TextBlock
                     Text="Mis Horarios Starbucks"
                     FontFamily="Gabriola"
@@ -46,10 +90,11 @@
                     HorizontalAlignment="Center"
                     TextAlignment="Center"
                     TextLineBounds="Tight"
-                    Foreground="White" Padding="1,1,0,1" />
+                    Foreground="White"
+                    Padding="1,1,0,1" />
             </Viewbox>
             <Viewbox x:Name="Title_effects2"
-                     Margin="16">
+                     Margin="12,12,12,4">
                 <TextBlock
                     Text="Mis Horarios Starbucks"
                     FontFamily="Gabriola"
@@ -62,7 +107,7 @@
                     Padding="0,1,1,0" />
             </Viewbox>
             <Viewbox x:Name="Title"
-                     Margin="16">
+                     Margin="12,12,12,4">
                 <TextBlock
                     Text="Mis Horarios Starbucks"
                     FontFamily="Gabriola"
@@ -71,21 +116,21 @@
                     HorizontalAlignment="Center"
                     TextAlignment="Center"
                     TextLineBounds="Tight"
-                    Foreground="#FF082118" />
+                    Foreground="#FF082118"
+                    MinHeight="10"/>
             </Viewbox>
         </Grid>
 
         <!-- SpaceSeparator-->
         <Grid x:Name="SpaceSeparator"
-              Grid.Row="1">
+              Grid.Row="1"
+              MinHeight="24">
         </Grid>
 
         <!--  InputPanel  -->
         <Grid x:Name="InputPanel"
               Grid.Row="2"
-              Background="#3F642D0F"
-              BorderBrush="#EA190A02"
-              BorderThickness="2,2,2,0">
+              Background="#99211200">
             <Grid.RowDefinitions>
                 <!--  welcome_title_textblock  -->
                 <RowDefinition Height="Auto" />
@@ -96,31 +141,45 @@
             </Grid.RowDefinitions>
 
             <!--  welcome_title_textblock  -->
-            <TextBlock x:Name="welcome_title_textblock"
-                           Margin="0,4"
-                           VerticalAlignment="Center"
-                           FontSize="36"
-                           FontWeight="Bold"
-                           Text="Bienvenido!"
-                           TextWrapping="Wrap"
-                           HorizontalAlignment="Center"
-                           Foreground="#FFC8FFDC"/>
+            <Viewbox x:Name="welcome_title_textblock"
+                     HorizontalAlignment="Center">
+                <TextBlock
+                    Margin="24,0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Text="Bienvenido!"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center"
+                    Foreground="#FFC8FFDC"/>
+            </Viewbox>
 
-            <!--  intro_textblock  -->
-            <TextBlock x:Name="intro_textblock"
-                       Grid.Row="1"
-                       Margin="0,16"
-                       VerticalAlignment="Center"
-                       FontSize="28"
-                       Text="Aquí podrás consultar tus horarios laborales ingresando solo tu legajo, ahora disponible en todos tus dispositivos con Windows 10! Encuéntrala en la Tienda."
-                       HorizontalAlignment="Center"
-                       TextWrapping="Wrap"
-                       TextAlignment="Center"
-                       Foreground="#FFF5FAFF" />
+            <Viewbox x:Name="intro_textblock"
+                     Grid.Row="1">
+                <!--  intro_textblock  -->
+                <TextBlock
+                    Margin="4,16"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    HorizontalAlignment="Center"
+                    TextWrapping="Wrap"
+                    TextAlignment="Center"
+                    Foreground="#FFF5FAFF">
+                    
+                    Aquí podrás consultar tus horarios laborales
+                    <LineBreak />
+                    ingresando solo tu legajo.
+                    <LineBreak />
+                    Ahora disponible en todos los dispositivos con Windows 10!
+                    
+                </TextBlock>
+            </Viewbox>
 
             <!--  InputBlocks  -->
             <Grid x:Name="InputBlocks"
-                        Grid.Row="2" Margin="0,0,0,16" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                  Grid.Row="2" Margin="0,8,0,16"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center" >
                 <Grid.ColumnDefinitions>
                     <!--  textBlock  -->
                     <ColumnDefinition Width="Auto" />
@@ -161,11 +220,9 @@
         <!--  ButtonPanel  -->
         <Grid x:Name="ButtonPanel"
               Grid.Row="3"
-              Background="#3F642D0F"
-              BorderBrush="#EA190A02"
-              BorderThickness="2,0,2,2">
+              Background="#99211200">
             <Rectangle x:Name="Button_3D_Gradient"
-                           Margin="0,2"
+                           Margin="0,10,0,26"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            RadiusX="6"
@@ -186,7 +243,7 @@
                 </Rectangle.Fill>
             </Rectangle>
             <Rectangle x:Name="Border"
-                           Margin="0,2"
+                           Margin="0,10,0,26"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            RadiusX="6"
@@ -201,7 +258,7 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
             <Button x:Name="send_legajo"
-                    Margin="0,1"
+                    Margin="0,8,0,24"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Click="send_legajo_button"
@@ -221,14 +278,15 @@
 
         <!-- SpaceSeparator-->
         <Grid x:Name="SpaceSeparator2"
-              Grid.Row="4">
+              Grid.Row="4"
+              MinHeight="24">
         </Grid>
 
         <!--  FooterPanel  -->
         <Grid x:Name="FooterPanel"
               Grid.Row="5"
               VerticalAlignment="Bottom"
-              Background="#FFC8C8C8" Margin="0" Padding="0,-6">
+              Background="#FFC8C8C8" Margin="0" Padding="0,-6" Height="28">
             <!--  E-mail Link  -->
             <StackPanel
                 x:Name="ContactPnael"
@@ -257,8 +315,8 @@
                     Background="{x:Null}"
                     BorderBrush="White"
                     BorderThickness="0"
-                    Click="Release_Notes_Click"
-                    Content="V1.02"
+                    Click="start_FadeOutAnimation2"
+                    Content="V1.1"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />

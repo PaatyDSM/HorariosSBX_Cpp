@@ -20,15 +20,16 @@ MainPage::MainPage()
 	// to the MainPage instance in order to call methods that are in this class.
 	MainPage::Current = this;
 
-	// Called when Hardware Back Button is pressed
-	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs ^>(this, &MainPage::HardwareButtons_BackPressed);
-
 	// Launch UWP apps in full-screen mode on mobile devices or tablets.
 	{
 		String^ platformFamily = Windows::System::Profile::AnalyticsInfo::VersionInfo->DeviceFamily;
 
 		if (platformFamily->Equals("Windows.Mobile"))
 		{
+			/// SpecificFix Crash on Desktop
+			// Called when Hardware Back Button is pressed
+			HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs ^>(this, &MainPage::HardwareButtons_BackPressed);
+
 			Windows::UI::ViewManagement::ApplicationView^ view = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView();
 
 			view->TryEnterFullScreenMode();

@@ -24,6 +24,9 @@ namespace SBX_HORARIOS
 		Windows::Web::Http::Filters::HttpBaseProtocolFilter^ filter;
 		Windows::Web::Http::HttpClient^ httpClient;
 
+		void start_FadeInAnimation(void);
+		void start_FadeOutAnimation(void);
+		void start_FadeOutAnimation2(void);
 		void send_pagewithlegajo(int);
 		void BackgroundTask(String^ e, int);
 		void Backbutton1(Object^ sender, RoutedEventArgs^ e);

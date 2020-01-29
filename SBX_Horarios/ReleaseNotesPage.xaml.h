@@ -20,6 +20,8 @@ namespace SBX_HORARIOS
 	private:
 		MainPage^ rootPage;
 
+		void start_FadeInAnimation(void);
+		void start_FadeOutAnimation(void);
 		void Footer_Click(Object^ sender, RoutedEventArgs^ e);
 		void Backbutton1(Object^ sender, RoutedEventArgs^ e);
 	};

@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by SBX_Horarios_C++.rc
+// Used by SBX_Horarios.rc
 
 // Valores predeterminados siguientes para nuevos objetos
 // 

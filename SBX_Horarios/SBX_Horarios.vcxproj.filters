@@ -102,10 +102,10 @@
     <Image Include="Assets\Square44x44Logo.targetsize-256.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\pictures\ReleaseNotes_background.png">
+    <Image Include="Assets\pictures\Welcome_background.png">
       <Filter>Assets\pictures</Filter>
     </Image>
-    <Image Include="Assets\pictures\Welcome_background.png">
+    <Image Include="Assets\pictures\Horarios_background.png">
       <Filter>Assets\pictures</Filter>
     </Image>
   </ItemGroup>
@@ -113,7 +113,7 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SBX_Horarios_C++_TemporaryKey.pfx" />
+    <None Include="SBX_Horarios_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
@@ -122,6 +122,6 @@
     <Page Include="WelcomePage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SBX_Horarios_C++.rc" />
+    <ResourceCompile Include="SBX_Horarios.rc" />
   </ItemGroup>
 </Project>

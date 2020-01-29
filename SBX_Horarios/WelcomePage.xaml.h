@@ -24,6 +24,9 @@ namespace SBX_HORARIOS
 	private:
 		MainPage^ rootPage;
 
+		void start_FadeInAnimation(void);
+		void start_FadeOutAnimation(void);
+		void start_FadeOutAnimation2(void);
 		void Footer_Click(Platform::Object^ sender, RoutedEventArgs^ e);
 		void send_legajo_button(Platform::Object^ sender, RoutedEventArgs^ e);
 		void Release_Notes_Click(Platform::Object^ sender, RoutedEventArgs^ e);

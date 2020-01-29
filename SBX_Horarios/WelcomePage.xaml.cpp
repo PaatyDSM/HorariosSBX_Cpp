@@ -22,6 +22,24 @@ WelcomePage::WelcomePage()
 	InitializeComponent();
 }
 
+// Function start_fadein_animation
+void WelcomePage::WelcomePage::start_FadeInAnimation(void)
+{
+	WelcomepPage_Storyboard->Begin();
+}
+
+// Function start_fadeout_animation
+void WelcomePage::WelcomePage::start_FadeOutAnimation(void)
+{
+	WelcomepPage_Storyboard2->Begin();
+}
+
+// Function start_fadeout_animation
+void WelcomePage::WelcomePage::start_FadeOutAnimation2(void)
+{
+	WelcomepPage_Storyboard3->Begin();
+}
+
 // OnNavigatedTo function
 void WelcomePage::OnNavigatedTo(NavigationEventArgs^ e)
 {
@@ -63,7 +81,7 @@ void WelcomePage::send_legajo_button(Object^ sender, RoutedEventArgs^ e)
 		else
 		{
 			// Goto NEXT FUNCTION
-			NavigateToHorariosPage();
+			start_FadeOutAnimation();
 		}
 
 }

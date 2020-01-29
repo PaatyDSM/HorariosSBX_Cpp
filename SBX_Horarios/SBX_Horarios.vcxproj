@@ -8,8 +8,9 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <ProjectName>SBX_HORARIOS</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -26,7 +27,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
@@ -51,8 +52,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <PackageCertificateKeyFile>SBX_Horarios_C++_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>391311A1A79F8C9A729B4C0D408782CF4A70F1CA</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>SBX_HORARIOS_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>AECC01E87C0902BA0276046E1C091CA3B82EF9F4</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
@@ -60,9 +61,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>MixedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
@@ -76,7 +82,7 @@
       <Optimization>Full</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointModel>Precise</FloatingPointModel>
     </ClCompile>
     <Manifest>
       <VerboseOutput>false</VerboseOutput>
@@ -96,6 +102,9 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="JSon_manageData\User.h" />
@@ -141,11 +150,11 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="SBX_Horarios_C++_TemporaryKey.pfx" />
+    <None Include="SBX_Horarios_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
-    <Image Include="Assets\pictures\ReleaseNotes_background.png" />
+    <Image Include="Assets\pictures\Horarios_background.png" />
     <Image Include="Assets\pictures\Welcome_background.png" />
     <Image Include="Assets\SplashScreen.scale-100.png">
       <DeploymentContent>true</DeploymentContent>
@@ -207,12 +216,10 @@
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs.120, Version=14.0" />
     <SDKReference Include="WindowsDesktop, Version=10.0.14393.0" />
-    <SDKReference Include="WindowsDesktop, Version=10.0.14393.0" />
-    <SDKReference Include="WindowsMobile, Version=10.0.14393.0" />
     <SDKReference Include="WindowsMobile, Version=10.0.14393.0" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SBX_Horarios_C++.rc" />
+    <ResourceCompile Include="SBX_Horarios.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
