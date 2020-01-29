@@ -9,6 +9,8 @@ using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Interop;
 
+using namespace std;
+
 // Referencia al Frame en el cual todas las páginas son cargadas.
 MainPage^ MainPage::Current = nullptr;
 
@@ -91,6 +93,12 @@ void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::I
 		///Specific Fix (bug#6161022)
 		// Clear the navigation stacks using the Clear method of each stack.
 		Page_Frame->BackStack->Clear();
+
+		///Specific Fix (bug#6161070)
+		if (Page_Frame->Content->ToString() == "SBX_HORARIOS.WelcomePage")
+		{
+			e->Handled = false;
+		}
 	}
 	else
 	{

@@ -114,6 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SBX_Horarios_TemporaryKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
+    <None Include="SBX_HORARIOS_StoreKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />

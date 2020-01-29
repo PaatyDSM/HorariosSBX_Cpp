@@ -128,7 +128,7 @@
                              BorderThickness="0"
                              TextWrapping="Wrap"
                              PlaceholderText="Cargando notas de publicación..."
-                             TextAlignment="Justify"
+                             TextAlignment="Left"
                              Background="#7FFFFFFF" />
                 </ScrollViewer>
 
@@ -226,7 +226,7 @@
                     Background="{x:Null}"
                     BorderBrush="White"
                     BorderThickness="0"
-                    Content="V1.15"
+                    Content="V1.17"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />
@@ -241,7 +241,7 @@
                     Content="PaatyDSM Apps"
                     FontFamily="Segoe Script"
                     FontSize="19"
-                    Tag="http://paaty.netii.net/PaatyDSMApps"
+                    Tag="http://paatydsm.000webhostapp.com"
                     ToolTipService.ToolTip="Ir a mi página web" />
             </Grid>
         </Grid>

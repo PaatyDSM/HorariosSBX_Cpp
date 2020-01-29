@@ -330,7 +330,7 @@
                     BorderBrush="White"
                     BorderThickness="0"
                     Click="start_FadeOutAnimation2"
-                    Content="V1.15"
+                    Content="V1.17"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />
@@ -345,7 +345,7 @@
                     Content="PaatyDSM Apps"
                     FontFamily="Segoe Script"
                     FontSize="19"
-                    Tag="http://paaty.netii.net/PaatyDSMApps"
+                    Tag="http://paatydsm.000webhostapp.com"
                     ToolTipService.ToolTip="Ir a mi página web" />
             </Grid>
         </Grid>
