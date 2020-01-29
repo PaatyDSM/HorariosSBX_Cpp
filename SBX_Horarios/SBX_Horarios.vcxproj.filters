@@ -37,6 +37,7 @@
     <ClCompile Include="JSon_manageData\WorkDays.cpp">
       <Filter>JSon_manageData</Filter>
     </ClCompile>
+    <ClCompile Include="TrialPage.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -58,6 +59,7 @@
     <ClInclude Include="JSon_manageData\WorkDays.h">
       <Filter>JSon_manageData</Filter>
     </ClInclude>
+    <ClInclude Include="TrialPage.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -122,6 +124,7 @@
     <Page Include="HorariosPage.xaml" />
     <Page Include="ReleaseNotesPage.xaml" />
     <Page Include="WelcomePage.xaml" />
+    <Page Include="TrialPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SBX_Horarios.rc" />

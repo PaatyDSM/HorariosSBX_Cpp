@@ -69,7 +69,7 @@
             <!--  TitlePanel  -->
             <RowDefinition Height="Auto" />
             <!--  SpaceSeparator  -->
-            <RowDefinition Height="0.20*" />
+            <RowDefinition Height="0.34*" />
             <!--  WelcomeText  -->
             <RowDefinition Height="*" />
             <!--  InputPanel  -->
@@ -131,7 +131,15 @@
         <!-- SpaceSeparator-->
         <Grid x:Name="SpaceSeparator"
               Grid.Row="1"
-              MinHeight="16">
+              MinHeight="16"
+              Background="#7FFFFFFF">
+                <TextBlock x:Name="UpdateText"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="Esta aplicación ha quedado obsoleta. Descarga la nueva versión en la tienda. Disponible en iOS, Android y Windows."
+                           FontWeight="Bold"
+                           Foreground="#FF8E0000"/>
         </Grid>
 
         <!--  WelcomeText  -->
@@ -164,20 +172,18 @@
                      Grid.Row="1">
                 <!--  intro_textblock  -->
                 <TextBlock
-                    Margin="4,16"
+                    Margin="4,12,4,8"
                     VerticalAlignment="Center"
                     FontSize="15"
                     HorizontalAlignment="Center"
                     TextWrapping="Wrap"
                     TextAlignment="Center"
                     Foreground="#FFF5FAFF">
-                    
-                    Aquí podrás consultar tus horarios laborales
+                    Esta aplicación ha quedado obsoleta.
                     <LineBreak />
-                    ingresando solo tu legajo.
+                    Descarga la nueva versión en la tienda.
                     <LineBreak />
-                    Ahora disponible en todos los dispositivos con Windows 10!
-
+                    Ahora disponible en iOS, Android y Windows.
                 </TextBlock>
             </Viewbox>
         </Grid>
@@ -186,49 +192,49 @@
         <Grid x:Name="InputPanel"
               Grid.Row="3"
               Background="#99211200"
-              VerticalAlignment="Top">
+              VerticalAlignment="Top"
+              HorizontalAlignment="Stretch">
+                <Grid x:Name="MarginFix"
+                      HorizontalAlignment="Center">
+                    <!--  InputBlocks  -->
+                    <Grid x:Name="InputBlocks"
+                          Margin="0,8,0,13"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center" >
+                        <Grid.ColumnDefinitions>
+                            <!--  textBlock  -->
+                            <ColumnDefinition Width="Auto" />
+                            <!--  InputField  -->
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-            <!--  InputBlocks  -->
-            <Grid x:Name="InputBlocks"
-                  Margin="0,8,0,16"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center" >
-                <Grid.ColumnDefinitions>
-                    <!--  textBlock  -->
-                    <ColumnDefinition Width="Auto" />
-                    <!--  InputField  -->
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    x:Name="textBlock"
-                    Margin="0,0,3,0"
-                    VerticalAlignment="Center"
-                    FontSize="24"
-                    Text="Legajo:"
-                    TextWrapping="Wrap"
-                    HorizontalAlignment="Right"
-                    Foreground="#FFE6FFF6" />
-                <!--  InputField  -->
-                <TextBox
-                    x:Name="main_legajo_input"
-                    Grid.Column="1"
-                    Margin="0"
-                    Background="#EAA0A0A0"
-                    BorderBrush="#FF1C4B4B"
-                    BorderThickness="1"
-                    FontSize="24"
-                    InputScope="Number"
-                    PlaceholderText=" Ingrese su legajo aquí"
-                    Text=""
-                    TextWrapping="Wrap"
-                    HorizontalAlignment="Left"
-                    MaxLength="16"
-                    TextAlignment="Center"
-                    MinWidth="264" />
+                        <TextBlock x:Name="textBlock"
+                                   Margin="0,0,3,0"
+                                   VerticalAlignment="Center"
+                                   FontSize="22"
+                                   Text="Legajo:"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Right"
+                                   Foreground="#FFE6FFF6" />
+                        <!--  InputField  -->
+                        <TextBox x:Name="main_legajo_input"
+                                 Grid.Column="1"
+                                 Margin="0,0,0,0"
+                                 Background="#EAA0A0A0"
+                                 BorderBrush="#FF1C4B4B"
+                                 BorderThickness="1"
+                                 FontSize="22"
+                                 InputScope="Number"
+                                 PlaceholderText=" Ingrese su legajo aquí"
+                                 Text=""
+                                 TextWrapping="Wrap"
+                                 HorizontalAlignment="Left"
+                                 MaxLength="16"
+                                 TextAlignment="Center"
+                                 MinWidth="242" />
+                    </Grid>
+                </Grid>
             </Grid>
-
-        </Grid>
 
         <!--  ButtonPanel  -->
         <Grid x:Name="ButtonPanel"
@@ -330,7 +336,7 @@
                     BorderBrush="White"
                     BorderThickness="0"
                     Click="start_FadeOutAnimation2"
-                    Content="V1.17"
+                    Content="V1.18"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />

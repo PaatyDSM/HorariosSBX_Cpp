@@ -42,13 +42,29 @@ MainPage::MainPage()
 // OnNavigatedTo function
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	/// Specific Fix (bug#6161012), (bug#6161013) & AfterSuspensionRandomCrash.
-	if (Page_Frame->Content == nullptr)
+	//Check trial
 	{
-		// When the navigation stack isn't restored navigate to the WelcomePage
-		if (!Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom }))
+		Windows::Globalization::Calendar^ c = ref new Windows::Globalization::Calendar;
+		String^ trial = c->YearAsString();
+		wstring w_trial(trial->Data());
+		wstring wide_year(w_trial);
+		string year(wide_year.begin(), wide_year.end());
+		int year_number = stoi(year);
+		if (year_number > 2017)
 		{
-			throw ref new FailureException("Error al cargar la página principal.\nDetalles del error: " + e);
+			Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.TrialPage", TypeKind::Custom });
+		}
+		else
+		{
+			/// Specific Fix (bug#6161012), (bug#6161013) & AfterSuspensionRandomCrash.
+			if (Page_Frame->Content == nullptr)
+			{
+				// When the navigation stack isn't restored navigate to the WelcomePage
+				if (!Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom }))
+				{
+					throw ref new FailureException("Error al cargar la página principal.\nDetalles del error: " + e);
+				}
+			}
 		}
 	}
 }

@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="SBX_HORARIOS.TrialPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SBX_HORARIOS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#FF1B2230">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/pictures/Welcome_background.png"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid Background="Black" Opacity="0.9">
+                <TextBlock x:Name="Title"
+                       Margin="0,48"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       FontWeight="Bold"
+                       Text="Expiró!"
+                       FontSize="48"
+                       Foreground="#FFAE0000"/>
+                <TextBlock x:Name="UpdateText"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       FontWeight="Bold"
+                       FontSize="24"
+                       Foreground="#FF8E0000">
+                Esta aplicación ha quedado obsoleta.
+                <LineBreak />
+                Por favor descarga la nueva versión de la aplicación
+                desde la tienda.
+                <LineBreak />
+                Ahora se encuentra disponible en iOS, Android y Windows e incluye muchas nuevas funciones!
+                </TextBlock>
+                <Grid VerticalAlignment="Bottom"
+                  HorizontalAlignment="Center"
+                  Margin="0,48">
+                    <HyperlinkButton
+                    Click="Website_Click"
+                    Content="PaatyDSM Apps"
+                    FontFamily="Segoe Script"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Tag="http://paatydsm.000webhostapp.com"
+                    ToolTipService.ToolTip="Ir a mi página web" />
+                </Grid>
+            </Grid>
+        </Grid>
+</Page>

@@ -226,7 +226,7 @@
                     Background="{x:Null}"
                     BorderBrush="White"
                     BorderThickness="0"
-                    Content="V1.17"
+                    Content="V1.18"
                     FontFamily="Consolas"
                     FontSize="12"
                     ToolTipService.ToolTip="Versión" />

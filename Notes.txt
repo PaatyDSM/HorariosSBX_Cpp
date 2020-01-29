@@ -1,6 +1,15 @@
 	Notes->Text =
 		
 		"Release notes :\n"
+		"\n"
+        	"------------------------------------------------------\n"
+        	"V1.18\n"
+		"*Minor GUI and code corrections.\n"
+		"*Added update text.\n"
+		"*Added x64 platform.\n"
+		"*Expiration for Windows 10 devices.\n"
+        	"\n"
+        	"------------------------------------------------------\n"
         	"\n"
         	"------------------------------------------------------\n"
         	"V1.17\n"
