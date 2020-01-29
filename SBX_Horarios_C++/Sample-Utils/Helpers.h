@@ -6,7 +6,7 @@ using namespace concurrency;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::Web::Http;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	class Helpers
 	{

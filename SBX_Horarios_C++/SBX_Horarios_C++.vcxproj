@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{be0e901b-ae5e-4505-8dde-39bd68504f5d}</ProjectGuid>
-    <RootNamespace>PaatyDSM</RootNamespace>
+    <RootNamespace>SBX_HORARIOS</RootNamespace>
     <DefaultLanguage>es-ES</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -42,21 +42,17 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props')" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props')" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
     <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props')" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsMobile, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsMobile.props')" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
     <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.14393.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <PackageCertificateKeyFile>SBX_Horarios_C++_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>EB822157BA01BE18B425BD0F098E926C4B0ADC20</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>391311A1A79F8C9A729B4C0D408782CF4A70F1CA</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
@@ -102,16 +98,17 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ReleaseNotes.xaml.h">
-      <DependentUpon>ReleaseNotes.xaml</DependentUpon>
+    <ClInclude Include="JSon_manageData\User.h" />
+    <ClInclude Include="JSon_manageData\WorkDays.h" />
+    <ClInclude Include="ReleaseNotesPage.xaml.h">
+      <DependentUpon>ReleaseNotesPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Sample-Utils\Helpers.h" />
     <ClInclude Include="Sample-Utils\PlugInFilter.h" />
-    <ClInclude Include="SBX_HORARIOS_MAINAPP.xaml.h">
-      <DependentUpon>SBX_HORARIOS_MAINAPP.xaml</DependentUpon>
+    <ClInclude Include="WelcomePage.xaml.h">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Common\SuspensionManager.h" />
     <ClInclude Include="HorariosPage.xaml.h">
       <DependentUpon>HorariosPage.xaml</DependentUpon>
     </ClInclude>
@@ -122,17 +119,15 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="School.h" />
-    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ReleaseNotes.xaml">
+    <Page Include="ReleaseNotesPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SBX_HORARIOS_MAINAPP.xaml">
+    <Page Include="WelcomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="HorariosPage.xaml">
@@ -141,7 +136,6 @@
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -151,11 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
-    <Image Include="Assets\pictures\56d66f9b9e92f_5087437448_1689b5784f_b.jpg" />
-    <Image Include="Assets\pictures\imagesKT4YA0V5.jpg" />
-    <Image Include="Assets\pictures\logo_main.png" />
-    <Image Include="Assets\pictures\MfeOdTR4-7760-10328.jpg" />
-    <Image Include="Assets\pictures\starbucks-1069758_1280.jpg" />
+    <Image Include="Assets\pictures\ReleaseNotes_background.png" />
+    <Image Include="Assets\pictures\Welcome_background.png" />
     <Image Include="Assets\SplashScreen.scale-100.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>
@@ -192,15 +183,16 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="ReleaseNotes.xaml.cpp">
-      <DependentUpon>ReleaseNotes.xaml</DependentUpon>
+    <ClCompile Include="JSon_manageData\User.cpp" />
+    <ClCompile Include="JSon_manageData\WorkDays.cpp" />
+    <ClCompile Include="ReleaseNotesPage.xaml.cpp">
+      <DependentUpon>ReleaseNotesPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Sample-Utils\Helpers.cpp" />
     <ClCompile Include="Sample-Utils\PlugInFilter.cpp" />
-    <ClCompile Include="SBX_HORARIOS_MAINAPP.xaml.cpp">
-      <DependentUpon>SBX_HORARIOS_MAINAPP.xaml</DependentUpon>
+    <ClCompile Include="WelcomePage.xaml.cpp">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Common\SuspensionManager.cpp" />
     <ClCompile Include="HorariosPage.xaml.cpp">
       <DependentUpon>HorariosPage.xaml</DependentUpon>
     </ClCompile>
@@ -211,8 +203,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="School.cpp" />
-    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs.120, Version=14.0" />

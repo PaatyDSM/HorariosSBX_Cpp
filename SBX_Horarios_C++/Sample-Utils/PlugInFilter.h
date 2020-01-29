@@ -6,7 +6,7 @@ using namespace Windows::Foundation;
 using namespace Windows::Web::Http;
 using namespace Windows::Web::Http::Filters;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	public ref class PlugInFilter sealed : public IHttpFilter
 	{

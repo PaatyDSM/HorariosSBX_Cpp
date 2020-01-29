@@ -2,16 +2,16 @@
 
 using namespace Windows::Data::Json;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	// Mark as WebHostHidden since Windows.Data.Json API is not available in JavaScript.
 	[Windows::Foundation::Metadata::WebHostHidden]
 	[Windows::UI::Xaml::Data::Bindable]
-	public ref class School sealed
+	public ref class WorkDays sealed
 	{
 	public:
-		School(void);
-		School(JsonObject^ jsonObject);
+		WorkDays(void);
+		WorkDays(JsonObject^ jsonObject);
 
 	property String^ Fecha
 	{

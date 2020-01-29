@@ -1,41 +1,52 @@
 ﻿#include "pch.h"
 
 #include "MainPage.xaml.h"
-#include "SBX_HORARIOS_MAINAPP.xaml.h"
+#include "WelcomePage.xaml.h"
 
-using namespace PaatyDSM;
+using namespace SBX_HORARIOS;
 
+using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Interop;
-using namespace Windows::Foundation;
 
-// Sostiene el Frame en el cual son cargadas todas las páginas.
+// Referencia al Frame en el cual todas las páginas son cargadas.
 MainPage^ MainPage::Current = nullptr;
 
 MainPage::MainPage()
 {
 	InitializeComponent();
 
-	// This is a static public property that allows downstream pages to get a handle to the MainPage instance
-	// in order to call methods that are in this class.
+	// This is a static public property that allows downstream pages to get a handle
+	// to the MainPage instance in order to call methods that are in this class.
 	MainPage::Current = this;
 
 	// Called when Hardware Back Button is pressed
 	HardwareButtons::BackPressed += ref new EventHandler<BackPressedEventArgs ^>(this, &MainPage::HardwareButtons_BackPressed);
+
+	// Launch UWP apps in full-screen mode on mobile devices or tablets.
+	{
+		String^ platformFamily = Windows::System::Profile::AnalyticsInfo::VersionInfo->DeviceFamily;
+
+		if (platformFamily->Equals("Windows.Mobile"))
+		{
+			Windows::UI::ViewManagement::ApplicationView^ view = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView();
+
+			view->TryEnterFullScreenMode();
+		}
+	}
+
 }
 
 // OnNavigatedTo function
 void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
-	SuspensionManager::RegisterFrame(Page_Frame, "PaatyDSM.SBX_HORARIOS_MAINAPP");
-
-	///Specific Fix (bug#6161012), (bug#6161013) & AfterSuspensionRandomCrash.
+	/// Specific Fix (bug#6161012), (bug#6161013) & AfterSuspensionRandomCrash.
 	if (Page_Frame->Content == nullptr)
 	{
-		// When the navigation stack isn't restored navigate to the SBX_HORARIOS_MAINAPP
-		if (!Page_Frame->Navigate(TypeName{ "PaatyDSM.SBX_HORARIOS_MAINAPP", TypeKind::Custom }))
+		// When the navigation stack isn't restored navigate to the WelcomePage
+		if (!Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom }))
 		{
-			throw ref new FailureException("Fallo al iniciar la App :(\n.\nCodigo de error: \n#31326497.\nContacte al editor de la aplicación\ne incluya el #codigo de error.");
+			throw ref new FailureException("Error al cargar la página principal.\nDetalles del error: " + e);
 		}
 	}
 	else
@@ -79,11 +90,11 @@ void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::I
 		e->Handled = true;
 
 		// Clear the status block when navigating
-			NotifyUser("", NotifyType::StatusMessage);
+		NotifyUser("", NotifyType::StatusMessage);
 
 		///Specific Fix (bug#6161022)
 		// Clear the navigation stacks using the Clear method of each stack.
-			Page_Frame->BackStack->Clear();
+		Page_Frame->BackStack->Clear();
 	}
 	else
 	{
@@ -91,9 +102,11 @@ void MainPage::HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::I
 	}
 
 	///Specific Fix (bug#6161022)
-	// Back to MainPage
-		Page_Frame->Navigate(TypeName{ "PaatyDSM.SBX_HORARIOS_MAINAPP", TypeKind::Custom });
-
 	// Clear the navigation stacks using the Clear method of each stack.
-		Page_Frame->BackStack->Clear();
+	Page_Frame->BackStack->Clear();
+
+	// Back to WelcomePage
+	Page_Frame->Navigate(TypeName{ "SBX_HORARIOS.WelcomePage", TypeKind::Custom });
+
 }
+

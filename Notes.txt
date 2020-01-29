@@ -1,6 +1,20 @@
 	Notes->Text =
-
+		
 		"Release notes :\n"
+		"\n"
+		"------------------------------------------------------\n"
+		"V1.02\n"
+		"*New and redesigned MainPage.\n"
+		"*Now pages are centered correctly in landscape mode.\n"
+		"*Revised and fixed translations.\n"
+		"*Revised source code.\n"
+		"\t - *A lot of changes and minor fixes.\n"
+		"*Deleted unused code and files.\n"
+		"*Fixed some wrong error messages text.\n"
+		"*Updated certificates.\n"
+		"*Fixed a random bug related to SuspensionManager.\n"
+		"\n"
+		"Know Bugs :\n"
 		"\n"
 		"------------------------------------------------------\n"
 		"V1.01\n"

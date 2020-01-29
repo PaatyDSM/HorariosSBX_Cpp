@@ -3,23 +3,22 @@
 #include "App.g.h"
 
 using namespace Platform;
-using namespace Windows::ApplicationModel;
-using namespace Windows::ApplicationModel::Activation;
+using namespace Windows::UI::Xaml::Navigation;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	/// <summary>
-	/// Provides application-specific behavior to supplement the default Application class.
+	/// Proporciona un comportamiento específico de la aplicación para complementar la clase Application predeterminada.
 	/// </summary>
 	ref class App sealed
 	{
 	public:
-		virtual void OnLaunched(LaunchActivatedEventArgs^ e) override;
+		virtual void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e) override;
 		App();
 
 	private:
-		void OnSuspending(Object^ sender, SuspendingEventArgs^ e);
-		void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);
+		void OnSuspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
+		void OnNavigationFailed(Object ^sender, NavigationFailedEventArgs ^e);
 	};
 }
 

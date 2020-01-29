@@ -1,15 +1,15 @@
 ﻿#pragma once
 
-#include "School.h"
+#include "WorkDays.h"
 #include "MainPage.xaml.h"
 
 using namespace Platform;
 using namespace Platform::Collections;
 using namespace Windows::Foundation::Collections;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
-	// Mark as WebHostHidden since School is WebHostHidden.
+	// Mark as WebHostHidden since WorkDays is WebHostHidden.
 	[Windows::Foundation::Metadata::WebHostHidden]
 	[Windows::UI::Xaml::Data::Bindable]
 	public ref class User sealed
@@ -30,9 +30,9 @@ namespace PaatyDSM
 		void set(String^ value);
 	}
 
-	property IVector<School^>^ Asignaciones
+	property IVector<WorkDays^>^ Asignaciones
 	{
-		IVector<School^>^ get();
+		IVector<WorkDays^>^ get();
 	}
 
 	private:
@@ -42,6 +42,7 @@ namespace PaatyDSM
 
 	String^ legajo;
 	String^ fechaConsulta;
-	Vector<School^>^ asignaciones;
+	Vector<WorkDays^>^ asignaciones;
 	};
+
 }

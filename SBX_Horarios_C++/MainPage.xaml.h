@@ -6,8 +6,11 @@ using namespace Platform;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Phone::UI::Input;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
+	/// <summary>
+	/// Enums the Status NotifyTypes.
+	/// </summary>
 	public enum class NotifyType
 	{
 		StatusMessage,
@@ -15,7 +18,7 @@ namespace PaatyDSM
 	};
 
 	/// <summary>
-	/// MainPage holds the Status Block and the Frame in which all the pages are loaded.
+	/// MainPage contiene el Status Block y el Frame en el cual todas las páginas son cargadas.
 	/// </summary>
 	public ref class MainPage sealed
 	{
@@ -26,7 +29,7 @@ namespace PaatyDSM
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
 
 	private:
-		void HardwareButtons_BackPressed(Object^ sender, Windows::Phone::UI::Input::BackPressedEventArgs^ e);
+		void HardwareButtons_BackPressed(Object^ sender, BackPressedEventArgs^ e);
 
 	internal:
 		static MainPage^ Current;

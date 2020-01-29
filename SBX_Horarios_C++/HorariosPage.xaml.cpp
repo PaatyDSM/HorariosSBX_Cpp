@@ -2,14 +2,14 @@
 
 #include "HorariosPage.xaml.h"
 #include "MainPage.xaml.h"
-#include "SBX_HORARIOS_MAINAPP.xaml.h"
+#include "WelcomePage.xaml.h"
 
 #include "Sample-Utils\Helpers.h"
 
 #include <fstream>
 #include <iostream>
 
-using namespace PaatyDSM;
+using namespace SBX_HORARIOS;
 
 using namespace concurrency;
 using namespace Platform;
@@ -26,14 +26,13 @@ using namespace std;
 /// Path for local saving
 String^ localfolder = ApplicationData::Current->LocalFolder->Path;
 
-PaatyDSM::Horarios::Horarios()
+HorariosPage::HorariosPage()
 {
 	InitializeComponent();
-
 }
 
 // OnNavigatedTo function
-void Horarios::OnNavigatedTo(NavigationEventArgs^ e)
+void HorariosPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	// Save received parameter like a reference called str
 		String^ str = (String^)e->Parameter;
@@ -71,7 +70,7 @@ void Horarios::OnNavigatedTo(NavigationEventArgs^ e)
 }
 
 // Send Legajo function
-void Horarios::send_pagewithlegajo(int legajo)
+void HorariosPage::send_pagewithlegajo(int legajo)
 {
 	///Specific Fix
 		rootPage->NotifyUser("Obteniendo horarios...", NotifyType::StatusMessage);
@@ -102,25 +101,25 @@ void Horarios::send_pagewithlegajo(int legajo)
 }
 
 // Hyperlink buttons
-void Horarios::Footer_Click(Object^ sender, RoutedEventArgs^ e)
+void HorariosPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
 	Windows::System::Launcher::LaunchUriAsync(uri);
 }
 
 // Go back to MainPage with uncleared errors
-void Horarios::GoPageBack()
+void HorariosPage::GoPageBack()
 {
 	///Specific Fix (#bug6161013)
 	OutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
 	MainPage::Current->DataContext = ref new User(OutputField->Text);
 
 	// Go to page
-	Frame->Navigate(TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
+	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
 }
 
 // Navigation: Back Button
-void Horarios::Backbutton1(Object^ sender, RoutedEventArgs^ e)
+void HorariosPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 {
 	///Specific Fix (#bug6161013)
 	OutputField->Text = "{\"asignaciones\":[],\"fechaConsulta\":\"\",\"legajo\":\"\"}";
@@ -130,11 +129,11 @@ void Horarios::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 	rootPage->NotifyUser("", NotifyType::StatusMessage);
 
 	// Go to page
-	Frame->Navigate(TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
+	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
 }
 
 // Save last used legajo
-void Horarios::save_legajo(int legajo_var)
+void HorariosPage::save_legajo(int legajo_var)
 {
 	// Convert String^ to string
 		wstring folderNameW(localfolder->Begin());
@@ -154,7 +153,7 @@ void Horarios::save_legajo(int legajo_var)
 }
 
 // Save cache to a file
-void Horarios::save_cache(String^ cache)
+void HorariosPage::save_cache(String^ cache)
 {
 	// Convert String^ to string
 		wstring w_data(cache->Begin());
@@ -177,7 +176,7 @@ void Horarios::save_cache(String^ cache)
 }
 
 // Run tasks
-void Horarios::BackgroundTask(String^ e, int legajo)
+void HorariosPage::BackgroundTask(String^ e, int legajo)
 {
 	// Save received parameter like a reference called str
 	String^ uriString = (String^)e;
@@ -256,7 +255,7 @@ void Horarios::BackgroundTask(String^ e, int legajo)
 }
 
 // Read from cache
-void Horarios::read_cache(int legajo)
+void HorariosPage::read_cache(int legajo)
 {
 	// Convert String^ to string
 	wstring folderNameW(localfolder->Begin());

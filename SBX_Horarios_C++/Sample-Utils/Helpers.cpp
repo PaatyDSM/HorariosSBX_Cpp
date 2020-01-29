@@ -5,7 +5,7 @@
 
 #include <Sample-Utils\PlugInFilter.h>
 
-using namespace PaatyDSM;
+using namespace SBX_HORARIOS;
 
 using namespace concurrency;
 using namespace Windows::UI::Xaml::Controls;

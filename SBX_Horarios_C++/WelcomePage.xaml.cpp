@@ -1,12 +1,12 @@
 ﻿#include "pch.h"
 
-#include "SBX_HORARIOS_MAINAPP.xaml.h"
+#include "WelcomePage.xaml.h"
 #include "HorariosPage.xaml.h"
-#include "ReleaseNotes.xaml.h"
+#include "ReleaseNotesPage.xaml.h"
 
 #include "fstream"
 
-using namespace PaatyDSM;
+using namespace SBX_HORARIOS;
 
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -17,13 +17,13 @@ using namespace Windows::Phone::UI::Input;
 
 using namespace std;
 
-SBX_HORARIOS_MAINAPP::SBX_HORARIOS_MAINAPP()
+WelcomePage::WelcomePage()
 {
 	InitializeComponent();
 }
 
 // OnNavigatedTo function
-void SBX_HORARIOS_MAINAPP::OnNavigatedTo(NavigationEventArgs^ e)
+void WelcomePage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
@@ -33,7 +33,7 @@ void SBX_HORARIOS_MAINAPP::OnNavigatedTo(NavigationEventArgs^ e)
 }
 
 // On click 'Consultar Horarios' validate Legajo and send it to the next page 'HorariosPage'
-void SBX_HORARIOS_MAINAPP::send_legajo_button(Object^ sender, RoutedEventArgs^ e)
+void WelcomePage::send_legajo_button(Object^ sender, RoutedEventArgs^ e)
 {
 	// Clear errors
 		rootPage->NotifyUser("", NotifyType::StatusMessage);
@@ -69,26 +69,26 @@ void SBX_HORARIOS_MAINAPP::send_legajo_button(Object^ sender, RoutedEventArgs^ e
 }
 
 // On click 'Hyperlinks'
-void SBX_HORARIOS_MAINAPP::Footer_Click(Object^ sender, RoutedEventArgs^ e)
+void WelcomePage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
 	Windows::System::Launcher::LaunchUriAsync(uri);
 }
 
 // Go to HorariosPage and send it legajo
-void PaatyDSM::SBX_HORARIOS_MAINAPP::NavigateToHorariosPage()
+void SBX_HORARIOS::WelcomePage::NavigateToHorariosPage()
 {
-	this->Frame->Navigate(TypeName(Horarios::typeid), main_legajo_input->Text);
+	this->Frame->Navigate(TypeName(HorariosPage::typeid), main_legajo_input->Text);
 }
 
 // On click 'Version number' navigate to 'Release Notes Page'
-void SBX_HORARIOS_MAINAPP::release_notes_button(Object^ sender, RoutedEventArgs^ e)
+void WelcomePage::Release_Notes_Click(Object^ sender, RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(TypeName(ReleaseNotes::typeid));
+	this->Frame->Navigate(TypeName(ReleaseNotesPage::typeid));
 }
 
 // Read last used legajo
-void SBX_HORARIOS_MAINAPP::read_legajo(void)
+void WelcomePage::read_legajo(void)
 {
 	// Path for local saving
 		String^ localfolder = ApplicationData::Current->LocalFolder->Path;

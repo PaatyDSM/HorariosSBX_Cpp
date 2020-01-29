@@ -1,18 +1,18 @@
 ﻿#pragma once
 
-#include "ReleaseNotes.g.h"
-#include "SBX_HORARIOS_MAINAPP.xaml.h"
+#include "ReleaseNotesPage.g.h"
+#include "WelcomePage.xaml.h"
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	/// <summary>
 	/// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 	/// </summary>
 	[Windows::Foundation::Metadata::WebHostHidden]
-	public ref class ReleaseNotes sealed
+	public ref class ReleaseNotesPage sealed
 	{
 	public:
-		ReleaseNotes();
+		ReleaseNotesPage();
 
 	protected:
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;

@@ -1,22 +1,22 @@
 ﻿#pragma once
 
-#include "SBX_HORARIOS_MAINAPP.g.h"
+#include "WelcomePage.g.h"
 #include "MainPage.xaml.h"
 
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Navigation;
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	/// <summary>
 	/// Página que muestra los horarios en formato de lista.
 	/// </summary>
 	[Windows::Foundation::Metadata::WebHostHidden]
 
-	public ref class SBX_HORARIOS_MAINAPP sealed
+	public ref class WelcomePage sealed
 	{
 	public:
-		SBX_HORARIOS_MAINAPP();
+		WelcomePage();
 
 	protected:
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;
@@ -26,7 +26,7 @@ namespace PaatyDSM
 
 		void Footer_Click(Platform::Object^ sender, RoutedEventArgs^ e);
 		void send_legajo_button(Platform::Object^ sender, RoutedEventArgs^ e);
-		void release_notes_button(Platform::Object^ sender, RoutedEventArgs^ e);
+		void Release_Notes_Click(Platform::Object^ sender, RoutedEventArgs^ e);
 		void NavigateToHorariosPage(void);
 		void read_legajo(void);
 	};

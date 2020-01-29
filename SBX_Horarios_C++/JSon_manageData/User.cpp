@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "User.h"
 
-using namespace PaatyDSM;
+using namespace SBX_HORARIOS;
 
 using namespace Platform;
 using namespace Platform::Collections;
@@ -14,7 +14,7 @@ String^ User::asignacionesKey = "asignaciones";
 
 User::User(void) : legajo(""), fechaConsulta("")
 {
-	asignaciones = ref new Vector<School^>();
+	asignaciones = ref new Vector<WorkDays^>();
 }
 
 User::User(String^ jsonString)
@@ -23,7 +23,7 @@ User::User(String^ jsonString)
 	legajo = jsonObject->GetNamedString(legajoKey, L"");
 	fechaConsulta = jsonObject->GetNamedString(fechaConsultaKey, "");
 
-	asignaciones = ref new Vector<School^>();
+	asignaciones = ref new Vector<WorkDays^>();
 
     JsonArray^ jsonArray = jsonObject->GetNamedArray(asignacionesKey, ref new JsonArray());
     for (unsigned int i = 0; i < jsonArray->Size; i++)
@@ -31,7 +31,7 @@ User::User(String^ jsonString)
         IJsonValue^ jsonValue = jsonArray->GetAt(i);
         if (jsonValue->ValueType == JsonValueType::Object)
         {
-			asignaciones->Append(ref new School(jsonValue->GetObject()));
+			asignaciones->Append(ref new WorkDays(jsonValue->GetObject()));
         }
     }
 }
@@ -56,7 +56,7 @@ void User::FechaConsulta::set(String^ value)
 	fechaConsulta = value;
 }
 
-IVector<School^>^ User::Asignaciones::get()
+IVector<WorkDays^>^ User::Asignaciones::get()
 {
     return asignaciones;
 }

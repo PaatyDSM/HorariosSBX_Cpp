@@ -1,18 +1,19 @@
 ﻿#pragma once
 
 #include "HorariosPage.g.h"
-#include "SBX_HORARIOS_MAINAPP.xaml.h"
+#include "WelcomePage.xaml.h"
 
-namespace PaatyDSM
+namespace SBX_HORARIOS
 {
 	/// <summary>
 	/// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
 	/// </summary>
 	[Windows::Foundation::Metadata::WebHostHidden]
-	public ref class Horarios sealed
+
+	public ref class HorariosPage sealed
 	{
 	public:
-		Horarios();
+		HorariosPage();
 
 	protected:
 		virtual void OnNavigatedTo(NavigationEventArgs^ e) override;

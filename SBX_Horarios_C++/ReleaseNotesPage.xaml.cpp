@@ -1,20 +1,20 @@
 ﻿#include "pch.h"
 
-#include "ReleaseNotes.xaml.h"
+#include "ReleaseNotesPage.xaml.h"
 #include "MainPage.xaml.h"
 
-using namespace PaatyDSM;
+using namespace SBX_HORARIOS;
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Interop;
 
-ReleaseNotes::ReleaseNotes()
+ReleaseNotesPage::ReleaseNotesPage()
 {
 	InitializeComponent();
 }
 
-void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
+void ReleaseNotesPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	// A pointer back to the main page.  This is needed if you want to call methods in MainPage such as NotifyUser()
 	rootPage = MainPage::Current;
@@ -25,6 +25,20 @@ void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
 	Notes->Text =
 
 		"Release notes :\n"
+		"\n"
+		"------------------------------------------------------\n"
+		"V1.02\n"
+		"*New and redesigned MainPage.\n"
+		"*Now pages are centered correctly in landscape mode.\n"
+		"*Revised and fixed translations.\n"
+		"*Revised source code.\n"
+		"\t - *A lot of changes and minor fixes.\n"
+		"*Deleted unused code and files.\n"
+		"*Fixed some wrong error messages text.\n"
+		"*Updated certificates.\n"
+		"*Fixed a random bug related to SuspensionManager.\n"
+		"\n"
+		"Know Bugs :\n"
 		"\n"
 		"------------------------------------------------------\n"
 		"V1.01\n"
@@ -267,15 +281,15 @@ void ReleaseNotes::OnNavigatedTo(NavigationEventArgs^ e)
 }
 
 // On Click 'Hyperlinks'
-void ReleaseNotes::Footer_Click(Object^ sender, RoutedEventArgs^ e)
+void ReleaseNotesPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto uri = ref new Uri((String^)((HyperlinkButton^)sender)->Tag);
 	Windows::System::Launcher::LaunchUriAsync(uri);
 }
 
 // Navigation: Back Button
-void ReleaseNotes::Backbutton1(Object^ sender, RoutedEventArgs^ e)
+void ReleaseNotesPage::Backbutton1(Object^ sender, RoutedEventArgs^ e)
 {
 	rootPage->NotifyUser("", NotifyType::StatusMessage);
-	Frame->Navigate(TypeName(PaatyDSM::SBX_HORARIOS_MAINAPP::typeid));
+	Frame->Navigate(TypeName(SBX_HORARIOS::WelcomePage::typeid));
 }
