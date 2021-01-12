@@ -16,6 +16,7 @@ Arquitectura 	ARM, x64, x86.
 #
 # Notas de versión:
 V1.48:
+
   *Manifiestos actualizados.
 
 
