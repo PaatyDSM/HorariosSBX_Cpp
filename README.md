@@ -13,11 +13,11 @@ Requisitos:
 Windows 10 versión 10586.0 o posterior, Xbox One.
 Arquitectura 	ARM, x64, x86.
 
-
+#
 # Notas de versión:
 V1.48: Manifiestos actualizados.
 
-
+#
 # Desarrollado por PaatyDSM Apps
 "Turning dreams into apps, living and leading the future":
 
