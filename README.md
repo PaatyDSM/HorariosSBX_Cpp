@@ -12,7 +12,7 @@ Disponible en: Xbox Series X|S, Xbox One, HoloLens, PC, Dispositivo móvil, Surf
 # Descarga en la Micrososft Store:
 https://www.microsoft.com/es-ar/p/mis-horarios-sbx/9nmsm40d0c7k?activetab=pivot:overviewtab
 
-*Solo disnpoible en Argentina
+*Solo disponible en Argentina
 
 Requisitos:
 Windows 10 versión 10586.0 o posterior, Xbox One.
